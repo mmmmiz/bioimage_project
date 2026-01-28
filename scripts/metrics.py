@@ -20,3 +20,10 @@ def calc_brightness(img: np.ndarray) -> float:
     brightness = float(np.mean(gray, dtype=np.float64))
     return brightness
 
+def calc_contrast(img_gray)-> float:
+    """
+    グレースケール画像のコントラストを計算する
+    コントラスト = 画素値の標準偏差
+    """
+    return float(np.std(img_gray))
+    #入力はグレースケール前提、戻り値は float に統一
