@@ -27,3 +27,22 @@ def calc_contrast(img_gray)-> float:
     """
     return float(np.std(img_gray))
     #入力はグレースケール前提、戻り値は float に統一
+    
+def _to_gray(img: np.ndarray) -> np.ndarray:
+    """BGR/Grayどちらでも受け取り、Gray(2次元)に揃える。"""
+    if img.ndim == 2:
+        return img
+    if img.ndim == 3:
+        return cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    raise ValueError(f"Unsupported image shape: {img.shape}")
+
+def calc_sharpness(img:np.ndarray) -> float:
+    """
+    シャープネス（ピンぼけ）指標：Variance of Laplacian
+    - 大きいほどシャープ、小さいほどボケ傾向
+    """
+    gray = _to_gray(img)
+    lap = cv2.Laplacian(gray, ddepth=cv2.CV_64F, ksize=3)
+    
+    score = float(np.var(lap))
+    return score
