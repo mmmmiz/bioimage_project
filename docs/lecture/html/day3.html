@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day3.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 4px dashed #c6e1ff;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="day-3-python%E9%96%A2%E6%95%B0%E3%83%BB%E3%82%A8%E3%83%A9%E3%83%BC%E5%87%A6%E7%90%861%E3%80%9C2%E6%99%82%E9%96%93">Day 3: Python関数・エラー処理（1〜2時間）</h1>
+<h2 id="%F0%9F%93%8B-%E4%BB%8A%E6%97%A5%E3%81%AE%E5%AD%A6%E7%BF%92%E5%86%85%E5%AE%B9">📋 今日の学習内容</h2>
+<table>
+<thead>
+<tr>
+<th>セクション</th>
+<th>内容</th>
+<th>所要時間目安</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.1</td>
+<td>関数の定義と戻り値</td>
+<td>30〜40分</td>
+</tr>
+<tr>
+<td>3.2</td>
+<td>例外処理（try-except）</td>
+<td>30〜40分</td>
+</tr>
+<tr>
+<td>3.3</td>
+<td>パス操作（pathlib）</td>
+<td>20〜30分</td>
+</tr>
+<tr>
+<td>3.4</td>
+<td>確認問題</td>
+<td>10〜20分</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2%E5%85%88%E3%81%AB%E7%9F%A5%E3%81%A3%E3%81%A6%E3%81%8A%E3%81%93%E3%81%86">💡 プロジェクトでの使用場面（先に知っておこう）</h3>
+<p>今日学ぶ内容は、プロジェクトの以下の場面で使います：</p>
+<ul>
+<li><strong>関数定義</strong> → Day 3〜5で <code>calc_brightness()</code>, <code>calc_contrast()</code>, <code>calc_sharpness()</code> などの指標計算関数を作る</li>
+<li><strong>例外処理</strong> → Day 7でエラーハンドリング、Day 20でUI安定化</li>
+<li><strong>パス操作</strong> → Day 1でディレクトリ構造設定、Day 9でデータセット作成時のフォルダ整理</li>
+</ul>
+<hr>
+<h2 id="31-%E9%96%A2%E6%95%B0%E3%81%AE%E5%AE%9A%E7%BE%A9%E3%81%A8%E6%88%BB%E3%82%8A%E5%80%A4">3.1 関数の定義と戻り値</h2>
+<h3 id="%F0%9F%8E%AF-%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">🎯 学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0">引数（ひきすう）と戻り値（もどりち）を持つ関数が書ける</label></li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1">型ヒント（Type Hints）の書き方を理解する</label></li>
+</ul>
+<hr>
+<h3 id="%F0%9F%93%96-%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E8%AA%AC%E6%98%8E%E3%81%BE%E3%81%9A%E3%81%AF%E3%81%93%E3%81%93%E3%81%8B%E3%82%89">📖 ざっくり説明（まずはここから）</h3>
+<p><strong>関数とは？</strong></p>
+<p>関数は「材料を入れると、加工して結果を返してくれる機械」のようなものです。</p>
+<pre class="hljs"><code><div>【例え】ジュースミキサー
+┌─────────────────────────────────────┐
+│  材料（引数）    →  ミキサー（関数）  →  ジュース（戻り値）  │
+│  りんご、水      →  混ぜる処理        →  りんごジュース      │
+└─────────────────────────────────────┘
+</div></code></pre>
+<p>プログラミングでは、同じ処理を何度も書かなくていいように、処理をまとめて名前をつけたものが「関数」です。</p>
+<p><strong>型ヒントとは？</strong></p>
+<p>型ヒントは「この関数には○○型のデータを入れてね」「返すのは△△型だよ」と書いておくメモのようなものです。書かなくても動きますが、書いておくとミスを防げます。</p>
+<hr>
+<h3 id="%F0%9F%93%9A-%E8%A9%B3%E7%B4%B0%E8%AA%AC%E6%98%8E%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B">📚 詳細説明（しっかり理解する）</h3>
+<h4 id="311-%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E9%96%A2%E6%95%B0%E5%AE%9A%E7%BE%A9">3.1.1 基本的な関数定義</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_brightness</span><span class="hljs-params">(image)</span>:</span>
+    <span class="hljs-string">"""画像の平均輝度を計算する"""</span>
+    <span class="hljs-keyword">return</span> np.mean(image)
+</div></code></pre>
+<p><strong>コードの解説：</strong></p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>def</code></td>
+<td>「関数を定義します」という宣言（definition の略）</td>
+</tr>
+<tr>
+<td><code>calc_brightness</code></td>
+<td>関数の名前（自分で決める）</td>
+</tr>
+<tr>
+<td><code>(image)</code></td>
+<td>引数（ひきすう）＝関数に渡すデータ</td>
+</tr>
+<tr>
+<td><code>&quot;&quot;&quot;...&quot;&quot;&quot;</code></td>
+<td>docstring（ドキュメント文字列）＝関数の説明文</td>
+</tr>
+<tr>
+<td><code>return</code></td>
+<td>「この値を返します」という命令</td>
+</tr>
+<tr>
+<td><code>np.mean(image)</code></td>
+<td>戻り値（もどりち）＝関数が返す結果</td>
+</tr>
+</tbody>
+</table>
+<p><strong>使用例：</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 関数を定義</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_brightness</span><span class="hljs-params">(image)</span>:</span>
+    <span class="hljs-string">"""画像の平均輝度を計算する"""</span>
+    <span class="hljs-keyword">return</span> np.mean(image)
+
+<span class="hljs-comment"># 関数を使う</span>
+test_image = np.array([[<span class="hljs-number">100</span>, <span class="hljs-number">150</span>], [<span class="hljs-number">200</span>, <span class="hljs-number">250</span>]])
+result = calc_brightness(test_image)  <span class="hljs-comment"># 関数を呼び出す</span>
+print(result)  <span class="hljs-comment"># 175.0</span>
+</div></code></pre>
+<hr>
+<h4 id="312-%E5%9E%8B%E3%83%92%E3%83%B3%E3%83%88%E4%BB%98%E3%81%8D%E3%81%AE%E9%96%A2%E6%95%B0%E6%8E%A8%E5%A5%A8">3.1.2 型ヒント付きの関数（推奨）</h4>
+<p>実務では、型ヒントをつけることが推奨されています。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">from</span> numpy.typing <span class="hljs-keyword">import</span> NDArray
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_brightness</span><span class="hljs-params">(image: NDArray[np.uint8])</span> -&gt; float:</span>
+    <span class="hljs-string">"""
+    画像の平均輝度を計算する
+    
+    Parameters
+    ----------
+    image : NDArray[np.uint8]
+        入力画像（グレースケール）
+    
+    Returns
+    -------
+    float
+        平均輝度値（0.0〜255.0）
+    """</span>
+    <span class="hljs-keyword">return</span> float(np.mean(image))
+</div></code></pre>
+<p><strong>コードの解説：</strong></p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>image: NDArray[np.uint8]</code></td>
+<td>「imageはNumPy配列で、中身はuint8型だよ」という型ヒント</td>
+</tr>
+<tr>
+<td><code>-&gt; float</code></td>
+<td>「この関数はfloat型の値を返すよ」という型ヒント</td>
+</tr>
+<tr>
+<td><code>float(np.mean(image))</code></td>
+<td>明示的にfloat型に変換（型ヒントと実際の型を一致させる）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>専門用語の解説：</strong></p>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+<th>平易な言い換え</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>引数（ひきすう）</td>
+<td>関数に渡すデータ</td>
+<td>関数への入力、材料</td>
+</tr>
+<tr>
+<td>戻り値（もどりち）</td>
+<td>関数が返すデータ</td>
+<td>関数からの出力、結果</td>
+</tr>
+<tr>
+<td>型ヒント（Type Hints）</td>
+<td>引数や戻り値のデータ型を示す注釈</td>
+<td>「この型を使ってね」というメモ</td>
+</tr>
+<tr>
+<td>docstring</td>
+<td>関数の説明を書く文字列</td>
+<td>関数の取扱説明書</td>
+</tr>
+<tr>
+<td>NDArray</td>
+<td>NumPyの配列型を表す型ヒント用の型</td>
+<td>NumPy配列であることを示す記号</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>0〜255の整数を表すデータ型</td>
+<td>画像のピクセル値に使う型</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="313-%E8%A4%87%E6%95%B0%E3%81%AE%E5%BC%95%E6%95%B0%E3%82%92%E6%8C%81%E3%81%A4%E9%96%A2%E6%95%B0">3.1.3 複数の引数を持つ関数</h4>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_brightness_ok</span><span class="hljs-params">(brightness: float, threshold: float = <span class="hljs-number">100.0</span>)</span> -&gt; bool:</span>
+    <span class="hljs-string">"""
+    明るさがしきい値以上かどうかを判定する
+    
+    Parameters
+    ----------
+    brightness : float
+        計算された明るさの値
+    threshold : float, optional
+        しきい値（デフォルト: 100.0）
+    
+    Returns
+    -------
+    bool
+        しきい値以上ならTrue、未満ならFalse
+    """</span>
+    <span class="hljs-keyword">return</span> brightness &gt;= threshold
+
+<span class="hljs-comment"># 使用例</span>
+print(is_brightness_ok(<span class="hljs-number">120.0</span>))        <span class="hljs-comment"># True（デフォルトのしきい値100を使用）</span>
+print(is_brightness_ok(<span class="hljs-number">80.0</span>))         <span class="hljs-comment"># False</span>
+print(is_brightness_ok(<span class="hljs-number">80.0</span>, <span class="hljs-number">70.0</span>))   <span class="hljs-comment"># True（しきい値を70に変更）</span>
+</div></code></pre>
+<p><strong>ポイント：</strong></p>
+<ul>
+<li><code>threshold: float = 100.0</code> のように書くと、引数を省略したときのデフォルト値を設定できます</li>
+<li>デフォルト値がある引数は、関数を呼ぶときに省略できます</li>
+</ul>
+<hr>
+<h3 id="%F0%9F%94%8D-%E5%9F%BA%E7%A4%8E%E4%BA%8B%E9%A0%85%E3%81%AE%E7%A2%BA%E8%AA%8D%E5%85%88">🔍 基礎事項の確認先</h3>
+<p>この内容がわからない場合は、以下を確認してください：</p>
+<table>
+<thead>
+<tr>
+<th>わからない点</th>
+<th>確認すべき基礎事項</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>def</code> の使い方がわからない</td>
+<td>Python公式: <a href="https://docs.python.org/ja/3/tutorial/controlflow.html#defining-functions">関数の定義</a></td>
+</tr>
+<tr>
+<td><code>return</code> の意味がわからない</td>
+<td>Python公式: <a href="https://docs.python.org/ja/3/reference/simple_stmts.html#the-return-statement">return文</a></td>
+</tr>
+<tr>
+<td>型ヒントの書き方</td>
+<td>Python公式: <a href="https://docs.python.org/ja/3/library/typing.html">型ヒント</a></td>
+</tr>
+<tr>
+<td>NumPy配列がわからない</td>
+<td>Day 1のNumPy基礎を復習</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.python.org/ja/3/tutorial/controlflow.html#defining-functions">Python公式: 関数の定義</a></li>
+<li><a href="https://docs.python.org/ja/3/library/typing.html">Python公式: typing — 型ヒントのサポート</a></li>
+<li><a href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">NumPy公式: numpy.typing.NDArray</a></li>
+</ul>
+<hr>
+<h2 id="32-%E4%BE%8B%E5%A4%96%E5%87%A6%E7%90%86try-except">3.2 例外処理（try-except）</h2>
+<h3 id="%F0%9F%8E%AF-%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">🎯 学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2">基本的なtry-except文が書ける</label></li>
+<li><input type="checkbox" id="checkbox3"><label for="checkbox3">画像読み込みエラーを適切に処理できる</label></li>
+</ul>
+<hr>
+<h3 id="%F0%9F%93%96-%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E8%AA%AC%E6%98%8E%E3%81%BE%E3%81%9A%E3%81%AF%E3%81%93%E3%81%93%E3%81%8B%E3%82%89">📖 ざっくり説明（まずはここから）</h3>
+<p><strong>例外処理とは？</strong></p>
+<p>プログラムは実行中にエラー（例外）が起きることがあります。例外処理は「エラーが起きたときにどうするか」を事前に決めておく仕組みです。</p>
+<pre class="hljs"><code><div>【例え】料理中のトラブル対応
+┌─────────────────────────────────────────┐
+│  try:（やってみる）                       │
+│      卵を割る                             │
+│  except 殻が入った:（もし失敗したら）      │
+│      殻を取り除く                         │
+│  except 卵が腐っていた:                   │
+│      新しい卵を使う                       │
+└─────────────────────────────────────────┘
+</div></code></pre>
+<p>例外処理がないと、エラーが起きた瞬間にプログラムが止まってしまいます。例外処理を書いておくと、エラーが起きても適切に対応してプログラムを続けられます。</p>
+<hr>
+<h3 id="%F0%9F%93%9A-%E8%A9%B3%E7%B4%B0%E8%AA%AC%E6%98%8E%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B">📚 詳細説明（しっかり理解する）</h3>
+<h4 id="321-%E5%9F%BA%E6%9C%AC%E6%A7%8B%E6%96%87">3.2.1 基本構文</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">try</span>:
+    <span class="hljs-comment"># エラーが起きる可能性のある処理</span>
+    result = risky_operation()
+<span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+    <span class="hljs-comment"># エラー時の処理</span>
+    print(<span class="hljs-string">f"エラーが発生しました: <span class="hljs-subst">{e}</span>"</span>)
+</div></code></pre>
+<p><strong>コードの解説：</strong></p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>try:</code></td>
+<td>「この中の処理を試してみる」というブロックの開始</td>
+</tr>
+<tr>
+<td><code>except Exception as e:</code></td>
+<td>「Exceptionが起きたら、それを <code>e</code> という変数に入れてここを実行」</td>
+</tr>
+<tr>
+<td><code>Exception</code></td>
+<td>すべてのエラー（例外）の親クラス。これを指定するとどんなエラーでもキャッチできる</td>
+</tr>
+<tr>
+<td><code>as e</code></td>
+<td>発生したエラーの情報を <code>e</code> という変数に格納する</td>
+</tr>
+</tbody>
+</table>
+<p><strong>実行の流れ：</strong></p>
+<pre class="hljs"><code><div>tryブロックを実行
+    ↓
+エラーなし → tryブロック終了後、exceptをスキップして次へ
+    ↓
+エラーあり → tryブロックを中断し、exceptブロックを実行
+</div></code></pre>
+<hr>
+<h4 id="322-%E7%94%BB%E5%83%8F%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF%E3%81%A7%E3%81%AE%E5%AE%9F%E8%B7%B5%E4%BE%8B">3.2.2 画像読み込みでの実践例</h4>
+<p>OpenCVの <code>cv2.imread()</code> は、読み込みに失敗しても<strong>エラーを出さずに <code>None</code> を返す</strong>という特殊な動作をします。これを適切に処理する例を見てみましょう。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load_image</span><span class="hljs-params">(filepath: str)</span>:</span>
+    <span class="hljs-string">"""
+    画像を安全に読み込む
+    
+    Parameters
+    ----------
+    filepath : str
+        画像ファイルのパス
+    
+    Returns
+    -------
+    numpy.ndarray or None
+        読み込んだ画像。失敗した場合はNone
+    """</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-comment"># 画像を読み込む</span>
+        image = cv2.imread(filepath)
+        
+        <span class="hljs-comment"># cv2.imread()は失敗してもエラーを出さずNoneを返す</span>
+        <span class="hljs-comment"># なので、明示的にチェックしてエラーを発生させる</span>
+        <span class="hljs-keyword">if</span> image <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">f"画像を読み込めませんでした: <span class="hljs-subst">{filepath}</span>"</span>)
+        
+        <span class="hljs-keyword">return</span> image
+    
+    <span class="hljs-keyword">except</span> ValueError <span class="hljs-keyword">as</span> e:
+        <span class="hljs-comment"># ValueErrorをキャッチして処理</span>
+        print(<span class="hljs-string">f"エラー: <span class="hljs-subst">{e}</span>"</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>
+    
+    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+        <span class="hljs-comment"># その他の予期しないエラーをキャッチ</span>
+        print(<span class="hljs-string">f"予期しないエラー: <span class="hljs-subst">{e}</span>"</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>
+</div></code></pre>
+<p><strong>コードの解説：</strong></p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>if image is None:</code></td>
+<td>画像が読み込めなかった場合のチェック</td>
+</tr>
+<tr>
+<td><code>raise ValueError(...)</code></td>
+<td>明示的にValueErrorを発生させる（投げる）</td>
+</tr>
+<tr>
+<td><code>except ValueError as e:</code></td>
+<td>ValueErrorだけをキャッチする</td>
+</tr>
+<tr>
+<td><code>except Exception as e:</code></td>
+<td>その他すべてのエラーをキャッチする（最後に書く）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>なぜ <code>raise</code> で明示的にエラーを発生させるのか？</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># cv2.imread()の困った動作</span>
+image = cv2.imread(<span class="hljs-string">"存在しないファイル.jpg"</span>)
+print(image)  <span class="hljs-comment"># None が出力される（エラーにならない！）</span>
+print(image.shape)  <span class="hljs-comment"># ここでエラー！NoneTypeにshapeはない</span>
+
+<span class="hljs-comment"># 明示的にエラーを発生させると、どこで問題が起きたかわかりやすい</span>
+</div></code></pre>
+<hr>
+<h4 id="323-%E8%A4%87%E6%95%B0%E3%81%AE%E4%BE%8B%E5%A4%96%E3%82%92%E5%80%8B%E5%88%A5%E3%81%AB%E5%87%A6%E7%90%86%E3%81%99%E3%82%8B">3.2.3 複数の例外を個別に処理する</h4>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">process_image</span><span class="hljs-params">(filepath: str)</span> -&gt; dict:</span>
+    <span class="hljs-string">"""画像を処理して結果を返す"""</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-comment"># ファイルを開く</span>
+        image = cv2.imread(filepath)
+        <span class="hljs-keyword">if</span> image <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+            <span class="hljs-keyword">raise</span> FileNotFoundError(<span class="hljs-string">f"ファイルが見つかりません: <span class="hljs-subst">{filepath}</span>"</span>)
+        
+        <span class="hljs-comment"># 処理を実行</span>
+        brightness = np.mean(image)
+        
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">"status"</span>: <span class="hljs-string">"success"</span>, <span class="hljs-string">"brightness"</span>: brightness}
+    
+    <span class="hljs-keyword">except</span> FileNotFoundError <span class="hljs-keyword">as</span> e:
+        <span class="hljs-comment"># ファイルが見つからない場合</span>
+        print(<span class="hljs-string">f"ファイルエラー: <span class="hljs-subst">{e}</span>"</span>)
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">"status"</span>: <span class="hljs-string">"error"</span>, <span class="hljs-string">"message"</span>: <span class="hljs-string">"ファイルが見つかりません"</span>}
+    
+    <span class="hljs-keyword">except</span> MemoryError <span class="hljs-keyword">as</span> e:
+        <span class="hljs-comment"># メモリ不足の場合</span>
+        print(<span class="hljs-string">f"メモリエラー: <span class="hljs-subst">{e}</span>"</span>)
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">"status"</span>: <span class="hljs-string">"error"</span>, <span class="hljs-string">"message"</span>: <span class="hljs-string">"メモリ不足です"</span>}
+    
+    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+        <span class="hljs-comment"># その他のエラー</span>
+        print(<span class="hljs-string">f"予期しないエラー: <span class="hljs-subst">{e}</span>"</span>)
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">"status"</span>: <span class="hljs-string">"error"</span>, <span class="hljs-string">"message"</span>: str(e)}
+</div></code></pre>
+<p><strong>ポイント：</strong></p>
+<ul>
+<li>特定のエラーから順番に書き、最後に <code>Exception</code> を書く</li>
+<li>エラーの種類によって異なる対応ができる</li>
+</ul>
+<hr>
+<h4 id="324-finally%E5%BF%85%E3%81%9A%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E5%87%A6%E7%90%86">3.2.4 finally（必ず実行する処理）</h4>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">process_with_cleanup</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-string">"""処理後に必ずクリーンアップを行う"""</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-comment"># 何かの処理</span>
+        result = some_operation()
+        <span class="hljs-keyword">return</span> result
+    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+        print(<span class="hljs-string">f"エラー: <span class="hljs-subst">{e}</span>"</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>
+    <span class="hljs-keyword">finally</span>:
+        <span class="hljs-comment"># エラーがあってもなくても、必ず実行される</span>
+        print(<span class="hljs-string">"クリーンアップ処理を実行"</span>)
+        cleanup()
+</div></code></pre>
+<p><strong>専門用語の解説：</strong></p>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+<th>平易な言い換え</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>例外（Exception）</td>
+<td>プログラム実行中に発生するエラー</td>
+<td>予期しない問題</td>
+</tr>
+<tr>
+<td>try</td>
+<td>エラーが起きるかもしれない処理を囲むブロック</td>
+<td>「試してみる」ゾーン</td>
+</tr>
+<tr>
+<td>except</td>
+<td>エラーが起きたときの処理を書くブロック</td>
+<td>「エラー時はこうする」ゾーン</td>
+</tr>
+<tr>
+<td>raise</td>
+<td>明示的にエラーを発生させる命令</td>
+<td>「エラーを投げる」</td>
+</tr>
+<tr>
+<td>finally</td>
+<td>エラーの有無に関わらず必ず実行されるブロック</td>
+<td>「最後に必ずやる」ゾーン</td>
+</tr>
+<tr>
+<td>ValueError</td>
+<td>値が不正な場合のエラー</td>
+<td>「その値はおかしい」エラー</td>
+</tr>
+<tr>
+<td>FileNotFoundError</td>
+<td>ファイルが見つからない場合のエラー</td>
+<td>「ファイルがない」エラー</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="%F0%9F%94%8D-%E5%9F%BA%E7%A4%8E%E4%BA%8B%E9%A0%85%E3%81%AE%E7%A2%BA%E8%AA%8D%E5%85%88">🔍 基礎事項の確認先</h3>
+<p>この内容がわからない場合は、以下を確認してください：</p>
+<table>
+<thead>
+<tr>
+<th>わからない点</th>
+<th>確認すべき基礎事項</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>try-exceptの基本</td>
+<td>Python公式: <a href="https://docs.python.org/ja/3/tutorial/errors.html">エラーと例外</a></td>
+</tr>
+<tr>
+<td><code>None</code> の扱い</td>
+<td>Python公式: <a href="https://docs.python.org/ja/3/library/constants.html#None">None型</a></td>
+</tr>
+<tr>
+<td><code>is</code> と <code>==</code> の違い</td>
+<td>Python公式: <a href="https://docs.python.org/ja/3/reference/expressions.html#comparisons">比較</a></td>
+</tr>
+<tr>
+<td>cv2.imread()の動作</td>
+<td>Day 2のOpenCV基礎を復習</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.python.org/ja/3/tutorial/errors.html">Python公式: エラーと例外</a></li>
+<li><a href="https://docs.python.org/ja/3/library/exceptions.html">Python公式: 組み込み例外</a></li>
+</ul>
+<hr>
+<h2 id="33-%E3%83%91%E3%82%B9%E6%93%8D%E4%BD%9Cpathlib">3.3 パス操作（pathlib）</h2>
+<h3 id="%F0%9F%8E%AF-%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">🎯 学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox4"><label for="checkbox4"></label><code>pathlib.Path</code> でファイルパスを扱える</li>
+<li><input type="checkbox" id="checkbox5"><label for="checkbox5">相対パス・絶対パスの違いを理解する</label></li>
+</ul>
+<hr>
+<h3 id="%F0%9F%93%96-%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E8%AA%AC%E6%98%8E%E3%81%BE%E3%81%9A%E3%81%AF%E3%81%93%E3%81%93%E3%81%8B%E3%82%89">📖 ざっくり説明（まずはここから）</h3>
+<p><strong>pathlibとは？</strong></p>
+<p><code>pathlib</code> は、ファイルやフォルダの場所（パス）を扱うための便利なライブラリです。</p>
+<p>昔のPythonでは文字列でパスを操作していましたが、<code>pathlib</code> を使うとより直感的に、OSの違い（Windows/Mac/Linux）を気にせずパスを扱えます。</p>
+<pre class="hljs"><code><div>【例え】住所の書き方
+┌─────────────────────────────────────────┐
+│  昔の方法（文字列）:                      │
+│      &quot;data&quot; + &quot;/&quot; + &quot;images&quot; + &quot;/&quot; + &quot;sample.jpg&quot;  │
+│      → OS によって &quot;/&quot; か &quot;\&quot; か変わる   │
+│                                          │
+│  pathlib の方法:                          │
+│      Path(&quot;data&quot;) / &quot;images&quot; / &quot;sample.jpg&quot;  │
+│      → OS を気にしなくてOK              │
+└─────────────────────────────────────────┘
+</div></code></pre>
+<hr>
+<h3 id="%F0%9F%93%9A-%E8%A9%B3%E7%B4%B0%E8%AA%AC%E6%98%8E%E3%81%97%E3%81%A3%E3%81%8B%E3%82%8A%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B">📚 詳細説明（しっかり理解する）</h3>
+<h4 id="331-%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E4%BD%BF%E3%81%84%E6%96%B9">3.3.1 基本的な使い方</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+
+<span class="hljs-comment"># パスの作成</span>
+data_dir = Path(<span class="hljs-string">"data"</span>)
+image_path = data_dir / <span class="hljs-string">"sample.jpg"</span>  <span class="hljs-comment"># "/" でパスを連結できる</span>
+
+print(image_path)  <span class="hljs-comment"># data/sample.jpg（Macの場合）</span>
+
+<span class="hljs-comment"># パスの存在確認</span>
+<span class="hljs-keyword">if</span> image_path.exists():
+    print(<span class="hljs-string">"ファイルが存在します"</span>)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">"ファイルが存在しません"</span>)
+
+<span class="hljs-comment"># ファイル名・拡張子の取得</span>
+print(image_path.name)    <span class="hljs-comment"># sample.jpg（ファイル名全体）</span>
+print(image_path.stem)    <span class="hljs-comment"># sample（拡張子を除いたファイル名）</span>
+print(image_path.suffix)  <span class="hljs-comment"># .jpg（拡張子）</span>
+print(image_path.parent)  <span class="hljs-comment"># data（親ディレクトリ）</span>
+</div></code></pre>
+<p><strong>コードの解説：</strong></p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Path(&quot;data&quot;)</code></td>
+<td>&quot;data&quot; という文字列からPathオブジェクトを作成</td>
+</tr>
+<tr>
+<td><code>data_dir / &quot;sample.jpg&quot;</code></td>
+<td>パスを <code>/</code> 演算子で連結（OSに合わせて自動で区切り文字を決める）</td>
+</tr>
+<tr>
+<td><code>.exists()</code></td>
+<td>ファイルやフォルダが存在するか確認</td>
+</tr>
+<tr>
+<td><code>.name</code></td>
+<td>ファイル名（拡張子含む）</td>
+</tr>
+<tr>
+<td><code>.stem</code></td>
+<td>ファイル名（拡張子なし）</td>
+</tr>
+<tr>
+<td><code>.suffix</code></td>
+<td>拡張子（ドット含む）</td>
+</tr>
+<tr>
+<td><code>.parent</code></td>
+<td>親ディレクトリのパス</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="332-%E7%9B%B8%E5%AF%BE%E3%83%91%E3%82%B9%E3%81%A8%E7%B5%B6%E5%AF%BE%E3%83%91%E3%82%B9">3.3.2 相対パスと絶対パス</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+
+<span class="hljs-comment"># 相対パス：今いる場所からの道順</span>
+relative_path = Path(<span class="hljs-string">"data/images/sample.jpg"</span>)
+print(relative_path)  <span class="hljs-comment"># data/images/sample.jpg</span>
+
+<span class="hljs-comment"># 絶対パス：ルート（最上位）からの完全な道順</span>
+absolute_path = Path(<span class="hljs-string">"/Users/username/project/data/images/sample.jpg"</span>)
+print(absolute_path)  <span class="hljs-comment"># /Users/username/project/data/images/sample.jpg</span>
+
+<span class="hljs-comment"># 相対パスを絶対パスに変換</span>
+full_path = relative_path.resolve()
+print(full_path)  <span class="hljs-comment"># /Users/username/current_dir/data/images/sample.jpg</span>
+
+<span class="hljs-comment"># 絶対パスかどうかを確認</span>
+print(relative_path.is_absolute())  <span class="hljs-comment"># False</span>
+print(absolute_path.is_absolute())  <span class="hljs-comment"># True</span>
+</div></code></pre>
+<p><strong>相対パスと絶対パスの違い：</strong></p>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>説明</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>相対パス</td>
+<td>現在の作業ディレクトリからの相対的な位置</td>
+<td><code>data/sample.jpg</code></td>
+</tr>
+<tr>
+<td>絶対パス</td>
+<td>ルートからの完全な位置</td>
+<td><code>/Users/name/project/data/sample.jpg</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="333-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%83%AB%E3%83%BC%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A">3.3.3 プロジェクトルートの設定</h4>
+<p>実際のプロジェクトでは、「プロジェクトのルートフォルダ」を基準にパスを設定することが多いです。</p>
+<p><strong>Pythonスクリプト（.py）の場合：</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+
+<span class="hljs-comment"># __file__ は現在のスクリプトファイルのパス</span>
+<span class="hljs-comment"># .parent で親ディレクトリを取得</span>
+<span class="hljs-comment"># 例：scripts/analysis.py から見て、プロジェクトルートは2階層上</span>
+
+BASE_DIR = Path(__file__).parent.parent  <span class="hljs-comment"># プロジェクトルート</span>
+DATA_DIR = BASE_DIR / <span class="hljs-string">"data"</span>             <span class="hljs-comment"># data フォルダ</span>
+OUTPUT_DIR = BASE_DIR / <span class="hljs-string">"output"</span>         <span class="hljs-comment"># output フォルダ</span>
+
+print(<span class="hljs-string">f"プロジェクトルート: <span class="hljs-subst">{BASE_DIR}</span>"</span>)
+print(<span class="hljs-string">f"データフォルダ: <span class="hljs-subst">{DATA_DIR}</span>"</span>)
+</div></code></pre>
+<p><strong>Jupyter Notebookの場合：</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+
+<span class="hljs-comment"># Notebookでは __file__ が使えないので、手動で設定する</span>
+<span class="hljs-comment"># または、Notebookの場所を基準にする</span>
+
+<span class="hljs-comment"># 方法1: 手動で設定</span>
+BASE_DIR = Path(<span class="hljs-string">"/Users/username/project"</span>)
+
+<span class="hljs-comment"># 方法2: カレントディレクトリを基準にする</span>
+<span class="hljs-keyword">import</span> os
+BASE_DIR = Path(os.getcwd())
+
+DATA_DIR = BASE_DIR / <span class="hljs-string">"data"</span>
+</div></code></pre>
+<hr>
+<h4 id="334-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AE%E4%BD%9C%E6%88%90%E3%81%A8%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97">3.3.4 ディレクトリの作成と一覧取得</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+
+<span class="hljs-comment"># ディレクトリを作成</span>
+output_dir = Path(<span class="hljs-string">"output/results"</span>)
+output_dir.mkdir(parents=<span class="hljs-literal">True</span>, exist_ok=<span class="hljs-literal">True</span>)
+<span class="hljs-comment"># parents=True: 親ディレクトリも一緒に作る</span>
+<span class="hljs-comment"># exist_ok=True: すでに存在してもエラーにしない</span>
+
+<span class="hljs-comment"># ディレクトリ内のファイル一覧を取得</span>
+data_dir = Path(<span class="hljs-string">"data"</span>)
+
+<span class="hljs-comment"># すべてのファイル・フォルダを取得</span>
+<span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> data_dir.iterdir():
+    print(item)
+
+<span class="hljs-comment"># 特定の拡張子のファイルだけ取得（glob）</span>
+<span class="hljs-keyword">for</span> jpg_file <span class="hljs-keyword">in</span> data_dir.glob(<span class="hljs-string">"*.jpg"</span>):
+    print(jpg_file)
+
+<span class="hljs-comment"># サブフォルダも含めて検索（再帰的glob）</span>
+<span class="hljs-keyword">for</span> jpg_file <span class="hljs-keyword">in</span> data_dir.glob(<span class="hljs-string">"**/*.jpg"</span>):
+    print(jpg_file)
+</div></code></pre>
+<p><strong>コードの解説：</strong></p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.mkdir()</code></td>
+<td>ディレクトリを作成</td>
+</tr>
+<tr>
+<td><code>parents=True</code></td>
+<td>親ディレクトリが存在しなければ一緒に作成</td>
+</tr>
+<tr>
+<td><code>exist_ok=True</code></td>
+<td>すでに存在してもエラーにしない</td>
+</tr>
+<tr>
+<td><code>.iterdir()</code></td>
+<td>ディレクトリ内の全アイテムをイテレート（繰り返し処理）</td>
+</tr>
+<tr>
+<td><code>.glob(&quot;*.jpg&quot;)</code></td>
+<td>パターンにマッチするファイルを検索</td>
+</tr>
+<tr>
+<td><code>**/*.jpg</code></td>
+<td>すべてのサブフォルダを含めて <code>.jpg</code> を検索</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="335-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E5%AE%9F%E8%B7%B5%E4%BE%8B">3.3.5 プロジェクトでの実践例</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+<span class="hljs-keyword">import</span> cv2
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setup_directories</span><span class="hljs-params">(base_dir: Path)</span> -&gt; dict:</span>
+    <span class="hljs-string">"""
+    プロジェクトのディレクトリ構造をセットアップする
+    
+    Parameters
+    ----------
+    base_dir : Path
+        プロジェクトのルートディレクトリ
+    
+    Returns
+    -------
+    dict
+        各ディレクトリのパスを格納した辞書
+    """</span>
+    dirs = {
+        <span class="hljs-string">"data"</span>: base_dir / <span class="hljs-string">"data"</span>,
+        <span class="hljs-string">"output"</span>: base_dir / <span class="hljs-string">"output"</span>,
+        <span class="hljs-string">"logs"</span>: base_dir / <span class="hljs-string">"logs"</span>,
+    }
+    
+    <span class="hljs-comment"># 各ディレクトリを作成</span>
+    <span class="hljs-keyword">for</span> dir_path <span class="hljs-keyword">in</span> dirs.values():
+        dir_path.mkdir(parents=<span class="hljs-literal">True</span>, exist_ok=<span class="hljs-literal">True</span>)
+    
+    <span class="hljs-keyword">return</span> dirs
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_image_files</span><span class="hljs-params">(data_dir: Path)</span> -&gt; list:</span>
+    <span class="hljs-string">"""
+    データディレクトリから画像ファイルのリストを取得する
+    
+    Parameters
+    ----------
+    data_dir : Path
+        画像が格納されているディレクトリ
+    
+    Returns
+    -------
+    list
+        画像ファイルのPathオブジェクトのリスト
+    """</span>
+    <span class="hljs-comment"># 対応する拡張子</span>
+    extensions = [<span class="hljs-string">"*.jpg"</span>, <span class="hljs-string">"*.jpeg"</span>, <span class="hljs-string">"*.png"</span>, <span class="hljs-string">"*.tif"</span>, <span class="hljs-string">"*.tiff"</span>]
+    
+    image_files = []
+    <span class="hljs-keyword">for</span> ext <span class="hljs-keyword">in</span> extensions:
+        image_files.extend(data_dir.glob(ext))
+    
+    <span class="hljs-keyword">return</span> sorted(image_files)  <span class="hljs-comment"># ファイル名でソート</span>
+
+
+<span class="hljs-comment"># 使用例</span>
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    BASE_DIR = Path(<span class="hljs-string">"."</span>)  <span class="hljs-comment"># カレントディレクトリ</span>
+    
+    dirs = setup_directories(BASE_DIR)
+    print(<span class="hljs-string">f"データフォルダ: <span class="hljs-subst">{dirs[<span class="hljs-string">'data'</span>]}</span>"</span>)
+    
+    images = get_image_files(dirs[<span class="hljs-string">"data"</span>])
+    print(<span class="hljs-string">f"画像ファイル数: <span class="hljs-subst">{len(images)}</span>"</span>)
+    
+    <span class="hljs-keyword">for</span> img_path <span class="hljs-keyword">in</span> images:
+        print(<span class="hljs-string">f"  - <span class="hljs-subst">{img_path.name}</span>"</span>)
+</div></code></pre>
+<p><strong>専門用語の解説：</strong></p>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+<th>平易な言い換え</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>パス（Path）</td>
+<td>ファイルやフォルダの場所を示す文字列</td>
+<td>ファイルの住所</td>
+</tr>
+<tr>
+<td>相対パス</td>
+<td>現在地からの相対的な場所</td>
+<td>「ここから右に2軒目」のような指定</td>
+</tr>
+<tr>
+<td>絶対パス</td>
+<td>ルートからの完全な場所</td>
+<td>「○○市△△町1-2-3」のような指定</td>
+</tr>
+<tr>
+<td>ディレクトリ</td>
+<td>フォルダのこと</td>
+<td>ファイルを入れる箱</td>
+</tr>
+<tr>
+<td>glob</td>
+<td>ワイルドカードを使ったファイル検索</td>
+<td>「*.jpg」で「すべてのjpgファイル」を検索</td>
+</tr>
+<tr>
+<td>イテレート</td>
+<td>繰り返し処理すること</td>
+<td>一つずつ順番に見ていくこと</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="%F0%9F%94%8D-%E5%9F%BA%E7%A4%8E%E4%BA%8B%E9%A0%85%E3%81%AE%E7%A2%BA%E8%AA%8D%E5%85%88">🔍 基礎事項の確認先</h3>
+<p>この内容がわからない場合は、以下を確認してください：</p>
+<table>
+<thead>
+<tr>
+<th>わからない点</th>
+<th>確認すべき基礎事項</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pathオブジェクトの基本</td>
+<td>Python公式: <a href="https://docs.python.org/ja/3/library/pathlib.html">pathlib</a></td>
+</tr>
+<tr>
+<td>for文の使い方</td>
+<td>Python公式: <a href="https://docs.python.org/ja/3/tutorial/controlflow.html#for-statements">for文</a></td>
+</tr>
+<tr>
+<td>リストの操作</td>
+<td>Python公式: <a href="https://docs.python.org/ja/3/tutorial/datastructures.html#more-on-lists">リスト</a></td>
+</tr>
+<tr>
+<td><code>__file__</code> の意味</td>
+<td>Python公式: <a href="https://docs.python.org/ja/3/reference/import.html#file__"><strong>file</strong></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/pathlib.html">Python公式: pathlib — オブジェクト指向のファイルシステムパス</a></li>
+<li><a href="https://docs.python.org/ja/3/library/pathlib.html#basic-use">Python公式: pathlib チュートリアル</a></li>
+</ul>
+<hr>
+<h2 id="34-%E2%9C%85-%E7%A2%BA%E8%AA%8D%E5%95%8F%E9%A1%8C">3.4 ✅ 確認問題</h2>
+<p>以下の問題を解いて、理解度をチェックしましょう。</p>
+<h3 id="%E5%95%8F%E9%A1%8C1-%E9%96%A2%E6%95%B0%E3%81%AE%E6%88%BB%E3%82%8A%E5%80%A4%E3%81%AE%E5%9E%8B">問題1: 関数の戻り値の型</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_contrast</span><span class="hljs-params">(image)</span> -&gt; float:</span>
+    <span class="hljs-keyword">return</span> np.std(image)
+
+<span class="hljs-comment"># この関数の戻り値の型は何でしょうか？</span>
+</div></code></pre>
+<h3 id="%E5%95%8F%E9%A1%8C2-%E4%BE%8B%E5%A4%96%E5%87%A6%E7%90%86%E3%81%AE%E5%8B%95%E4%BD%9C">問題2: 例外処理の動作</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+
+<span class="hljs-keyword">try</span>:
+    image = cv2.imread(<span class="hljs-string">"not_exist.jpg"</span>)
+    <span class="hljs-keyword">if</span> image <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">"読み込み失敗"</span>)
+    print(<span class="hljs-string">"成功"</span>)
+<span class="hljs-keyword">except</span> ValueError <span class="hljs-keyword">as</span> e:
+    print(<span class="hljs-string">f"キャッチ: <span class="hljs-subst">{e}</span>"</span>)
+
+<span class="hljs-comment"># 上のコードを実行すると、何が出力されるでしょうか？</span>
+</div></code></pre>
+<h3 id="%E5%95%8F%E9%A1%8C3-%E3%83%91%E3%82%B9%E6%93%8D%E4%BD%9C">問題3: パス操作</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+
+result = Path(<span class="hljs-string">"data"</span>) / <span class="hljs-string">"images"</span> / <span class="hljs-string">"sample.jpg"</span>
+
+<span class="hljs-comment"># resultの値は何でしょうか？</span>
+</div></code></pre>
+<h3 id="%E5%95%8F%E9%A1%8C4-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%90%8D%E3%81%AE%E5%8F%96%E5%BE%97">問題4: ファイル名の取得</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+
+filepath = Path(<span class="hljs-string">"/Users/name/project/data/image001.png"</span>)
+
+<span class="hljs-comment"># 以下の各属性の値を答えてください</span>
+<span class="hljs-comment"># filepath.name → ?</span>
+<span class="hljs-comment"># filepath.stem → ?</span>
+<span class="hljs-comment"># filepath.suffix → ?</span>
+<span class="hljs-comment"># filepath.parent → ?</span>
+</div></code></pre>
+<h3 id="%E5%95%8F%E9%A1%8C5-%E5%AE%9F%E8%B7%B5%E5%95%8F%E9%A1%8C">問題5: 実践問題</h3>
+<p>以下の要件を満たす関数 <code>load_images_from_dir</code> を作成してください。</p>
+<p>要件：</p>
+<ul>
+<li>引数：ディレクトリパス（Path型）</li>
+<li>戻り値：読み込んだ画像のリスト（list型）</li>
+<li>動作：指定したディレクトリ内の <code>.jpg</code> ファイルをすべて読み込む</li>
+<li>エラー処理：読み込みに失敗した画像はスキップする</li>
+</ul>
+<hr>
+<details>
+<summary>📝 解答を見る</summary>
+<h3 id="%E5%95%8F%E9%A1%8C1%E3%81%AE%E8%A7%A3%E7%AD%94">問題1の解答</h3>
+<pre class="hljs"><code><div>float（型ヒントで -&gt; float と明示されている）
+</div></code></pre>
+<h3 id="%E5%95%8F%E9%A1%8C2%E3%81%AE%E8%A7%A3%E7%AD%94">問題2の解答</h3>
+<pre class="hljs"><code><div>キャッチ: 読み込み失敗
+
+解説：
+1. cv2.imread(&quot;not_exist.jpg&quot;) は存在しないファイルなので None を返す
+2. if image is None: が True になる
+3. raise ValueError(&quot;読み込み失敗&quot;) でValueErrorが発生
+4. except ValueError as e: でキャッチされる
+5. print(f&quot;キャッチ: {e}&quot;) が実行される
+</div></code></pre>
+<h3 id="%E5%95%8F%E9%A1%8C3%E3%81%AE%E8%A7%A3%E7%AD%94">問題3の解答</h3>
+<pre class="hljs"><code><div>Path(&quot;data/images/sample.jpg&quot;)
+または文字列として表示すると &quot;data/images/sample.jpg&quot;
+
+解説：
+pathlib.Pathでは / 演算子でパスを連結できます。
+OSによって実際の区切り文字は自動で調整されます。
+（Macでは /、Windowsでは \）
+</div></code></pre>
+<h3 id="%E5%95%8F%E9%A1%8C4%E3%81%AE%E8%A7%A3%E7%AD%94">問題4の解答</h3>
+<pre class="hljs"><code><div>filepath.name   → &quot;image001.png&quot;（ファイル名全体）
+filepath.stem   → &quot;image001&quot;（拡張子を除いたファイル名）
+filepath.suffix → &quot;.png&quot;（拡張子、ドット含む）
+filepath.parent → Path(&quot;/Users/name/project/data&quot;)（親ディレクトリ）
+</div></code></pre>
+<h3 id="%E5%95%8F%E9%A1%8C5%E3%81%AE%E8%A7%A3%E7%AD%94">問題5の解答</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+<span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load_images_from_dir</span><span class="hljs-params">(dir_path: Path)</span> -&gt; List[np.ndarray]:</span>
+    <span class="hljs-string">"""
+    ディレクトリ内のJPG画像をすべて読み込む
+    
+    Parameters
+    ----------
+    dir_path : Path
+        画像が格納されているディレクトリのパス
+    
+    Returns
+    -------
+    List[np.ndarray]
+        読み込んだ画像のリスト
+    """</span>
+    images = []
+    
+    <span class="hljs-comment"># .jpg ファイルを検索</span>
+    <span class="hljs-keyword">for</span> jpg_file <span class="hljs-keyword">in</span> dir_path.glob(<span class="hljs-string">"*.jpg"</span>):
+        <span class="hljs-keyword">try</span>:
+            <span class="hljs-comment"># 画像を読み込み</span>
+            image = cv2.imread(str(jpg_file))
+            
+            <span class="hljs-comment"># 読み込み失敗のチェック</span>
+            <span class="hljs-keyword">if</span> image <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+                print(<span class="hljs-string">f"スキップ（読み込み失敗）: <span class="hljs-subst">{jpg_file.name}</span>"</span>)
+                <span class="hljs-keyword">continue</span>
+            
+            images.append(image)
+            print(<span class="hljs-string">f"読み込み成功: <span class="hljs-subst">{jpg_file.name}</span>"</span>)
+            
+        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+            print(<span class="hljs-string">f"スキップ（エラー）: <span class="hljs-subst">{jpg_file.name}</span> - <span class="hljs-subst">{e}</span>"</span>)
+            <span class="hljs-keyword">continue</span>
+    
+    <span class="hljs-keyword">return</span> images
+
+
+<span class="hljs-comment"># 使用例</span>
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    data_dir = Path(<span class="hljs-string">"data"</span>)
+    loaded_images = load_images_from_dir(data_dir)
+    print(<span class="hljs-string">f"読み込んだ画像数: <span class="hljs-subst">{len(loaded_images)}</span>"</span>)
+</div></code></pre>
+<p><strong>ポイント：</strong></p>
+<ul>
+<li><code>glob(&quot;*.jpg&quot;)</code> で <code>.jpg</code> ファイルだけを検索</li>
+<li><code>str(jpg_file)</code> で Path を文字列に変換（cv2.imread は文字列を受け取る）</li>
+<li>読み込み失敗時は <code>continue</code> でスキップ</li>
+<li>try-except で予期しないエラーにも対応</li>
+</ul>
+</details>
+<hr>
+<h2 id="%F0%9F%93%9D-%E4%BB%8A%E6%97%A5%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81">📝 今日のまとめ</h2>
+<h3 id="%E5%AD%A6%E3%82%93%E3%81%A0%E3%81%93%E3%81%A8">学んだこと</h3>
+<ol>
+<li>
+<p><strong>関数の定義</strong></p>
+<ul>
+<li><code>def 関数名(引数): return 戻り値</code> の形式</li>
+<li>型ヒントで引数と戻り値の型を明示できる</li>
+<li>docstringで関数の説明を書く</li>
+</ul>
+</li>
+<li>
+<p><strong>例外処理</strong></p>
+<ul>
+<li><code>try-except</code> でエラーを安全に処理できる</li>
+<li><code>raise</code> で明示的にエラーを発生させられる</li>
+<li><code>cv2.imread()</code> は失敗しても <code>None</code> を返すだけなので注意</li>
+</ul>
+</li>
+<li>
+<p><strong>パス操作</strong></p>
+<ul>
+<li><code>pathlib.Path</code> でOSを気にせずパスを扱える</li>
+<li><code>/</code> 演算子でパスを連結できる</li>
+<li><code>.exists()</code>, <code>.glob()</code>, <code>.mkdir()</code> などの便利なメソッド</li>
+</ul>
+</li>
+</ol>
+<h3 id="%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88">チェックリスト</h3>
+<ul>
+<li><input type="checkbox" id="checkbox6"><label for="checkbox6">型ヒント付きの関数を定義できる</label></li>
+<li><input type="checkbox" id="checkbox7"><label for="checkbox7">try-exceptでエラーを処理できる</label></li>
+<li><input type="checkbox" id="checkbox8"><label for="checkbox8">raiseで明示的にエラーを発生させられる</label></li>
+<li><input type="checkbox" id="checkbox9"><label for="checkbox9">pathlibでパスを扱える</label></li>
+<li><input type="checkbox" id="checkbox10"><label for="checkbox10">globでファイルを検索できる</label></li>
+</ul>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

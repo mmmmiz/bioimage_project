@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day2.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 4px dashed #c6e1ff;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 3rem;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: #f0f7ff;
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #ff6209; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="day-2-opencv%E5%9F%BA%E7%A4%8E2%E3%80%9C3%E6%99%82%E9%96%93">Day 2: OpenCV基礎（2〜3時間）</h1>
+<h2 id="%F0%9F%93%8B-%E3%81%93%E3%81%AE%E6%97%A5%E3%81%AE%E5%AD%A6%E7%BF%92%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">📋 この日の学習について</h2>
+<p><strong>OpenCV（オープンシーブイ）</strong> は、画像処理や動画処理を行うためのライブラリです。<br>
+この日は、画像を読み込んで処理するための基本的な操作を学びます。</p>
+<h3 id="%E3%81%93%E3%81%AE%E6%97%A5%E3%81%AE%E3%82%B4%E3%83%BC%E3%83%AB">この日のゴール</h3>
+<ul>
+<li>画像をプログラムで読み込めるようになる</li>
+<li>カラー画像とグレースケール画像の違いを理解する</li>
+<li>シャープネス（ピントの合い具合）を測る方法を知る</li>
+<li>画像をぼかす方法を知る</li>
+</ul>
+<h3 id="%E5%89%8D%E6%8F%90%E7%9F%A5%E8%AD%98">前提知識</h3>
+<ul>
+<li>Day 1のNumPy基礎（配列、<code>shape</code>、<code>dtype</code>など）</li>
+<li>Pythonの基本文法（import、変数、関数呼び出し）</li>
+</ul>
+<hr>
+<h2 id="21-%E7%94%BB%E5%83%8F%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF%E3%81%A8%E8%A1%A8%E7%A4%BA">2.1 画像の読み込みと表示</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0"></label><code>cv2.imread()</code>で画像を読み込める</li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1">OpenCVがBGR形式で読み込むことを理解する</label></li>
+</ul>
+<hr>
+<h3 id="%F0%9F%94%B0-%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E8%AA%AC%E6%98%8E%E3%81%BE%E3%81%9A%E3%81%AF%E3%81%93%E3%81%93%E3%81%8B%E3%82%89">🔰 ざっくり説明（まずはここから）</h3>
+<p><strong>画像を読み込む</strong>というのは、画像ファイル（JPGやPNGなど）をプログラムで扱える形（数字の集まり）に変換することです。</p>
+<p>OpenCVでは <code>cv2.imread()</code> という命令を使います。<br>
+読み込まれた画像は、Day 1で学んだ<strong>NumPy配列</strong>として扱われます。</p>
+<pre class="hljs"><code><div>画像ファイル → cv2.imread() → NumPy配列（数字の集まり）
+</div></code></pre>
+<hr>
+<h3 id="%F0%9F%93%9A-%E8%A9%B3%E3%81%97%E3%81%84%E8%AA%AC%E6%98%8E">📚 詳しい説明</h3>
+<h4 id="211-%E7%94%BB%E5%83%8F%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF">2.1.1 画像の読み込み</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2  <span class="hljs-comment"># OpenCVライブラリを読み込む</span>
+
+<span class="hljs-comment"># 画像を読み込む</span>
+image = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)
+
+<span class="hljs-comment"># 読み込めたか確認（とても重要！）</span>
+<span class="hljs-keyword">if</span> image <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+    print(<span class="hljs-string">"画像が読み込めませんでした"</span>)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">f"画像サイズ: <span class="hljs-subst">{image.shape}</span>"</span>)
+</div></code></pre>
+<p><strong>コードの解説</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>コード</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>import cv2</code></td>
+<td>OpenCVライブラリを使えるようにする</td>
+</tr>
+<tr>
+<td><code>cv2.imread('sample.jpg')</code></td>
+<td>画像ファイルを読み込む</td>
+</tr>
+<tr>
+<td><code>image is None</code></td>
+<td>読み込みに失敗したかチェック</td>
+</tr>
+<tr>
+<td><code>image.shape</code></td>
+<td>画像のサイズ（高さ, 幅, チャンネル数）を取得</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="%E2%9A%A0%EF%B8%8F-%E9%87%8D%E8%A6%81%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF%E5%A4%B1%E6%95%97%E3%81%AE%E6%A4%9C%E7%9F%A5">⚠️ 重要ポイント：読み込み失敗の検知</h4>
+<p><strong><code>cv2.imread()</code>の注意点</strong>:</p>
+<ul>
+<li>読み込みに失敗しても<strong>エラーが出ない</strong>（プログラムが止まらない）</li>
+<li>失敗すると**<code>None</code>**という特別な値が返ってくる</li>
+<li>必ず<code>if image is None:</code>でチェックする習慣をつけよう</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># 存在しないファイルを読み込もうとした場合</span>
+image = cv2.imread(<span class="hljs-string">'sonzai_shinai.jpg'</span>)
+print(image)  <span class="hljs-comment"># None と表示される（エラーにならない！）</span>
+</div></code></pre>
+<blockquote>
+<p>💡 <strong>なぜエラーにならない？</strong><br>
+OpenCVはC++で作られたライブラリで、Pythonとは異なる設計思想を持っています。
+エラーを投げる代わりに<code>None</code>を返すことで、プログラマーが自分で対処できるようになっています。</p>
+</blockquote>
+<hr>
+<h4 id="212-bgr%E5%BD%A2%E5%BC%8F%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">2.1.2 BGR形式について</h4>
+<p><strong>BGR（ビージーアール）</strong> とは、色の並び順のことです。</p>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>色の順番</th>
+<th>使う場面</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BGR</strong></td>
+<td>青(Blue) → 緑(Green) → 赤(Red)</td>
+<td>OpenCV</td>
+</tr>
+<tr>
+<td><strong>RGB</strong></td>
+<td>赤(Red) → 緑(Green) → 青(Blue)</td>
+<td>一般的な画像形式、matplotlib</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+
+image = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)
+
+<span class="hljs-comment"># 最初のピクセルの色を確認</span>
+<span class="hljs-comment"># 順番は [青, 緑, 赤] になっている</span>
+print(image[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>])  <span class="hljs-comment"># 例: [255, 128, 64] → 青が255, 緑が128, 赤が64</span>
+</div></code></pre>
+<blockquote>
+<p>💡 <strong>なぜBGRなの？</strong><br>
+歴史的な理由です。OpenCVが生まれた1990年代後半、WindowsのBMP形式がBGR順だったため、
+OpenCVもそれに合わせました。今でも互換性のためにBGRを使い続けています。</p>
+</blockquote>
+<hr>
+<h4 id="213-%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF">2.1.3 グレースケール読み込み</h4>
+<p><strong>グレースケール（白黒画像）</strong> で読み込むこともできます。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># グレースケールで直接読み込む</span>
+gray = cv2.imread(<span class="hljs-string">'sample.jpg'</span>, cv2.IMREAD_GRAYSCALE)
+
+print(gray.shape)  <span class="hljs-comment"># (高さ, 幅) ← 2次元になる（チャンネルがない）</span>
+</div></code></pre>
+<p><strong>カラー画像とグレースケール画像の違い</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>shapeの例</th>
+<th>次元数</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>カラー</td>
+<td><code>(480, 640, 3)</code></td>
+<td>3次元</td>
+<td>高さ×幅×3色(BGR)</td>
+</tr>
+<tr>
+<td>グレースケール</td>
+<td><code>(480, 640)</code></td>
+<td>2次元</td>
+<td>高さ×幅のみ</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li><strong>Day 1</strong>: 画像を読み込んで<code>shape</code>と<code>dtype</code>を確認</li>
+<li><strong>全体を通じて</strong>: 画像ファイルの読み込みに使用</li>
+</ul>
+<hr>
+<h3 id="%F0%9F%93%96-%E5%9F%BA%E7%A4%8E%E4%BA%8B%E9%A0%85%E3%81%AE%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">📖 基礎事項の確認ポイント</h3>
+<p>もしこのセクションがわからなければ、以下を確認しましょう：</p>
+<table>
+<thead>
+<tr>
+<th>わからないこと</th>
+<th>確認する内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>import</code>文</td>
+<td>Pythonのモジュール読み込み</td>
+</tr>
+<tr>
+<td><code>if</code>文</td>
+<td>条件分岐の基本</td>
+</tr>
+<tr>
+<td><code>None</code></td>
+<td>Pythonの特殊な値（「何もない」を表す）</td>
+</tr>
+<tr>
+<td><code>.shape</code></td>
+<td>Day 1のNumPy配列の属性</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.opencv.org/4.x/d4/da8/group__imgcodecs.html#ga288b8b3da0892bd651fce07b3bbd3a56">cv2.imread - OpenCV公式ドキュメント</a></li>
+<li><a href="https://docs.opencv.org/4.x/d8/d6a/group__imgcodecs__flags.html">cv2.IMREAD_GRAYSCALE などのフラグ</a></li>
+</ul>
+<hr>
+<h2 id="22-%E8%89%B2%E7%A9%BA%E9%96%93%E3%81%AE%E5%A4%89%E6%8F%9B">2.2 色空間の変換</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2"></label><code>cv2.cvtColor()</code>でカラー変換ができる</li>
+<li><input type="checkbox" id="checkbox3"><label for="checkbox3">BGR → グレースケール変換を理解する</label></li>
+</ul>
+<hr>
+<h3 id="%F0%9F%94%B0-%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E8%AA%AC%E6%98%8E%E3%81%BE%E3%81%9A%E3%81%AF%E3%81%93%E3%81%93%E3%81%8B%E3%82%89">🔰 ざっくり説明（まずはここから）</h3>
+<p><strong>色空間の変換</strong>とは、画像の色の表現方法を変えることです。</p>
+<p>例えば：</p>
+<ul>
+<li>カラー写真を白黒写真に変える</li>
+<li>OpenCVのBGR形式をRGB形式に変える</li>
+</ul>
+<p>これには <code>cv2.cvtColor()</code> という命令を使います。</p>
+<pre class="hljs"><code><div>カラー画像 → cv2.cvtColor() → グレースケール画像
+</div></code></pre>
+<hr>
+<h3 id="%F0%9F%93%9A-%E8%A9%B3%E3%81%97%E3%81%84%E8%AA%AC%E6%98%8E">📚 詳しい説明</h3>
+<h4 id="221-%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%E5%A4%89%E6%8F%9B">2.2.1 グレースケール変換</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+
+<span class="hljs-comment"># カラー画像を読み込み</span>
+color_image = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)
+
+<span class="hljs-comment"># グレースケールに変換</span>
+gray_image = cv2.cvtColor(color_image, cv2.COLOR_BGR2GRAY)
+
+<span class="hljs-comment"># 変換前後のサイズを確認</span>
+print(<span class="hljs-string">f"カラー: <span class="hljs-subst">{color_image.shape}</span>"</span>)  <span class="hljs-comment"># (480, 640, 3) ← 3チャンネル</span>
+print(<span class="hljs-string">f"グレー: <span class="hljs-subst">{gray_image.shape}</span>"</span>)   <span class="hljs-comment"># (480, 640)    ← 1チャンネル（2次元）</span>
+</div></code></pre>
+<p><strong>コードの解説</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>コード</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cv2.cvtColor(画像, 変換コード)</code></td>
+<td>色空間を変換する</td>
+</tr>
+<tr>
+<td><code>cv2.COLOR_BGR2GRAY</code></td>
+<td>BGR形式 → グレースケールに変換</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="%F0%9F%A7%AE-%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%E5%A4%89%E6%8F%9B%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF">🧮 グレースケール変換の仕組み</h4>
+<p>グレースケール変換は、3つの色(BGR)を1つの明るさの値に変換します。</p>
+<p><strong>計算式</strong>:</p>
+<pre class="hljs"><code><div>グレー値 = 0.114 × 青 + 0.587 × 緑 + 0.299 × 赤
+</div></code></pre>
+<blockquote>
+<p>💡 <strong>なぜ均等に足さないの？</strong><br>
+人間の目は緑色に最も敏感で、青色には鈍感です。
+この計算式は人間の目の感度に合わせて作られています。
+（専門用語：**輝度（Luminance）**の計算式）</p>
+</blockquote>
+<hr>
+<h4 id="%E2%9D%93-%E3%81%AA%E3%81%9C%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%E5%A4%89%E6%8F%9B%E3%81%8C%E5%BF%85%E8%A6%81">❓ なぜグレースケール変換が必要？</h4>
+<table>
+<thead>
+<tr>
+<th>理由</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>計算が簡単になる</strong></td>
+<td>3チャンネル → 1チャンネルでデータ量が1/3に</td>
+</tr>
+<tr>
+<td><strong>指標計算に必要</strong></td>
+<td>明るさやシャープネスはグレースケールで計算する</td>
+</tr>
+<tr>
+<td><strong>処理速度が上がる</strong></td>
+<td>データ量が減るので計算が速い</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="222-bgr-%E2%86%92-rgb%E5%A4%89%E6%8F%9Bmatplotlib%E8%A1%A8%E7%A4%BA%E7%94%A8">2.2.2 BGR → RGB変換（matplotlib表示用）</h4>
+<p>matplotlibで画像を表示するときは、RGB形式に変換が必要です。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+<span class="hljs-comment"># OpenCVで読み込み（BGR形式）</span>
+image = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)
+
+<span class="hljs-comment"># RGB形式に変換</span>
+image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+<span class="hljs-comment"># matplotlibで表示</span>
+plt.imshow(image_rgb)
+plt.title(<span class="hljs-string">"サンプル画像"</span>)
+plt.axis(<span class="hljs-string">'off'</span>)  <span class="hljs-comment"># 軸を非表示</span>
+plt.show()
+</div></code></pre>
+<p><strong>変換しないとどうなる？</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 変換せずに表示すると...</span>
+plt.imshow(image)  <span class="hljs-comment"># 赤と青が入れ替わった変な色になる！</span>
+</div></code></pre>
+<hr>
+<h4 id="%F0%9F%93%8B-%E3%82%88%E3%81%8F%E4%BD%BF%E3%81%86%E5%A4%89%E6%8F%9B%E3%82%B3%E3%83%BC%E3%83%89%E4%B8%80%E8%A6%A7">📋 よく使う変換コード一覧</h4>
+<table>
+<thead>
+<tr>
+<th>変換コード</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cv2.COLOR_BGR2GRAY</code></td>
+<td>BGR → グレースケール</td>
+</tr>
+<tr>
+<td><code>cv2.COLOR_BGR2RGB</code></td>
+<td>BGR → RGB</td>
+</tr>
+<tr>
+<td><code>cv2.COLOR_RGB2BGR</code></td>
+<td>RGB → BGR</td>
+</tr>
+<tr>
+<td><code>cv2.COLOR_BGR2HSV</code></td>
+<td>BGR → HSV（色相・彩度・明度）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li><strong>Day 2</strong>: カラー/グレースケールの違い確認</li>
+<li><strong>Day 3〜5</strong>: 指標計算の前処理（グレースケールに変換してから計算）</li>
+</ul>
+<hr>
+<h3 id="%F0%9F%93%96-%E5%9F%BA%E7%A4%8E%E4%BA%8B%E9%A0%85%E3%81%AE%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">📖 基礎事項の確認ポイント</h3>
+<table>
+<thead>
+<tr>
+<th>わからないこと</th>
+<th>確認する内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>関数の引数</td>
+<td>Pythonの関数呼び出し（引数の渡し方）</td>
+</tr>
+<tr>
+<td>定数（<code>cv2.COLOR_BGR2GRAY</code>など）</td>
+<td>Pythonの定数・列挙型</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.opencv.org/4.x/d8/d01/group__imgproc__color__conversions.html#ga397ae87e1288a81d2363b61574eb8cab">cv2.cvtColor - OpenCV公式ドキュメント</a></li>
+<li><a href="https://docs.opencv.org/4.x/d8/d01/group__imgproc__color__conversions.html">色変換コード一覧</a></li>
+</ul>
+<hr>
+<h2 id="23-laplacian%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%97%E3%83%8D%E3%82%B9%E8%A8%88%E7%AE%97%E7%94%A8">2.3 Laplacianフィルタ（シャープネス計算用）</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox4"><label for="checkbox4">Laplacianフィルタの概念を理解する</label></li>
+<li><input type="checkbox" id="checkbox5"><label for="checkbox5"></label><code>cv2.Laplacian()</code>の使い方を習得する</li>
+</ul>
+<hr>
+<h3 id="%F0%9F%94%B0-%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E8%AA%AC%E6%98%8E%E3%81%BE%E3%81%9A%E3%81%AF%E3%81%93%E3%81%93%E3%81%8B%E3%82%89">🔰 ざっくり説明（まずはここから）</h3>
+<p><strong>Laplacian（ラプラシアン）フィルタ</strong>は、画像の「輪郭」や「境界線」を見つける道具です。</p>
+<p><strong>ピントが合っている画像の特徴</strong>:</p>
+<ul>
+<li>物と物の境界がくっきりしている</li>
+<li>色の変化が急激</li>
+</ul>
+<p><strong>ピンぼけ画像の特徴</strong>:</p>
+<ul>
+<li>境界がぼんやりしている</li>
+<li>色の変化がなだらか</li>
+</ul>
+<p>Laplacianフィルタを使うと、この「くっきり度」を数値で測れます。</p>
+<pre class="hljs"><code><div>くっきりした画像 → Laplacian値が大きい → シャープネスが高い
+ぼんやりした画像 → Laplacian値が小さい → シャープネスが低い
+</div></code></pre>
+<hr>
+<h3 id="%F0%9F%93%9A-%E8%A9%B3%E3%81%97%E3%81%84%E8%AA%AC%E6%98%8E">📚 詳しい説明</h3>
+<h4 id="231-laplacian%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%81%A8%E3%81%AF">2.3.1 Laplacianフィルタとは</h4>
+<p><strong>技術的な説明</strong>:<br>
+Laplacianフィルタは<strong>2次微分（にじびぶん）</strong> を計算します。</p>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>簡単な説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>微分</strong></td>
+<td>変化の度合いを調べること</td>
+</tr>
+<tr>
+<td><strong>1次微分</strong></td>
+<td>「どれくらい変化しているか」</td>
+</tr>
+<tr>
+<td><strong>2次微分</strong></td>
+<td>「変化のスピードがどれくらい変わっているか」</td>
+</tr>
+</tbody>
+</table>
+<p>画像で言うと：</p>
+<ul>
+<li><strong>1次微分</strong> = 隣のピクセルとの明るさの差</li>
+<li><strong>2次微分</strong> = その差がさらにどう変わっているか（エッジの鋭さ）</li>
+</ul>
+<hr>
+<h4 id="232-%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%97%E3%83%8D%E3%82%B9%E8%A8%88%E7%AE%97%E3%81%AE%E5%AE%9F%E8%A3%85">2.3.2 シャープネス計算の実装</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># グレースケール画像を用意</span>
+gray = cv2.imread(<span class="hljs-string">'sample.jpg'</span>, cv2.IMREAD_GRAYSCALE)
+
+<span class="hljs-comment"># Laplacianフィルタを適用</span>
+laplacian = cv2.Laplacian(gray, cv2.CV_64F)
+
+<span class="hljs-comment"># 分散を計算 → シャープネスの指標</span>
+sharpness = np.var(laplacian)
+print(<span class="hljs-string">f"シャープネス: <span class="hljs-subst">{sharpness}</span>"</span>)
+</div></code></pre>
+<p><strong>コードの解説</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>コード</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cv2.Laplacian(gray, cv2.CV_64F)</code></td>
+<td>Laplacianフィルタを適用</td>
+</tr>
+<tr>
+<td><code>cv2.CV_64F</code></td>
+<td>出力を64ビット浮動小数点数にする</td>
+</tr>
+<tr>
+<td><code>np.var(laplacian)</code></td>
+<td>結果の分散を計算（Day 1で学習）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="%E2%9D%93-%E3%81%AA%E3%81%9C%E5%88%86%E6%95%A3%E3%82%92%E4%BD%BF%E3%81%86%E3%81%AE">❓ なぜ分散を使うの？</h4>
+<p>Laplacianフィルタの出力は、エッジの強さを表す数値の配列です。</p>
+<ul>
+<li><strong>ピントが合った画像</strong>: エッジがたくさんある → Laplacian値のバラつきが大きい → <strong>分散が大きい</strong></li>
+<li><strong>ピンぼけ画像</strong>: エッジが少ない → Laplacian値が全体的に小さい → <strong>分散が小さい</strong></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># イメージ</span>
+sharp_image_laplacian = [<span class="hljs-number">-100</span>, <span class="hljs-number">200</span>, <span class="hljs-number">-150</span>, <span class="hljs-number">300</span>, ...]  <span class="hljs-comment"># バラつき大</span>
+blurry_image_laplacian = [<span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">8</span>, <span class="hljs-number">12</span>, ...]        <span class="hljs-comment"># バラつき小</span>
+</div></code></pre>
+<hr>
+<h4 id="%F0%9F%94%A2-cv2cv64f%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">🔢 cv2.CV_64Fについて</h4>
+<table>
+<thead>
+<tr>
+<th>定数</th>
+<th>データ型</th>
+<th>範囲</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cv2.CV_8U</code></td>
+<td>8ビット符号なし整数</td>
+<td>0〜255</td>
+</tr>
+<tr>
+<td><code>cv2.CV_64F</code></td>
+<td>64ビット浮動小数点数</td>
+<td>非常に広い範囲</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>なぜCV_64Fを使う？</strong><br>
+Laplacianフィルタの結果は<strong>マイナスの値</strong>も含みます。
+<code>cv2.CV_8U</code>だとマイナスの値が0になってしまうので、<code>cv2.CV_64F</code>を使います。</p>
+</blockquote>
+<hr>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li><strong>Day 5</strong>: <code>calc_sharpness()</code> 関数の実装</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># プロジェクトで作成する関数のイメージ</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_sharpness</span><span class="hljs-params">(image)</span>:</span>
+    <span class="hljs-string">"""シャープネスを計算する"""</span>
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    laplacian = cv2.Laplacian(gray, cv2.CV_64F)
+    <span class="hljs-keyword">return</span> np.var(laplacian)
+</div></code></pre>
+<hr>
+<h3 id="%F0%9F%93%96-%E5%9F%BA%E7%A4%8E%E4%BA%8B%E9%A0%85%E3%81%AE%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">📖 基礎事項の確認ポイント</h3>
+<table>
+<thead>
+<tr>
+<th>わからないこと</th>
+<th>確認する内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>np.var()</code></td>
+<td>Day 1のNumPy統計関数（分散）</td>
+</tr>
+<tr>
+<td>グレースケール変換</td>
+<td>このDay 2のセクション2.2</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gad78703e4c8fe703d479c1860d76429e6">cv2.Laplacian - OpenCV公式ドキュメント</a></li>
+<li><a href="https://docs.opencv.org/4.x/d5/db5/tutorial_laplace_operator.html">Laplacian（概念説明）- OpenCV Tutorial</a></li>
+</ul>
+<hr>
+<h2 id="24-gaussian%E3%81%BC%E3%81%8B%E3%81%97%E4%BA%BA%E5%B7%A5%E3%83%94%E3%83%B3%E3%81%BC%E3%81%91%E7%94%9F%E6%88%90%E7%94%A8">2.4 Gaussianぼかし（人工ピンぼけ生成用）</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox6"><label for="checkbox6"></label><code>cv2.GaussianBlur()</code>でぼかし処理ができる</li>
+<li><input type="checkbox" id="checkbox7"><label for="checkbox7">σ（シグマ）の意味を理解する</label></li>
+</ul>
+<hr>
+<h3 id="%F0%9F%94%B0-%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E8%AA%AC%E6%98%8E%E3%81%BE%E3%81%9A%E3%81%AF%E3%81%93%E3%81%93%E3%81%8B%E3%82%89">🔰 ざっくり説明（まずはここから）</h3>
+<p><strong>Gaussianぼかし（ガウシアンぼかし）</strong> は、画像を「ぼかす」処理です。</p>
+<p>スマホのカメラアプリで背景をぼかすような効果を、プログラムで作れます。</p>
+<ul>
+<li><strong>σ（シグマ）が小さい</strong> → 少しだけぼける</li>
+<li><strong>σ（シグマ）が大きい</strong> → 強くぼける</li>
+</ul>
+<pre class="hljs"><code><div>元画像 → GaussianBlur(σ=1) → 少しぼけた画像
+元画像 → GaussianBlur(σ=5) → かなりぼけた画像
+</div></code></pre>
+<hr>
+<h3 id="%F0%9F%93%9A-%E8%A9%B3%E3%81%97%E3%81%84%E8%AA%AC%E6%98%8E">📚 詳しい説明</h3>
+<h4 id="241-gaussian%E3%81%BC%E3%81%8B%E3%81%97%E3%81%A8%E3%81%AF">2.4.1 Gaussianぼかしとは</h4>
+<p><strong>技術的な説明</strong>:<br>
+Gaussianぼかしは、<strong>ガウス分布（正規分布）</strong> という数学的な関数を使って画像をぼかします。</p>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>簡単な説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ガウス分布</strong></td>
+<td>中心が一番高く、端に行くほど低くなる釣鐘型の形</td>
+</tr>
+<tr>
+<td><strong>σ（シグマ）</strong></td>
+<td>ガウス分布の広がり具合を決める数値</td>
+</tr>
+<tr>
+<td><strong>カーネル</strong></td>
+<td>ぼかしに使う数値の組み合わせ（小さな行列）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="242-%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E4%BD%BF%E3%81%84%E6%96%B9">2.4.2 基本的な使い方</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+
+<span class="hljs-comment"># 画像読み込み</span>
+image = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)
+
+<span class="hljs-comment"># 方法1: カーネルサイズを指定</span>
+blurred = cv2.GaussianBlur(image, (<span class="hljs-number">5</span>, <span class="hljs-number">5</span>), <span class="hljs-number">0</span>)
+
+<span class="hljs-comment"># 方法2: σ（シグマ）を明示的に指定</span>
+blurred_sigma3 = cv2.GaussianBlur(image, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), sigmaX=<span class="hljs-number">3</span>)
+</div></code></pre>
+<p><strong>コードの解説</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>引数</th>
+<th>意味</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第1引数</td>
+<td>入力画像</td>
+<td><code>image</code></td>
+</tr>
+<tr>
+<td>第2引数</td>
+<td>カーネルサイズ</td>
+<td><code>(5, 5)</code> または <code>(0, 0)</code></td>
+</tr>
+<tr>
+<td>第3引数</td>
+<td>sigmaX（横方向のぼかし強度）</td>
+<td><code>0</code>（自動）または <code>3</code>（指定）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="%F0%9F%93%8B-%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%81%AE%E8%A9%B3%E7%B4%B0">📋 パラメータの詳細</h4>
+<p><strong>カーネルサイズ</strong>:</p>
+<ul>
+<li><code>(5, 5)</code> のように<strong>奇数×奇数</strong>で指定</li>
+<li>数字が大きいほどぼかしの範囲が広がる</li>
+<li><code>(0, 0)</code> にすると、sigmaXから自動計算される</li>
+</ul>
+<p><strong>sigmaX（σ）</strong>:</p>
+<ul>
+<li>ぼかしの強さを決める値</li>
+<li>大きいほど強くぼける</li>
+<li><code>0</code> にすると、カーネルサイズから自動計算される</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># 推奨: sigmaXを明示的に指定する方法</span>
+blur_weak = cv2.GaussianBlur(image, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), sigmaX=<span class="hljs-number">1</span>)   <span class="hljs-comment"># 弱いぼかし</span>
+blur_medium = cv2.GaussianBlur(image, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), sigmaX=<span class="hljs-number">3</span>)  <span class="hljs-comment"># 中程度</span>
+blur_strong = cv2.GaussianBlur(image, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), sigmaX=<span class="hljs-number">5</span>)  <span class="hljs-comment"># 強いぼかし</span>
+</div></code></pre>
+<hr>
+<h4 id="243-%CF%83%E3%82%B7%E3%82%B0%E3%83%9E%E3%81%AE%E5%8A%B9%E6%9E%9C%E3%82%92%E6%AF%94%E8%BC%83">2.4.3 σ（シグマ）の効果を比較</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+<span class="hljs-comment"># 画像読み込み</span>
+image = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)
+image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+<span class="hljs-comment"># 異なるσでぼかし</span>
+sigma_values = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>]
+fig, axes = plt.subplots(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>, figsize=(<span class="hljs-number">15</span>, <span class="hljs-number">3</span>))
+
+<span class="hljs-comment"># 元画像</span>
+axes[<span class="hljs-number">0</span>].imshow(image_rgb)
+axes[<span class="hljs-number">0</span>].set_title(<span class="hljs-string">"元画像"</span>)
+axes[<span class="hljs-number">0</span>].axis(<span class="hljs-string">'off'</span>)
+
+<span class="hljs-comment"># 各σでぼかした画像</span>
+<span class="hljs-keyword">for</span> i, sigma <span class="hljs-keyword">in</span> enumerate(sigma_values):
+    blurred = cv2.GaussianBlur(image, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), sigmaX=sigma)
+    blurred_rgb = cv2.cvtColor(blurred, cv2.COLOR_BGR2RGB)
+    axes[i+<span class="hljs-number">1</span>].imshow(blurred_rgb)
+    axes[i+<span class="hljs-number">1</span>].set_title(<span class="hljs-string">f"σ = <span class="hljs-subst">{sigma}</span>"</span>)
+    axes[i+<span class="hljs-number">1</span>].axis(<span class="hljs-string">'off'</span>)
+
+plt.tight_layout()
+plt.show()
+</div></code></pre>
+<hr>
+<h4 id="%F0%9F%92%A1-%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%97%E3%83%8D%E3%82%B9%E3%81%A8%E3%81%AE%E9%96%A2%E4%BF%82">💡 シャープネスとの関係</h4>
+<p>ぼかし処理をすると、シャープネスが下がります。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_sharpness</span><span class="hljs-params">(image)</span>:</span>
+    <span class="hljs-string">"""シャープネスを計算"""</span>
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    laplacian = cv2.Laplacian(gray, cv2.CV_64F)
+    <span class="hljs-keyword">return</span> np.var(laplacian)
+
+<span class="hljs-comment"># 画像読み込み</span>
+image = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)
+
+<span class="hljs-comment"># 元画像のシャープネス</span>
+print(<span class="hljs-string">f"元画像: <span class="hljs-subst">{calc_sharpness(image):<span class="hljs-number">.2</span>f}</span>"</span>)
+
+<span class="hljs-comment"># ぼかした画像のシャープネス</span>
+<span class="hljs-keyword">for</span> sigma <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>]:
+    blurred = cv2.GaussianBlur(image, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), sigmaX=sigma)
+    print(<span class="hljs-string">f"σ=<span class="hljs-subst">{sigma}</span>: <span class="hljs-subst">{calc_sharpness(blurred):<span class="hljs-number">.2</span>f}</span>"</span>)
+
+<span class="hljs-comment"># 出力例:</span>
+<span class="hljs-comment"># 元画像: 1250.00</span>
+<span class="hljs-comment"># σ=1: 800.00</span>
+<span class="hljs-comment"># σ=3: 150.00</span>
+<span class="hljs-comment"># σ=5: 50.00</span>
+</div></code></pre>
+<hr>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li><strong>Day 8〜9</strong>: 人工ピンぼけ画像の生成（テストデータ作成）</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># プロジェクトでの使用イメージ</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">create_blurred_test_images</span><span class="hljs-params">(original_image)</span>:</span>
+    <span class="hljs-string">"""テスト用のぼけ画像を生成"""</span>
+    results = []
+    <span class="hljs-keyword">for</span> sigma <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]:
+        blurred = cv2.GaussianBlur(original_image, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), sigmaX=sigma)
+        results.append({
+            <span class="hljs-string">'sigma'</span>: sigma,
+            <span class="hljs-string">'image'</span>: blurred
+        })
+    <span class="hljs-keyword">return</span> results
+</div></code></pre>
+<hr>
+<h3 id="%F0%9F%93%96-%E5%9F%BA%E7%A4%8E%E4%BA%8B%E9%A0%85%E3%81%AE%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">📖 基礎事項の確認ポイント</h3>
+<table>
+<thead>
+<tr>
+<th>わからないこと</th>
+<th>確認する内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>関数のキーワード引数</td>
+<td>Python関数の<code>sigmaX=3</code>のような書き方</td>
+</tr>
+<tr>
+<td>タプル <code>(5, 5)</code></td>
+<td>Pythonのタプルの基本</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1">cv2.GaussianBlur - OpenCV公式ドキュメント</a></li>
+<li><a href="https://docs.opencv.org/4.x/d4/d13/tutorial_py_filtering.html">Smoothing Images（ぼかしの概念説明）</a></li>
+</ul>
+<hr>
+<h2 id="25-%E2%9C%85-opencv%E7%A2%BA%E8%AA%8D%E5%95%8F%E9%A1%8C">2.5 ✅ OpenCV確認問題</h2>
+<p>学習した内容を確認しましょう。コードの出力を予想してから実行してみてください。</p>
+<h3 id="%E5%95%8F%E9%A1%8C1-shape%E3%81%AE%E5%A4%89%E5%8C%96">問題1: shapeの変化</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+
+<span class="hljs-comment"># カラー画像を読み込み（サイズ: 480×640）</span>
+color = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)  <span class="hljs-comment"># shape: (480, 640, 3)</span>
+
+<span class="hljs-comment"># グレースケールに変換</span>
+gray_image = cv2.cvtColor(color, cv2.COLOR_BGR2GRAY)
+
+<span class="hljs-comment"># gray_image.shape は何になる？</span>
+</div></code></pre>
+<hr>
+<h3 id="%E5%95%8F%E9%A1%8C2-%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%97%E3%83%8D%E3%82%B9%E8%A8%88%E7%AE%97">問題2: シャープネス計算</h3>
+<p>シャープネス計算の正しい順序はどれ？</p>
+<ul>
+<li><strong>A</strong>: Laplacian → mean（平均）</li>
+<li><strong>B</strong>: Laplacian → var（分散）</li>
+<li><strong>C</strong>: GaussianBlur → var（分散）</li>
+</ul>
+<hr>
+<h3 id="%E5%95%8F%E9%A1%8C3-%E3%81%BC%E3%81%8B%E3%81%97%E3%81%AE%E5%BC%B7%E3%81%95">問題3: ぼかしの強さ</h3>
+<p>ぼかしを強くするにはどうする？</p>
+<ul>
+<li><strong>A</strong>: sigmaXを大きくする</li>
+<li><strong>B</strong>: sigmaXを小さくする</li>
+<li><strong>C</strong>: sigmaXは関係ない</li>
+</ul>
+<hr>
+<h3 id="%E5%95%8F%E9%A1%8C4-%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF%E3%82%A8%E3%83%A9%E3%83%BC">問題4: 読み込みエラー</h3>
+<p>以下のコードで、存在しないファイルを読み込もうとしたとき、何が起こる？</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+
+image = cv2.imread(<span class="hljs-string">'sonzai_shinai_file.jpg'</span>)
+print(type(image))
+</div></code></pre>
+<ul>
+<li><strong>A</strong>: エラーが発生してプログラムが止まる</li>
+<li><strong>B</strong>: <code>None</code>が返ってくる</li>
+<li><strong>C</strong>: 空の配列が返ってくる</li>
+</ul>
+<hr>
+<details>
+<summary>🔍 解答を見る</summary>
+<h3 id="%E5%95%8F%E9%A1%8C1%E3%81%AE%E8%A7%A3%E7%AD%94-480-640">問題1の解答: <code>(480, 640)</code></h3>
+<pre class="hljs"><code><div>グレースケール変換で3チャンネル → 1チャンネルになる
+
+カラー: (480, 640, 3) → 高さ480、幅640、3色
+グレー: (480, 640)    → 高さ480、幅640のみ（色の情報がなくなる）
+</div></code></pre>
+<hr>
+<h3 id="%E5%95%8F%E9%A1%8C2%E3%81%AE%E8%A7%A3%E7%AD%94-blaplacian-%E2%86%92-var">問題2の解答: <strong>B（Laplacian → var）</strong></h3>
+<pre class="hljs"><code><div>理由:
+- Laplacianフィルタでエッジ（輪郭）を検出
+- その結果の分散（var）でシャープネスを測る
+
+Aが間違いの理由:
+- 平均（mean）だとエッジの「平均的な強さ」になってしまう
+- シャープネスは「バラつき」を見たいので分散を使う
+
+Cが間違いの理由:
+- GaussianBlurはぼかす処理
+- シャープネス計算にはLaplacianを使う
+</div></code></pre>
+<hr>
+<h3 id="%E5%95%8F%E9%A1%8C3%E3%81%AE%E8%A7%A3%E7%AD%94-asigmax%E3%82%92%E5%A4%A7%E3%81%8D%E3%81%8F%E3%81%99%E3%82%8B">問題3の解答: <strong>A（sigmaXを大きくする）</strong></h3>
+<pre class="hljs"><code><div>σ（シグマ）の値とぼかしの関係:
+- σ = 1 → 弱いぼかし
+- σ = 3 → 中程度のぼかし
+- σ = 5 → 強いぼかし
+
+σが大きいほど、より広い範囲のピクセルを混ぜ合わせるので、
+強くぼける
+</div></code></pre>
+<hr>
+<h3 id="%E5%95%8F%E9%A1%8C4%E3%81%AE%E8%A7%A3%E7%AD%94-bnone%E3%81%8C%E8%BF%94%E3%81%A3%E3%81%A6%E3%81%8F%E3%82%8B">問題4の解答: <strong>B（<code>None</code>が返ってくる）</strong></h3>
+<pre class="hljs"><code><div>cv2.imread()の重要な特徴:
+- ファイルが存在しなくてもエラーにならない
+- 代わりに None という特別な値を返す
+- 必ず if image is None: でチェックする習慣をつけよう
+
+print(type(image)) の出力は &lt;class 'NoneType'&gt; になる
+</div></code></pre>
+</details>
+<hr>
+<h2 id="%F0%9F%93%9D-day-2-%E3%81%BE%E3%81%A8%E3%82%81">📝 Day 2 まとめ</h2>
+<h3 id="%E5%AD%A6%E3%82%93%E3%81%A0%E3%81%93%E3%81%A8">学んだこと</h3>
+<table>
+<thead>
+<tr>
+<th>関数/概念</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cv2.imread()</code></td>
+<td>画像の読み込み</td>
+</tr>
+<tr>
+<td><code>cv2.cvtColor()</code></td>
+<td>色空間の変換（BGR↔グレースケール↔RGB）</td>
+</tr>
+<tr>
+<td><code>cv2.Laplacian()</code></td>
+<td>エッジ検出（シャープネス計算用）</td>
+</tr>
+<tr>
+<td><code>cv2.GaussianBlur()</code></td>
+<td>画像のぼかし</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%E9%87%8D%E8%A6%81%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">重要ポイント</h3>
+<ol>
+<li><strong><code>cv2.imread()</code>は失敗してもエラーにならない</strong> → 必ず<code>None</code>チェック</li>
+<li><strong>OpenCVはBGR形式</strong> → matplotlibで表示するときはRGBに変換</li>
+<li><strong>シャープネス = Laplacianの分散</strong> → <code>np.var(cv2.Laplacian(gray, cv2.CV_64F))</code></li>
+<li><strong>σが大きいほど強くぼける</strong> → <code>cv2.GaussianBlur(image, (0, 0), sigmaX=σ)</code></li>
+</ol>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

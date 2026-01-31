@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>bioimage_learning_agenda.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 4px dashed #c6e1ff;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 3rem;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #ff6209; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="bioimage-quality-check-app">Bioimage Quality Check App</h1>
+<h2 id="%E4%BA%8B%E5%89%8D%E5%AD%A6%E7%BF%92%E3%82%A2%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%80%E6%8E%A8%E5%AE%9A10%E3%80%9C13%E6%99%82%E9%96%93">事前学習アジェンダ（推定10〜13時間）</h2>
+<hr>
+<h2 id="%F0%9F%93%8B-%E3%81%93%E3%81%AE%E3%82%A2%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%80%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">📋 このアジェンダについて</h2>
+<p>プロジェクト開始前に必要な知識を「最小限かつ効果的」に学ぶためのカリキュラムです。<br>
+各トピックはプロジェクトで<strong>実際に使う機能だけ</strong>に絞っています。</p>
+<h3 id="%E5%AD%A6%E7%BF%92%E3%81%AE%E9%80%B2%E3%82%81%E6%96%B9">学習の進め方</h3>
+<ol>
+<li>各セクションを順番に進める</li>
+<li>「✅ 確認問題」で理解度をチェック</li>
+<li>「🔗 公式リファレンス」で詳細を確認（必要に応じて）</li>
+<li>「💡 プロジェクトでの使用場面」で実践イメージを持つ</li>
+</ol>
+<hr>
+<h2 id="%F0%9F%8E%AF-%E5%AD%A6%E7%BF%92%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97">🎯 学習ロードマップ</h2>
+<pre class="hljs"><code><div>Day 1: NumPy基礎（2〜3h）
+    ↓
+Day 2: OpenCV基礎（2〜3h）
+    ↓
+Day 3: Python関数・エラー処理（1〜2h）
+    ↓
+Day 4: Streamlit基礎（3〜4h）
+    ↓
+Day 5: pandas基礎 + 総復習（1〜2h）
+</div></code></pre>
+<hr>
+<h1 id="day-1-numpy%E5%9F%BA%E7%A4%8E2%E3%80%9C3%E6%99%82%E9%96%93">Day 1: NumPy基礎（2〜3時間）</h1>
+<h2 id="11-numpy%E9%85%8D%E5%88%97%E3%81%A8%E3%81%AF%E4%BD%95%E3%81%8B">1.1 NumPy配列とは何か</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0">NumPy配列（ndarray）の概念を理解する</label></li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1">画像データがNumPy配列として扱われることを理解する</label></li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<h4 id="111-numpy%E9%85%8D%E5%88%97%E3%81%AE%E4%BD%9C%E6%88%90%E3%81%A8%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">1.1.1 NumPy配列の作成と基本操作</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 配列の作成</span>
+arr = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>])
+
+<span class="hljs-comment"># 2次元配列（行列）</span>
+matrix = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>],
+                   [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]])
+</div></code></pre>
+<h4 id="112-%E9%85%8D%E5%88%97%E3%81%AE%E5%B1%9E%E6%80%A7%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E6%9C%80%E9%87%8D%E8%A6%81">1.1.2 配列の属性（プロジェクトで最重要）</h4>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>意味</th>
+<th>画像での例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shape</code></td>
+<td>配列の形状（各次元のサイズ）</td>
+<td><code>(480, 640, 3)</code> = 高さ480、幅640、3チャンネル</td>
+</tr>
+<tr>
+<td><code>dtype</code></td>
+<td>データ型</td>
+<td><code>uint8</code> = 0〜255の整数</td>
+</tr>
+<tr>
+<td><code>ndim</code></td>
+<td>次元数</td>
+<td>2 = グレースケール、3 = カラー</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 画像を読み込んだと仮定</span>
+image = np.zeros((<span class="hljs-number">480</span>, <span class="hljs-number">640</span>, <span class="hljs-number">3</span>), dtype=np.uint8)
+
+print(image.shape)  <span class="hljs-comment"># (480, 640, 3)</span>
+print(image.dtype)  <span class="hljs-comment"># uint8</span>
+print(image.ndim)   <span class="hljs-comment"># 3</span>
+</div></code></pre>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 1: 画像を読み込んだ後、<code>shape</code>と<code>dtype</code>で画像の情報を確認する</li>
+<li>Day 7: カラー/グレースケールの判定に<code>ndim</code>を使う</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://numpy.org/doc/stable/reference/arrays.ndarray.html#array-attributes">NumPy配列の属性</a></li>
+</ul>
+<hr>
+<h2 id="12-%E7%B5%B1%E8%A8%88%E9%96%A2%E6%95%B0%E6%8C%87%E6%A8%99%E8%A8%88%E7%AE%97%E3%81%AE%E6%A0%B8%E5%BF%83">1.2 統計関数（指標計算の核心）</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2"></label><code>np.mean()</code>（平均）の使い方を理解する</li>
+<li><input type="checkbox" id="checkbox3"><label for="checkbox3"></label><code>np.std()</code>（標準偏差）の使い方を理解する</li>
+<li><input type="checkbox" id="checkbox4"><label for="checkbox4"></label><code>np.var()</code>（分散）の使い方を理解する</li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<h4 id="121-%E5%B9%B3%E5%9D%87mean%E2%86%92-%E6%98%8E%E3%82%8B%E3%81%95%E8%A8%88%E7%AE%97%E3%81%AB%E4%BD%BF%E7%94%A8">1.2.1 平均（Mean）→ 明るさ計算に使用</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 1次元配列の平均</span>
+arr = np.array([<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>, <span class="hljs-number">50</span>])
+print(np.mean(arr))  <span class="hljs-comment"># 30.0</span>
+
+<span class="hljs-comment"># 2次元配列（画像）の全体平均</span>
+image = np.array([[<span class="hljs-number">100</span>, <span class="hljs-number">150</span>],
+                  [<span class="hljs-number">200</span>, <span class="hljs-number">250</span>]])
+print(np.mean(image))  <span class="hljs-comment"># 175.0</span>
+</div></code></pre>
+<p><strong>平均の意味</strong>: 全ての値を足して、個数で割った値<br>
+<strong>画像での意味</strong>: 全ピクセルの輝度の平均 = 画像全体の「明るさ」</p>
+<h4 id="122-%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AEstandard-deviation%E2%86%92-%E3%82%B3%E3%83%B3%E3%83%88%E3%83%A9%E3%82%B9%E3%83%88%E8%A8%88%E7%AE%97%E3%81%AB%E4%BD%BF%E7%94%A8">1.2.2 標準偏差（Standard Deviation）→ コントラスト計算に使用</h4>
+<pre class="hljs"><code><div><span class="hljs-comment"># 標準偏差</span>
+arr1 = np.array([<span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>])  <span class="hljs-comment"># バラつきなし</span>
+arr2 = np.array([<span class="hljs-number">0</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">100</span>])  <span class="hljs-comment"># バラつきあり</span>
+
+print(np.std(arr1))  <span class="hljs-comment"># 0.0</span>
+print(np.std(arr2))  <span class="hljs-comment"># 35.36...</span>
+</div></code></pre>
+<p><strong>標準偏差の意味</strong>: 値が平均からどれくらい散らばっているか<br>
+<strong>画像での意味</strong>: 輝度のバラつき = 画像の「コントラスト」</p>
+<h4 id="123-%E5%88%86%E6%95%A3variance%E2%86%92-%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%97%E3%83%8D%E3%82%B9%E8%A8%88%E7%AE%97%E3%81%AB%E4%BD%BF%E7%94%A8">1.2.3 分散（Variance）→ シャープネス計算に使用</h4>
+<pre class="hljs"><code><div><span class="hljs-comment"># 分散 = 標準偏差の2乗</span>
+arr = np.array([<span class="hljs-number">0</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">100</span>])
+print(np.var(arr))  <span class="hljs-comment"># 1250.0</span>
+print(np.std(arr) ** <span class="hljs-number">2</span>)  <span class="hljs-comment"># 1250.0（同じ値）</span>
+</div></code></pre>
+<p><strong>分散の意味</strong>: 標準偏差を2乗したもの。散らばり具合の別表現<br>
+<strong>画像での意味</strong>: Laplacianフィルタ後の分散 = 「シャープネス」</p>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<table>
+<thead>
+<tr>
+<th>関数</th>
+<th>使用日</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>np.mean()</code></td>
+<td>Day 3</td>
+<td><code>calc_brightness()</code> 関数</td>
+</tr>
+<tr>
+<td><code>np.std()</code></td>
+<td>Day 4</td>
+<td><code>calc_contrast()</code> 関数</td>
+</tr>
+<tr>
+<td><code>np.var()</code></td>
+<td>Day 5</td>
+<td><code>calc_sharpness()</code> 関数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://numpy.org/doc/stable/reference/generated/numpy.mean.html">np.mean</a></li>
+<li><a href="https://numpy.org/doc/stable/reference/generated/numpy.std.html">np.std</a></li>
+<li><a href="https://numpy.org/doc/stable/reference/generated/numpy.var.html">np.var</a></li>
+</ul>
+<hr>
+<h2 id="13-%E2%9C%85-numpy%E7%A2%BA%E8%AA%8D%E5%95%8F%E9%A1%8C">1.3 ✅ NumPy確認問題</h2>
+<p>以下のコードの出力を予想してから実行してみてください。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 問題1: shape</span>
+arr = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]])
+print(arr.shape)  <span class="hljs-comment"># → ?</span>
+
+<span class="hljs-comment"># 問題2: mean</span>
+image = np.array([[<span class="hljs-number">0</span>, <span class="hljs-number">100</span>], [<span class="hljs-number">100</span>, <span class="hljs-number">200</span>]])
+print(np.mean(image))  <span class="hljs-comment"># → ?</span>
+
+<span class="hljs-comment"># 問題3: std（直感で答える）</span>
+low_contrast = np.array([<span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>])
+high_contrast = np.array([<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">100</span>, <span class="hljs-number">100</span>])
+<span class="hljs-comment"># どちらの標準偏差が大きい？</span>
+</div></code></pre>
+<details>
+<summary>解答を見る</summary>
+<pre class="hljs"><code><div>問題1: (2, 3)  # 2行3列
+問題2: 100.0  # (0+100+100+200)/4 = 100
+問題3: high_contrastの方が大きい
+       - low_contrast: std = 0.0（全部同じ値）
+       - high_contrast: std = 50.0（0と100に散らばっている）
+</div></code></pre>
+</details>
+<hr>
+<h1 id="day-2-opencv%E5%9F%BA%E7%A4%8E2%E3%80%9C3%E6%99%82%E9%96%93">Day 2: OpenCV基礎（2〜3時間）</h1>
+<h2 id="21-%E7%94%BB%E5%83%8F%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF%E3%81%A8%E8%A1%A8%E7%A4%BA">2.1 画像の読み込みと表示</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox5"><label for="checkbox5"></label><code>cv2.imread()</code>で画像を読み込める</li>
+<li><input type="checkbox" id="checkbox6"><label for="checkbox6">OpenCVがBGR形式で読み込むことを理解する</label></li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<h4 id="211-%E7%94%BB%E5%83%8F%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF">2.1.1 画像の読み込み</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+
+<span class="hljs-comment"># 画像を読み込む</span>
+image = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)
+
+<span class="hljs-comment"># 読み込めたか確認</span>
+<span class="hljs-keyword">if</span> image <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+    print(<span class="hljs-string">"画像が読み込めませんでした"</span>)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">f"画像サイズ: <span class="hljs-subst">{image.shape}</span>"</span>)
+</div></code></pre>
+<p><strong>重要ポイント</strong>:</p>
+<ul>
+<li><code>cv2.imread()</code>はNumPy配列を返す</li>
+<li>読み込みに失敗すると<code>None</code>を返す（エラーにならない！）</li>
+<li>カラー画像は<strong>BGR形式</strong>（青・緑・赤の順）で読み込まれる</li>
+</ul>
+<h4 id="212-%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF">2.1.2 グレースケール読み込み</h4>
+<pre class="hljs"><code><div><span class="hljs-comment"># グレースケールで直接読み込む</span>
+gray = cv2.imread(<span class="hljs-string">'sample.jpg'</span>, cv2.IMREAD_GRAYSCALE)
+print(gray.shape)  <span class="hljs-comment"># (高さ, 幅) ← 2次元になる</span>
+</div></code></pre>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 1: 画像を読み込んで<code>shape</code>と<code>dtype</code>を確認</li>
+<li>全体を通じて: 画像ファイルの読み込みに使用</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.opencv.org/4.x/d4/da8/group__imgcodecs.html#ga288b8b3da0892bd651fce07b3bbd3a56">cv2.imread</a></li>
+</ul>
+<hr>
+<h2 id="22-%E8%89%B2%E7%A9%BA%E9%96%93%E3%81%AE%E5%A4%89%E6%8F%9B">2.2 色空間の変換</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox7"><label for="checkbox7"></label><code>cv2.cvtColor()</code>でカラー変換ができる</li>
+<li><input type="checkbox" id="checkbox8"><label for="checkbox8">BGR → グレースケール変換を理解する</label></li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<h4 id="221-%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%E5%A4%89%E6%8F%9B">2.2.1 グレースケール変換</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+
+<span class="hljs-comment"># カラー画像を読み込み</span>
+color_image = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)
+
+<span class="hljs-comment"># グレースケールに変換</span>
+gray_image = cv2.cvtColor(color_image, cv2.COLOR_BGR2GRAY)
+
+print(color_image.shape)  <span class="hljs-comment"># (480, 640, 3) ← 3チャンネル</span>
+print(gray_image.shape)   <span class="hljs-comment"># (480, 640)    ← 1チャンネル（2次元）</span>
+</div></code></pre>
+<p><strong>なぜグレースケール変換が必要？</strong></p>
+<ul>
+<li>輝度計算を簡単にするため</li>
+<li>指標計算は基本的にグレースケールで行う</li>
+<li>計算量が減る（1チャンネル vs 3チャンネル）</li>
+</ul>
+<h4 id="222-bgr-%E2%86%92-rgb%E5%A4%89%E6%8F%9Bmatplotlib%E8%A1%A8%E7%A4%BA%E7%94%A8">2.2.2 BGR → RGB変換（matplotlib表示用）</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+image = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)
+image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+<span class="hljs-comment"># matplotlibで表示</span>
+plt.imshow(image_rgb)
+plt.show()
+</div></code></pre>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 2: カラー/グレースケールの違い確認</li>
+<li>Day 3〜5: 指標計算の前処理</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.opencv.org/4.x/d8/d01/group__imgproc__color__conversions.html#ga397ae87e1288a81d2363b61574eb8cab">cv2.cvtColor</a></li>
+</ul>
+<hr>
+<h2 id="23-laplacian%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%97%E3%83%8D%E3%82%B9%E8%A8%88%E7%AE%97%E7%94%A8">2.3 Laplacianフィルタ（シャープネス計算用）</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox9"><label for="checkbox9">Laplacianフィルタの概念を理解する</label></li>
+<li><input type="checkbox" id="checkbox10"><label for="checkbox10"></label><code>cv2.Laplacian()</code>の使い方を習得する</li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<h4 id="231-laplacian%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%81%A8%E3%81%AF">2.3.1 Laplacianフィルタとは</h4>
+<p><strong>ざっくり説明</strong>:<br>
+画像の「輪郭」や「エッジ」を検出するフィルタ。<br>
+ピントが合っている画像 → エッジがくっきり → Laplacian値が大きい<br>
+ピンぼけ画像 → エッジがぼんやり → Laplacian値が小さい</p>
+<p><strong>技術的説明</strong>:<br>
+Laplacianフィルタは2次微分を計算する。輝度の急激な変化（エッジ）を検出する。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># グレースケール画像を用意</span>
+gray = cv2.imread(<span class="hljs-string">'sample.jpg'</span>, cv2.IMREAD_GRAYSCALE)
+
+<span class="hljs-comment"># Laplacianフィルタを適用</span>
+laplacian = cv2.Laplacian(gray, cv2.CV_64F)
+
+<span class="hljs-comment"># 分散を計算 → シャープネスの指標</span>
+sharpness = np.var(laplacian)
+print(<span class="hljs-string">f"シャープネス: <span class="hljs-subst">{sharpness}</span>"</span>)
+</div></code></pre>
+<p><strong>パラメータ説明</strong>:</p>
+<ul>
+<li>第1引数: 入力画像（グレースケール）</li>
+<li>第2引数: 出力のデータ型（<code>cv2.CV_64F</code>で64bit浮動小数点）</li>
+</ul>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 5: <code>calc_sharpness()</code> 関数の実装</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gad78703e4c8fe703d479c1860d76429e6">cv2.Laplacian</a></li>
+</ul>
+<hr>
+<h2 id="24-gaussian%E3%81%BC%E3%81%8B%E3%81%97%E4%BA%BA%E5%B7%A5%E3%83%94%E3%83%B3%E3%81%BC%E3%81%91%E7%94%9F%E6%88%90%E7%94%A8">2.4 Gaussianぼかし（人工ピンぼけ生成用）</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox11"><label for="checkbox11"></label><code>cv2.GaussianBlur()</code>でぼかし処理ができる</li>
+<li><input type="checkbox" id="checkbox12"><label for="checkbox12">σ（シグマ）の意味を理解する</label></li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<h4 id="241-gaussian%E3%81%BC%E3%81%8B%E3%81%97%E3%81%A8%E3%81%AF">2.4.1 Gaussianぼかしとは</h4>
+<p><strong>ざっくり説明</strong>:<br>
+画像を「ぼかす」処理。σ（シグマ）が大きいほど強くぼける。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+
+<span class="hljs-comment"># 画像読み込み</span>
+image = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)
+
+<span class="hljs-comment"># Gaussianぼかしを適用</span>
+<span class="hljs-comment"># (5, 5): カーネルサイズ（奇数で指定）</span>
+<span class="hljs-comment"># 0: σを自動計算（カーネルサイズから決定）</span>
+blurred = cv2.GaussianBlur(image, (<span class="hljs-number">5</span>, <span class="hljs-number">5</span>), <span class="hljs-number">0</span>)
+
+<span class="hljs-comment"># σを明示的に指定する場合</span>
+blurred_sigma3 = cv2.GaussianBlur(image, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), sigmaX=<span class="hljs-number">3</span>)
+</div></code></pre>
+<p><strong>パラメータ説明</strong>:</p>
+<ul>
+<li>第1引数: 入力画像</li>
+<li>第2引数: カーネルサイズ（奇数×奇数）。<code>(0, 0)</code>でσから自動決定</li>
+<li>第3引数: sigmaX（横方向のぼかし強度）</li>
+</ul>
+<h4 id="242-%CF%83%E3%82%B7%E3%82%B0%E3%83%9E%E3%81%AE%E5%8A%B9%E6%9E%9C">2.4.2 σ（シグマ）の効果</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+
+image = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)
+
+<span class="hljs-comment"># σを変えてぼかしの強さを変える</span>
+blur_s1 = cv2.GaussianBlur(image, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), sigmaX=<span class="hljs-number">1</span>)  <span class="hljs-comment"># 弱いぼかし</span>
+blur_s3 = cv2.GaussianBlur(image, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), sigmaX=<span class="hljs-number">3</span>)  <span class="hljs-comment"># 中程度</span>
+blur_s5 = cv2.GaussianBlur(image, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), sigmaX=<span class="hljs-number">5</span>)  <span class="hljs-comment"># 強いぼかし</span>
+</div></code></pre>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 8〜9: 人工ピンぼけ画像の生成</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1">cv2.GaussianBlur</a></li>
+</ul>
+<hr>
+<h2 id="25-%E2%9C%85-opencv%E7%A2%BA%E8%AA%8D%E5%95%8F%E9%A1%8C">2.5 ✅ OpenCV確認問題</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 問題1: 以下のコードでgray_imageのshapeは？</span>
+color = cv2.imread(<span class="hljs-string">'sample.jpg'</span>)  <span class="hljs-comment"># shape: (480, 640, 3)</span>
+gray_image = cv2.cvtColor(color, cv2.COLOR_BGR2GRAY)
+<span class="hljs-comment"># gray_image.shape → ?</span>
+
+<span class="hljs-comment"># 問題2: シャープネス計算の正しい順序は？</span>
+<span class="hljs-comment"># A: Laplacian → mean</span>
+<span class="hljs-comment"># B: Laplacian → var</span>
+<span class="hljs-comment"># C: GaussianBlur → var</span>
+
+<span class="hljs-comment"># 問題3: ぼかしを強くするには？</span>
+<span class="hljs-comment"># A: sigmaXを大きくする</span>
+<span class="hljs-comment"># B: sigmaXを小さくする</span>
+</div></code></pre>
+<details>
+<summary>解答を見る</summary>
+<pre class="hljs"><code><div>問題1: (480, 640)
+       グレースケール変換で3チャンネル→1チャンネルになる
+
+問題2: B（Laplacian → var）
+       Laplacianでエッジを検出し、その分散でシャープネスを測る
+
+問題3: A（sigmaXを大きくする）
+       σが大きいほどぼかしが強くなる
+</div></code></pre>
+</details>
+<hr>
+<h1 id="day-3-python%E9%96%A2%E6%95%B0%E3%83%BB%E3%82%A8%E3%83%A9%E3%83%BC%E5%87%A6%E7%90%861%E3%80%9C2%E6%99%82%E9%96%93">Day 3: Python関数・エラー処理（1〜2時間）</h1>
+<h2 id="31-%E9%96%A2%E6%95%B0%E3%81%AE%E5%AE%9A%E7%BE%A9%E3%81%A8%E6%88%BB%E3%82%8A%E5%80%A4">3.1 関数の定義と戻り値</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox13"><label for="checkbox13">引数と戻り値を持つ関数が書ける</label></li>
+<li><input type="checkbox" id="checkbox14"><label for="checkbox14">型ヒント（Type Hints）の書き方を理解する</label></li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<h4 id="311-%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E9%96%A2%E6%95%B0%E5%AE%9A%E7%BE%A9">3.1.1 基本的な関数定義</h4>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_brightness</span><span class="hljs-params">(image)</span>:</span>
+    <span class="hljs-string">"""画像の平均輝度を計算する"""</span>
+    <span class="hljs-keyword">return</span> np.mean(image)
+</div></code></pre>
+<h4 id="312-%E5%9E%8B%E3%83%92%E3%83%B3%E3%83%88%E4%BB%98%E3%81%8D%E3%81%AE%E9%96%A2%E6%95%B0%E6%8E%A8%E5%A5%A8">3.1.2 型ヒント付きの関数（推奨）</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">from</span> numpy.typing <span class="hljs-keyword">import</span> NDArray
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_brightness</span><span class="hljs-params">(image: NDArray[np.uint8])</span> -&gt; float:</span>
+    <span class="hljs-string">"""
+    画像の平均輝度を計算する
+    
+    Parameters
+    ----------
+    image : NDArray[np.uint8]
+        入力画像（グレースケール）
+    
+    Returns
+    -------
+    float
+        平均輝度値（0.0〜255.0）
+    """</span>
+    <span class="hljs-keyword">return</span> float(np.mean(image))
+</div></code></pre>
+<p><strong>型ヒントの意味</strong>:</p>
+<ul>
+<li><code>image: NDArray[np.uint8]</code> → 引数はNumPy配列（uint8型）</li>
+<li><code>-&gt; float</code> → 戻り値はfloat型</li>
+</ul>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 3〜5: 各指標計算関数の実装</li>
+<li>Day 12: 判定ロジックの関数化</li>
+</ul>
+<hr>
+<h2 id="32-%E4%BE%8B%E5%A4%96%E5%87%A6%E7%90%86try-except">3.2 例外処理（try-except）</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox15"><label for="checkbox15">基本的なtry-except文が書ける</label></li>
+<li><input type="checkbox" id="checkbox16"><label for="checkbox16">画像読み込みエラーを適切に処理できる</label></li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<h4 id="321-%E5%9F%BA%E6%9C%AC%E6%A7%8B%E6%96%87">3.2.1 基本構文</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">try</span>:
+    <span class="hljs-comment"># エラーが起きる可能性のある処理</span>
+    result = risky_operation()
+<span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+    <span class="hljs-comment"># エラー時の処理</span>
+    print(<span class="hljs-string">f"エラーが発生しました: <span class="hljs-subst">{e}</span>"</span>)
+</div></code></pre>
+<h4 id="322-%E7%94%BB%E5%83%8F%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF%E3%81%A7%E3%81%AE%E5%AE%9F%E8%B7%B5%E4%BE%8B">3.2.2 画像読み込みでの実践例</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> cv2
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load_image</span><span class="hljs-params">(filepath: str)</span>:</span>
+    <span class="hljs-string">"""画像を安全に読み込む"""</span>
+    <span class="hljs-keyword">try</span>:
+        image = cv2.imread(filepath)
+        <span class="hljs-keyword">if</span> image <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">f"画像を読み込めませんでした: <span class="hljs-subst">{filepath}</span>"</span>)
+        <span class="hljs-keyword">return</span> image
+    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+        print(<span class="hljs-string">f"エラー: <span class="hljs-subst">{e}</span>"</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>
+</div></code></pre>
+<p><strong>ポイント</strong>:</p>
+<ul>
+<li><code>cv2.imread()</code>は失敗しても例外を投げない（<code>None</code>を返す）</li>
+<li>明示的に<code>ValueError</code>を発生させてエラーを検知可能にする</li>
+</ul>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 7: エラーハンドリング</li>
+<li>Day 20: UI安定化</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.python.org/ja/3/tutorial/errors.html">Python例外処理</a></li>
+</ul>
+<hr>
+<h2 id="33-%E3%83%91%E3%82%B9%E6%93%8D%E4%BD%9Cpathlib">3.3 パス操作（pathlib）</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox17"><label for="checkbox17"></label><code>pathlib.Path</code>でファイルパスを扱える</li>
+<li><input type="checkbox" id="checkbox18"><label for="checkbox18">相対パス・絶対パスの違いを理解する</label></li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<h4 id="331-%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E4%BD%BF%E3%81%84%E6%96%B9">3.3.1 基本的な使い方</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+
+<span class="hljs-comment"># パスの作成</span>
+data_dir = Path(<span class="hljs-string">"data"</span>)
+image_path = data_dir / <span class="hljs-string">"sample.jpg"</span>
+
+<span class="hljs-comment"># パスの存在確認</span>
+<span class="hljs-keyword">if</span> image_path.exists():
+    print(<span class="hljs-string">"ファイルが存在します"</span>)
+
+<span class="hljs-comment"># ファイル名・拡張子の取得</span>
+print(image_path.name)    <span class="hljs-comment"># sample.jpg</span>
+print(image_path.stem)    <span class="hljs-comment"># sample</span>
+print(image_path.suffix)  <span class="hljs-comment"># .jpg</span>
+</div></code></pre>
+<h4 id="332-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%83%AB%E3%83%BC%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A">3.3.2 プロジェクトルートの設定</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+
+<span class="hljs-comment"># プロジェクトルートを基準にする</span>
+BASE_DIR = Path(__file__).parent.parent  <span class="hljs-comment"># scripts/ から見て2階層上</span>
+DATA_DIR = BASE_DIR / <span class="hljs-string">"data"</span>
+</div></code></pre>
+<p><strong>Notebookでの注意</strong>:</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Notebookでは __file__ が使えないので手動で設定</span>
+<span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+BASE_DIR = Path(<span class="hljs-string">"/path/to/project"</span>)  <span class="hljs-comment"># プロジェクトのルートを指定</span>
+</div></code></pre>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 1: ディレクトリ構造の設定</li>
+<li>Day 9: データセット作成時のフォルダ整理</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/pathlib.html">pathlib</a></li>
+</ul>
+<hr>
+<h2 id="34-%E2%9C%85-python%E7%A2%BA%E8%AA%8D%E5%95%8F%E9%A1%8C">3.4 ✅ Python確認問題</h2>
+<pre class="hljs"><code><div><span class="hljs-comment"># 問題1: 以下の関数の戻り値の型は？</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_contrast</span><span class="hljs-params">(image)</span> -&gt; float:</span>
+    <span class="hljs-keyword">return</span> np.std(image)
+
+<span class="hljs-comment"># 問題2: 以下のコードでエラーが発生した場合、何が出力される？</span>
+<span class="hljs-keyword">try</span>:
+    image = cv2.imread(<span class="hljs-string">"not_exist.jpg"</span>)
+    <span class="hljs-keyword">if</span> image <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">"読み込み失敗"</span>)
+<span class="hljs-keyword">except</span> ValueError <span class="hljs-keyword">as</span> e:
+    print(<span class="hljs-string">f"キャッチ: <span class="hljs-subst">{e}</span>"</span>)
+
+<span class="hljs-comment"># 問題3: Path("data") / "images" / "sample.jpg" の結果は？</span>
+</div></code></pre>
+<details>
+<summary>解答を見る</summary>
+<pre class="hljs"><code><div>問題1: float（型ヒントで明示されている）
+
+問題2: 「キャッチ: 読み込み失敗」が出力される
+       cv2.imread()はNoneを返すので、明示的にValueErrorを発生させている
+
+問題3: Path(&quot;data/images/sample.jpg&quot;) 
+       または &quot;data/images/sample.jpg&quot;（OSによって区切り文字が変わる）
+</div></code></pre>
+</details>
+<hr>
+<h1 id="day-4-streamlit%E5%9F%BA%E7%A4%8E3%E3%80%9C4%E6%99%82%E9%96%93">Day 4: Streamlit基礎（3〜4時間）</h1>
+<h2 id="41-streamlit%E3%81%A8%E3%81%AF">4.1 Streamlitとは</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox19"><label for="checkbox19">Streamlitの基本概念を理解する</label></li>
+<li><input type="checkbox" id="checkbox20"><label for="checkbox20">簡単なアプリを起動できる</label></li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<h4 id="411-streamlit%E3%81%AE%E7%89%B9%E5%BE%B4">4.1.1 Streamlitの特徴</h4>
+<p><strong>ざっくり説明</strong>:<br>
+Pythonだけでウェブアプリが作れるライブラリ。<br>
+HTML/CSS/JavaScriptの知識不要。</p>
+<p><strong>技術的説明</strong>:</p>
+<ul>
+<li>スクリプトを上から順に実行してUIを生成</li>
+<li>ユーザー操作があるとスクリプト全体が再実行される</li>
+<li>状態管理は<code>st.session_state</code>で行う</li>
+</ul>
+<h4 id="412-%E6%9C%80%E5%B0%8F%E9%99%90%E3%81%AE%E3%82%A2%E3%83%97%E3%83%AA">4.1.2 最小限のアプリ</h4>
+<pre class="hljs"><code><div><span class="hljs-comment"># app.py</span>
+<span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
+
+st.title(<span class="hljs-string">"Hello Streamlit!"</span>)
+st.write(<span class="hljs-string">"これは最初のStreamlitアプリです"</span>)
+</div></code></pre>
+<p><strong>起動方法</strong>:</p>
+<pre class="hljs"><code><div>streamlit run app.py
+</div></code></pre>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.streamlit.io/">Streamlit公式ドキュメント</a></li>
+<li><a href="https://docs.streamlit.io/get-started">Get started</a></li>
+</ul>
+<hr>
+<h2 id="42-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89">4.2 ファイルアップロード</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox21"><label for="checkbox21"></label><code>st.file_uploader()</code>で画像をアップロードできる</li>
+<li><input type="checkbox" id="checkbox22"><label for="checkbox22">アップロードされたファイルをOpenCVで処理できる</label></li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
+<span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+st.title(<span class="hljs-string">"画像アップローダー"</span>)
+
+<span class="hljs-comment"># ファイルアップロード</span>
+uploaded_file = st.file_uploader(
+    <span class="hljs-string">"画像を選択してください"</span>,
+    type=[<span class="hljs-string">"jpg"</span>, <span class="hljs-string">"jpeg"</span>, <span class="hljs-string">"png"</span>]
+)
+
+<span class="hljs-keyword">if</span> uploaded_file <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:
+    <span class="hljs-comment"># バイトデータをNumPy配列に変換</span>
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    
+    <span class="hljs-comment"># OpenCVで画像としてデコード</span>
+    image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+    
+    <span class="hljs-comment"># 画像を表示</span>
+    st.image(image, channels=<span class="hljs-string">"BGR"</span>, caption=<span class="hljs-string">"アップロードされた画像"</span>)
+    st.write(<span class="hljs-string">f"サイズ: <span class="hljs-subst">{image.shape}</span>"</span>)
+</div></code></pre>
+<p><strong>ポイント</strong>:</p>
+<ul>
+<li><code>uploaded_file</code>は最初<code>None</code>。ファイルがアップロードされると値が入る</li>
+<li><code>st.image()</code>でOpenCV画像を表示するときは<code>channels=&quot;BGR&quot;</code>を指定</li>
+</ul>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 15: 画像アップロード機能</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.streamlit.io/develop/api-reference/widgets/st.file_uploader">st.file_uploader</a></li>
+</ul>
+<hr>
+<h2 id="43-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%80%E3%83%BC">4.3 スライダー</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox23"><label for="checkbox23"></label><code>st.slider()</code>でしきい値を調整できる</li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
+
+st.title(<span class="hljs-string">"しきい値調整"</span>)
+
+<span class="hljs-comment"># スライダー</span>
+brightness_threshold = st.slider(
+    <span class="hljs-string">"明るさのしきい値"</span>,
+    min_value=<span class="hljs-number">0</span>,
+    max_value=<span class="hljs-number">255</span>,
+    value=<span class="hljs-number">100</span>,  <span class="hljs-comment"># デフォルト値</span>
+    step=<span class="hljs-number">1</span>
+)
+
+st.write(<span class="hljs-string">f"現在の値: <span class="hljs-subst">{brightness_threshold}</span>"</span>)
+
+<span class="hljs-comment"># 範囲スライダー</span>
+contrast_range = st.slider(
+    <span class="hljs-string">"コントラストの範囲"</span>,
+    min_value=<span class="hljs-number">0.0</span>,
+    max_value=<span class="hljs-number">100.0</span>,
+    value=(<span class="hljs-number">20.0</span>, <span class="hljs-number">80.0</span>),  <span class="hljs-comment"># タプルで範囲を指定</span>
+    step=<span class="hljs-number">0.5</span>
+)
+
+st.write(<span class="hljs-string">f"下限: <span class="hljs-subst">{contrast_range[<span class="hljs-number">0</span>]}</span>, 上限: <span class="hljs-subst">{contrast_range[<span class="hljs-number">1</span>]}</span>"</span>)
+</div></code></pre>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 17: しきい値UI化</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.streamlit.io/develop/api-reference/widgets/st.slider">st.slider</a></li>
+</ul>
+<hr>
+<h2 id="44-%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E8%A1%A8%E7%A4%BA">4.4 テーブル表示</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox24"><label for="checkbox24"></label><code>st.dataframe()</code>でデータを表示できる</li>
+<li><input type="checkbox" id="checkbox25"><label for="checkbox25"></label><code>st.table()</code>との違いを理解する</li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+<span class="hljs-comment"># サンプルデータ</span>
+data = {
+    <span class="hljs-string">"指標"</span>: [<span class="hljs-string">"明るさ"</span>, <span class="hljs-string">"コントラスト"</span>, <span class="hljs-string">"シャープネス"</span>],
+    <span class="hljs-string">"値"</span>: [<span class="hljs-number">125.5</span>, <span class="hljs-number">45.2</span>, <span class="hljs-number">1250.0</span>],
+    <span class="hljs-string">"判定"</span>: [<span class="hljs-string">"OK"</span>, <span class="hljs-string">"OK"</span>, <span class="hljs-string">"NG"</span>]
+}
+df = pd.DataFrame(data)
+
+<span class="hljs-comment"># インタラクティブなテーブル</span>
+st.subheader(<span class="hljs-string">"st.dataframe（インタラクティブ）"</span>)
+st.dataframe(df, use_container_width=<span class="hljs-literal">True</span>)
+
+<span class="hljs-comment"># 静的なテーブル</span>
+st.subheader(<span class="hljs-string">"st.table（静的）"</span>)
+st.table(df)
+</div></code></pre>
+<p><strong>違い</strong>:</p>
+<ul>
+<li><code>st.dataframe()</code>: ソートやスクロールが可能</li>
+<li><code>st.table()</code>: 静的な表示のみ</li>
+</ul>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 16: 指標の表形式表示</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.streamlit.io/develop/api-reference/data/st.dataframe">st.dataframe</a></li>
+</ul>
+<hr>
+<h2 id="45-%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9C%E3%82%BF%E3%83%B3">4.5 ダウンロードボタン</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox26"><label for="checkbox26"></label><code>st.download_button()</code>でCSVをダウンロードできる</li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+<span class="hljs-comment"># データ作成</span>
+df = pd.DataFrame({
+    <span class="hljs-string">"ファイル名"</span>: [<span class="hljs-string">"image1.jpg"</span>, <span class="hljs-string">"image2.jpg"</span>],
+    <span class="hljs-string">"明るさ"</span>: [<span class="hljs-number">125.5</span>, <span class="hljs-number">98.3</span>],
+    <span class="hljs-string">"判定"</span>: [<span class="hljs-string">"OK"</span>, <span class="hljs-string">"NG"</span>]
+})
+
+<span class="hljs-comment"># CSVに変換</span>
+csv = df.to_csv(index=<span class="hljs-literal">False</span>)
+
+<span class="hljs-comment"># ダウンロードボタン</span>
+st.download_button(
+    label=<span class="hljs-string">"📥 CSVをダウンロード"</span>,
+    data=csv,
+    file_name=<span class="hljs-string">"quality_check_result.csv"</span>,
+    mime=<span class="hljs-string">"text/csv"</span>
+)
+</div></code></pre>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 19: CSV出力機能</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://docs.streamlit.io/develop/api-reference/widgets/st.download_button">st.download_button</a></li>
+</ul>
+<hr>
+<h2 id="46-%E2%9C%85-streamlit%E7%A2%BA%E8%AA%8D%E5%95%8F%E9%A1%8C">4.6 ✅ Streamlit確認問題</h2>
+<pre class="hljs"><code><div><span class="hljs-comment"># 問題1: 以下のコードでファイルがアップロードされていない場合、</span>
+<span class="hljs-comment">#        if文の中は実行される？</span>
+uploaded_file = st.file_uploader(<span class="hljs-string">"ファイルを選択"</span>)
+<span class="hljs-keyword">if</span> uploaded_file:
+    st.write(<span class="hljs-string">"ファイルがあります"</span>)
+
+<span class="hljs-comment"># 問題2: st.slider()で範囲を選択するには？</span>
+<span class="hljs-comment"># A: value=(10, 90) とタプルで指定</span>
+<span class="hljs-comment"># B: range=True と指定</span>
+<span class="hljs-comment"># C: 範囲選択はできない</span>
+
+<span class="hljs-comment"># 問題3: st.dataframe()とst.table()の違いは？</span>
+</div></code></pre>
+<details>
+<summary>解答を見る</summary>
+<pre class="hljs"><code><div>問題1: 実行されない
+       uploaded_fileはNoneなのでFalsyとして扱われる
+
+問題2: A（value=(10, 90) とタプルで指定）
+
+問題3: 
+- st.dataframe(): インタラクティブ（ソート・スクロール可能）
+- st.table(): 静的表示のみ
+</div></code></pre>
+</details>
+<hr>
+<h1 id="day-5-pandas%E5%9F%BA%E7%A4%8E--%E7%B7%8F%E5%BE%A9%E7%BF%921%E3%80%9C2%E6%99%82%E9%96%93">Day 5: pandas基礎 + 総復習（1〜2時間）</h1>
+<h2 id="51-dataframe%E5%9F%BA%E7%A4%8E">5.1 DataFrame基礎</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox27"><label for="checkbox27">辞書からDataFrameを作成できる</label></li>
+<li><input type="checkbox" id="checkbox28"><label for="checkbox28">CSVファイルに出力できる</label></li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<h4 id="511-%E8%BE%9E%E6%9B%B8%E3%81%8B%E3%82%89dataframe%E4%BD%9C%E6%88%90">5.1.1 辞書からDataFrame作成</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+<span class="hljs-comment"># 辞書のリストから作成</span>
+results = [
+    {<span class="hljs-string">"filename"</span>: <span class="hljs-string">"image1.jpg"</span>, <span class="hljs-string">"brightness"</span>: <span class="hljs-number">125.5</span>, <span class="hljs-string">"status"</span>: <span class="hljs-string">"OK"</span>},
+    {<span class="hljs-string">"filename"</span>: <span class="hljs-string">"image2.jpg"</span>, <span class="hljs-string">"brightness"</span>: <span class="hljs-number">98.3</span>, <span class="hljs-string">"status"</span>: <span class="hljs-string">"NG"</span>},
+]
+df = pd.DataFrame(results)
+print(df)
+</div></code></pre>
+<p>出力:</p>
+<pre class="hljs"><code><div>      filename  brightness status
+0  image1.jpg       125.5     OK
+1  image2.jpg        98.3     NG
+</div></code></pre>
+<h4 id="512-csv%E5%87%BA%E5%8A%9B">5.1.2 CSV出力</h4>
+<pre class="hljs"><code><div><span class="hljs-comment"># CSVファイルに保存</span>
+df.to_csv(<span class="hljs-string">"result.csv"</span>, index=<span class="hljs-literal">False</span>)
+
+<span class="hljs-comment"># 文字列として取得（Streamlitダウンロード用）</span>
+csv_string = df.to_csv(index=<span class="hljs-literal">False</span>)
+</div></code></pre>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 13: 結果のdict化</li>
+<li>Day 19: CSVダウンロード</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html">DataFrame.to_csv</a></li>
+</ul>
+<hr>
+<h2 id="52-matplotlib%E6%A4%9C%E8%A8%BC%E7%94%A8%E6%9C%80%E5%B0%8F%E9%99%90">5.2 matplotlib検証用（最小限）</h2>
+<h3 id="%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99">学習目標</h3>
+<ul>
+<li><input type="checkbox" id="checkbox29"><label for="checkbox29">画像を表示できる</label></li>
+<li><input type="checkbox" id="checkbox30"><label for="checkbox30">簡単なグラフを作成できる</label></li>
+</ul>
+<h3 id="%E5%AD%A6%E3%81%B6%E3%81%B9%E3%81%8D%E5%86%85%E5%AE%B9">学ぶべき内容</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> cv2
+
+<span class="hljs-comment"># 画像表示（Notebook検証用）</span>
+image = cv2.imread(<span class="hljs-string">"sample.jpg"</span>)
+image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+plt.figure(figsize=(<span class="hljs-number">8</span>, <span class="hljs-number">6</span>))
+plt.imshow(image_rgb)
+plt.title(<span class="hljs-string">"Sample Image"</span>)
+plt.axis(<span class="hljs-string">"off"</span>)
+plt.show()
+
+<span class="hljs-comment"># 棒グラフ（指標比較用）</span>
+metrics = [<span class="hljs-string">"Brightness"</span>, <span class="hljs-string">"Contrast"</span>, <span class="hljs-string">"Sharpness"</span>]
+values = [<span class="hljs-number">125.5</span>, <span class="hljs-number">45.2</span>, <span class="hljs-number">1250.0</span>]
+
+plt.figure(figsize=(<span class="hljs-number">8</span>, <span class="hljs-number">4</span>))
+plt.bar(metrics, values)
+plt.title(<span class="hljs-string">"Quality Metrics"</span>)
+plt.show()
+</div></code></pre>
+<h3 id="%F0%9F%92%A1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%BF%E7%94%A8%E5%A0%B4%E9%9D%A2">💡 プロジェクトでの使用場面</h3>
+<ul>
+<li>Day 2: 画像表示確認</li>
+<li>Day 10: 指標挙動の可視化</li>
+</ul>
+<h3 id="%F0%9F%94%97-%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">🔗 公式リファレンス</h3>
+<ul>
+<li><a href="https://matplotlib.org/stable/api/pyplot_summary.html">matplotlib.pyplot</a></li>
+</ul>
+<hr>
+<h2 id="53-%E7%B7%8F%E5%BE%A9%E7%BF%92%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88">5.3 総復習チェックリスト</h2>
+<h3 id="numpy">NumPy</h3>
+<ul>
+<li><input type="checkbox" id="checkbox31"><label for="checkbox31"></label><code>shape</code>, <code>dtype</code>で配列の情報を確認できる</li>
+<li><input type="checkbox" id="checkbox32"><label for="checkbox32"></label><code>np.mean()</code>で平均を計算できる</li>
+<li><input type="checkbox" id="checkbox33"><label for="checkbox33"></label><code>np.std()</code>で標準偏差を計算できる</li>
+<li><input type="checkbox" id="checkbox34"><label for="checkbox34"></label><code>np.var()</code>で分散を計算できる</li>
+</ul>
+<h3 id="opencv">OpenCV</h3>
+<ul>
+<li><input type="checkbox" id="checkbox35"><label for="checkbox35"></label><code>cv2.imread()</code>で画像を読み込める</li>
+<li><input type="checkbox" id="checkbox36"><label for="checkbox36"></label><code>cv2.cvtColor()</code>でグレースケール変換できる</li>
+<li><input type="checkbox" id="checkbox37"><label for="checkbox37"></label><code>cv2.Laplacian()</code>でエッジ検出できる</li>
+<li><input type="checkbox" id="checkbox38"><label for="checkbox38"></label><code>cv2.GaussianBlur()</code>でぼかし処理できる</li>
+</ul>
+<h3 id="python">Python</h3>
+<ul>
+<li><input type="checkbox" id="checkbox39"><label for="checkbox39">型ヒント付きの関数を定義できる</label></li>
+<li><input type="checkbox" id="checkbox40"><label for="checkbox40">try-exceptでエラーを処理できる</label></li>
+<li><input type="checkbox" id="checkbox41"><label for="checkbox41">pathlibでパスを扱える</label></li>
+</ul>
+<h3 id="streamlit">Streamlit</h3>
+<ul>
+<li><input type="checkbox" id="checkbox42"><label for="checkbox42"></label><code>st.file_uploader()</code>でファイルをアップロードできる</li>
+<li><input type="checkbox" id="checkbox43"><label for="checkbox43"></label><code>st.slider()</code>でしきい値を調整できる</li>
+<li><input type="checkbox" id="checkbox44"><label for="checkbox44"></label><code>st.dataframe()</code>でテーブル表示できる</li>
+<li><input type="checkbox" id="checkbox45"><label for="checkbox45"></label><code>st.download_button()</code>でCSVをダウンロードできる</li>
+</ul>
+<h3 id="pandas">pandas</h3>
+<ul>
+<li><input type="checkbox" id="checkbox46"><label for="checkbox46">辞書からDataFrameを作成できる</label></li>
+<li><input type="checkbox" id="checkbox47"><label for="checkbox47"></label><code>to_csv()</code>でCSV出力できる</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%9D-%E5%AD%A6%E7%BF%92%E5%AE%8C%E4%BA%86%E5%BE%8C%E3%81%AE%E6%AC%A1%E3%81%AE%E3%82%B9%E3%83%86%E3%83%83%E3%83%97">📝 学習完了後の次のステップ</h2>
+<p>このアジェンダを完了したら、プロジェクト計画書の<strong>Week 1 Day 1</strong>から開発を開始してください。</p>
+<p>学習中に不明点があれば、いつでも質問してください！</p>
+
+</body>
+</html>

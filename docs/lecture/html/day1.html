@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day1.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 4px dashed #c6e1ff;
+	
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 3rem;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #ff6209; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="day-1-numpy%E5%9F%BA%E7%A4%8E2%E3%80%9C3%E6%99%82%E9%96%93">Day 1: NumPy基礎（2〜3時間）</h1>
+<h2 id="bioimage-quality-check-app-%E4%BA%8B%E5%89%8D%E5%AD%A6%E7%BF%92">Bioimage Quality Check App 事前学習</h2>
+
+<h2 id="%F0%9F%8E%AF-%E4%BB%8A%E6%97%A5%E3%81%AE%E3%82%B4%E3%83%BC%E3%83%AB">🎯 今日のゴール</h2>
+<p>今日の学習を終えると、以下ができるようになります：</p>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0">NumPy配列が「画像データそのもの」であることを理解する</label></li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1"></label><code>shape</code>、<code>dtype</code>で画像の情報を読み取れる</li>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2"></label><code>np.mean()</code>で明るさを計算できる</li>
+<li><input type="checkbox" id="checkbox3"><label for="checkbox3"></label><code>np.std()</code>でコントラストを計算できる</li>
+<li><input type="checkbox" id="checkbox4"><label for="checkbox4"></label><code>np.var()</code>でシャープネス計算の準備ができる</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%9A-%E7%9B%AE%E6%AC%A1">📚 目次</h2>
+<ol>
+<li><a href="#1-numpy%E3%81%A8%E3%81%AF%E4%BD%95%E3%81%8B">NumPyとは何か</a></li>
+<li><a href="#2-numpy%E9%85%8D%E5%88%97%E3%81%AE%E5%9F%BA%E6%9C%AC">NumPy配列の基本</a></li>
+<li><a href="#3-%E7%94%BB%E5%83%8F--numpy%E9%85%8D%E5%88%97">画像 = NumPy配列</a></li>
+<li><a href="#4-%E7%B5%B1%E8%A8%88%E9%96%A2%E6%95%B0mean-std-var">統計関数（mean, std, var）</a></li>
+<li><a href="#5-%E5%AE%9F%E8%B7%B5%E6%BC%94%E7%BF%92">実践演習</a></li>
+<li><a href="#6-%E7%A2%BA%E8%AA%8D%E5%95%8F%E9%A1%8C">確認問題</a></li>
+<li><a href="#7-%E3%81%BE%E3%81%A8%E3%82%81%E3%81%A8%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A">まとめと次回予告</a></li>
+</ol>
+<hr>
+<h2 id="1-numpy%E3%81%A8%E3%81%AF%E4%BD%95%E3%81%8B">1. NumPyとは何か</h2>
+<h3 id="11-%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E8%AA%AC%E6%98%8E">1.1 ざっくり説明</h3>
+<p>NumPy（ナムパイ）は、Pythonで「数値の塊」を高速に扱うためのライブラリです。</p>
+<p><strong>たとえ話</strong>：</p>
+<ul>
+<li>Pythonのリスト = 手作業で1つずつ計算する</li>
+<li>NumPy配列 = 電卓で一気にまとめて計算する</li>
+</ul>
+<h3 id="12-%E3%81%AA%E3%81%9C%E7%94%BB%E5%83%8F%E5%87%A6%E7%90%86%E3%81%A7numpy%E3%81%8C%E5%BF%85%E8%A6%81">1.2 なぜ画像処理でNumPyが必要？</h3>
+<p>画像は「ピクセル（点）の集まり」です。</p>
+<pre class="hljs"><code><div>1枚の画像 = 数十万〜数百万のピクセル
+各ピクセル = 0〜255の数値（明るさ）
+</div></code></pre>
+<p>この大量の数値を効率よく扱うために、NumPyが必須なのです。</p>
+<h3 id="13-%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E7%A2%BA%E8%AA%8D">1.3 インストール確認</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+print(np.__version__)
+<span class="hljs-comment"># 出力例: 1.24.3</span>
+</div></code></pre>
+<p><strong>💡 ポイント</strong>: <code>import numpy as np</code>と書くのが慣例です。以降<code>np.〇〇</code>と書けます。</p>
+<hr>
+<h2 id="2-numpy%E9%85%8D%E5%88%97%E3%81%AE%E5%9F%BA%E6%9C%AC">2. NumPy配列の基本</h2>
+<h3 id="21-%E9%85%8D%E5%88%97%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B">2.1 配列を作ってみる</h3>
+<h4 id="%E3%83%AA%E3%82%B9%E3%83%88%E3%81%8B%E3%82%89%E9%85%8D%E5%88%97%E3%82%92%E4%BD%9C%E3%82%8B">リストから配列を作る</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 1次元配列（数字が横に並んだもの）</span>
+arr1d = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>])
+print(arr1d)
+<span class="hljs-comment"># 出力: [1 2 3 4 5]</span>
+
+<span class="hljs-comment"># 2次元配列（数字が縦横に並んだもの＝表のようなもの）</span>
+arr2d = np.array([
+    [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>],
+    [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]
+])
+print(arr2d)
+<span class="hljs-comment"># 出力:</span>
+<span class="hljs-comment"># [[1 2 3]</span>
+<span class="hljs-comment">#  [4 5 6]]</span>
+</div></code></pre>
+<p><strong>📝 用語解説</strong>：</p>
+<ul>
+<li><strong>1次元配列</strong>: 数字が一列に並んだもの。ベクトルとも呼ばれる</li>
+<li><strong>2次元配列</strong>: 数字が縦横に並んだもの。行列（matrix）とも呼ばれる</li>
+<li><strong>ndarray</strong>: NumPy配列の正式名称（n-dimensional array = n次元配列）</li>
+</ul>
+<h3 id="22-%E9%85%8D%E5%88%97%E3%81%AE%E5%B1%9E%E6%80%A7%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E8%B6%85%E9%87%8D%E8%A6%81">2.2 配列の属性を確認する（超重要！）</h3>
+<p>配列には「自分がどんな形をしているか」を教えてくれる属性があります。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+arr = np.array([
+    [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>],
+    [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]
+])
+
+<span class="hljs-comment"># shape: 配列の形状（各次元のサイズ）</span>
+print(arr.shape)  <span class="hljs-comment"># (2, 3) ← 2行3列という意味</span>
+
+<span class="hljs-comment"># dtype: データ型（どんな種類の数値か）</span>
+print(arr.dtype)  <span class="hljs-comment"># int64 ← 64ビット整数という意味</span>
+
+<span class="hljs-comment"># ndim: 次元数</span>
+print(arr.ndim)   <span class="hljs-comment"># 2 ← 2次元という意味</span>
+
+<span class="hljs-comment"># size: 全要素数</span>
+print(arr.size)   <span class="hljs-comment"># 6 ← 2×3=6個の要素があるという意味</span>
+</div></code></pre>
+<h4 id="%E5%B1%9E%E6%80%A7%E3%81%AE%E6%84%8F%E5%91%B3%E3%81%BE%E3%81%A8%E3%82%81">属性の意味まとめ</h4>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>意味</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shape</code></td>
+<td>形状（タプル）</td>
+<td><code>(2, 3)</code> = 2行3列</td>
+</tr>
+<tr>
+<td><code>dtype</code></td>
+<td>データ型</td>
+<td><code>int64</code>, <code>float64</code>, <code>uint8</code></td>
+</tr>
+<tr>
+<td><code>ndim</code></td>
+<td>次元数</td>
+<td><code>1</code>, <code>2</code>, <code>3</code></td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>全要素数</td>
+<td><code>6</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-dtype%E3%83%87%E3%83%BC%E3%82%BF%E5%9E%8B%E3%81%AE%E7%A8%AE%E9%A1%9E">2.3 dtype（データ型）の種類</h3>
+<p>プロジェクトでよく使うデータ型：</p>
+<table>
+<thead>
+<tr>
+<th>dtype</th>
+<th>意味</th>
+<th>範囲</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uint8</code></td>
+<td>符号なし8ビット整数</td>
+<td>0〜255</td>
+<td>画像のピクセル値</td>
+</tr>
+<tr>
+<td><code>int64</code></td>
+<td>符号あり64ビット整数</td>
+<td>非常に広い</td>
+<td>一般的な整数</td>
+</tr>
+<tr>
+<td><code>float64</code></td>
+<td>64ビット浮動小数点</td>
+<td>非常に広い</td>
+<td>計算結果</td>
+</tr>
+</tbody>
+</table>
+<p><strong>📝 用語解説</strong>：</p>
+<ul>
+<li><strong>uint8</strong>: unsigned int 8-bit の略。「符号なし（マイナスなし）8ビット整数」</li>
+<li>画像は通常<code>uint8</code>で表現される（0=黒、255=白）</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># データ型を指定して配列を作る</span>
+arr_uint8 = np.array([<span class="hljs-number">0</span>, <span class="hljs-number">128</span>, <span class="hljs-number">255</span>], dtype=np.uint8)
+print(arr_uint8.dtype)  <span class="hljs-comment"># uint8</span>
+</div></code></pre>
+<h3 id="%F0%9F%93%8D-%E3%81%93%E3%81%93%E3%81%8C%E3%82%8F%E3%81%8B%E3%82%89%E3%81%AA%E3%81%91%E3%82%8C%E3%81%B0%E7%A2%BA%E8%AA%8D%E3%81%99%E3%81%B9%E3%81%8D%E5%9F%BA%E7%A4%8E">📍 ここがわからなければ確認すべき基礎</h3>
+<ul>
+<li>Pythonのリスト（<code>[]</code>での作成、要素へのアクセス）</li>
+<li>タプル（<code>()</code>で表現される変更不可のデータ構造）</li>
+<li>変数への代入とprint文</li>
+</ul>
+<hr>
+<h2 id="3-%E7%94%BB%E5%83%8F--numpy%E9%85%8D%E5%88%97">3. 画像 = NumPy配列</h2>
+<h3 id="31-%E7%94%BB%E5%83%8F%E3%81%AF%E3%81%A9%E3%81%86%E3%82%84%E3%81%A3%E3%81%A6%E6%95%B0%E5%80%A4%E3%81%AB%E3%81%AA%E3%82%8B">3.1 画像はどうやって数値になる？</h3>
+<p>画像は「ピクセルの集まり」で、各ピクセルは数値で表されます。</p>
+<h4 id="%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%E7%94%BB%E5%83%8F%E7%99%BD%E9%BB%92%E7%94%BB%E5%83%8F">グレースケール画像（白黒画像）</h4>
+<pre class="hljs"><code><div>┌─────────────────────────┐
+│ 0   50  100 150 200 255 │  ← 各数値がピクセルの明るさ
+│ 黒  暗   ↓   ↓   明  白 │
+└─────────────────────────┘
+</div></code></pre>
+<ul>
+<li><strong>0</strong> = 真っ黒</li>
+<li><strong>255</strong> = 真っ白</li>
+<li><strong>中間の値</strong> = グレー（灰色）</li>
+</ul>
+<h4 id="%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%E7%94%BB%E5%83%8F%E3%81%AE%E9%85%8D%E5%88%97">グレースケール画像の配列</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 4×4ピクセルのグレースケール画像を想像してください</span>
+gray_image = np.array([
+    [<span class="hljs-number">0</span>,   <span class="hljs-number">50</span>,  <span class="hljs-number">100</span>, <span class="hljs-number">150</span>],   <span class="hljs-comment"># 1行目：暗い → 明るい</span>
+    [<span class="hljs-number">50</span>,  <span class="hljs-number">100</span>, <span class="hljs-number">150</span>, <span class="hljs-number">200</span>],   <span class="hljs-comment"># 2行目</span>
+    [<span class="hljs-number">100</span>, <span class="hljs-number">150</span>, <span class="hljs-number">200</span>, <span class="hljs-number">250</span>],   <span class="hljs-comment"># 3行目</span>
+    [<span class="hljs-number">150</span>, <span class="hljs-number">200</span>, <span class="hljs-number">250</span>, <span class="hljs-number">255</span>]    <span class="hljs-comment"># 4行目：最も明るい</span>
+], dtype=np.uint8)
+
+print(gray_image.shape)  <span class="hljs-comment"># (4, 4) ← 高さ4、幅4</span>
+print(gray_image.ndim)   <span class="hljs-comment"># 2 ← 2次元</span>
+</div></code></pre>
+<h3 id="32-%E3%82%AB%E3%83%A9%E3%83%BC%E7%94%BB%E5%83%8F%E3%81%AE%E9%85%8D%E5%88%97">3.2 カラー画像の配列</h3>
+<p>カラー画像は<strong>3つのチャンネル</strong>（層）を持ちます。</p>
+<pre class="hljs"><code><div>┌──────────────────────────────────────┐
+│  赤(R)チャンネル   [0〜255の2次元配列]  │
+│  緑(G)チャンネル   [0〜255の2次元配列]  │
+│  青(B)チャンネル   [0〜255の2次元配列]  │
+└──────────────────────────────────────┘
+         ↓ 3つを重ねると
+    カラー画像（3次元配列）
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 2×2ピクセルのカラー画像を想像してください</span>
+<span class="hljs-comment"># shape = (高さ, 幅, チャンネル数)</span>
+color_image = np.zeros((<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>), dtype=np.uint8)
+
+<span class="hljs-comment"># 左上のピクセルを赤色にする</span>
+color_image[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>] = [<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>]  <span class="hljs-comment"># R=255, G=0, B=0 → 赤</span>
+
+<span class="hljs-comment"># 右上のピクセルを緑色にする</span>
+color_image[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>] = [<span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>]  <span class="hljs-comment"># R=0, G=255, B=0 → 緑</span>
+
+print(color_image.shape)  <span class="hljs-comment"># (2, 2, 3) ← 高さ2、幅2、3チャンネル</span>
+print(color_image.ndim)   <span class="hljs-comment"># 3 ← 3次元</span>
+</div></code></pre>
+<h3 id="33-shape%E3%81%AE%E8%AA%AD%E3%81%BF%E6%96%B9%E8%B6%85%E9%87%8D%E8%A6%81">3.3 shapeの読み方（超重要！）</h3>
+<table>
+<thead>
+<tr>
+<th>画像の種類</th>
+<th>shape</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>グレースケール</td>
+<td><code>(480, 640)</code></td>
+<td>高さ480px、幅640px</td>
+</tr>
+<tr>
+<td>カラー(RGB)</td>
+<td><code>(480, 640, 3)</code></td>
+<td>高さ480px、幅640px、3チャンネル</td>
+</tr>
+</tbody>
+</table>
+<p><strong>覚え方</strong>: <code>(高さ, 幅, チャンネル)</code> = <code>(Height, Width, Channels)</code> = <code>(H, W, C)</code></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># グレースケール画像のshape</span>
+gray = np.zeros((<span class="hljs-number">480</span>, <span class="hljs-number">640</span>), dtype=np.uint8)
+print(<span class="hljs-string">f"グレースケール: <span class="hljs-subst">{gray.shape}</span>"</span>)  <span class="hljs-comment"># (480, 640)</span>
+print(<span class="hljs-string">f"次元数: <span class="hljs-subst">{gray.ndim}</span>"</span>)           <span class="hljs-comment"># 2</span>
+
+<span class="hljs-comment"># カラー画像のshape</span>
+color = np.zeros((<span class="hljs-number">480</span>, <span class="hljs-number">640</span>, <span class="hljs-number">3</span>), dtype=np.uint8)
+print(<span class="hljs-string">f"カラー: <span class="hljs-subst">{color.shape}</span>"</span>)         <span class="hljs-comment"># (480, 640, 3)</span>
+print(<span class="hljs-string">f"次元数: <span class="hljs-subst">{color.ndim}</span>"</span>)          <span class="hljs-comment"># 3</span>
+</div></code></pre>
+<h3 id="34-%E3%82%AB%E3%83%A9%E3%83%BC%E3%81%8B%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%E3%81%8B%E3%82%92%E5%88%A4%E5%AE%9A%E3%81%99%E3%82%8B">3.4 カラーかグレースケールかを判定する</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_grayscale</span><span class="hljs-params">(image)</span>:</span>
+    <span class="hljs-string">"""画像がグレースケールかどうかを判定"""</span>
+    <span class="hljs-keyword">return</span> image.ndim == <span class="hljs-number">2</span>
+
+<span class="hljs-comment"># テスト</span>
+gray = np.zeros((<span class="hljs-number">100</span>, <span class="hljs-number">100</span>), dtype=np.uint8)
+color = np.zeros((<span class="hljs-number">100</span>, <span class="hljs-number">100</span>, <span class="hljs-number">3</span>), dtype=np.uint8)
+
+print(is_grayscale(gray))   <span class="hljs-comment"># True</span>
+print(is_grayscale(color))  <span class="hljs-comment"># False</span>
+</div></code></pre>
+<h3 id="%F0%9F%93%8D-%E3%81%93%E3%81%93%E3%81%8C%E3%82%8F%E3%81%8B%E3%82%89%E3%81%AA%E3%81%91%E3%82%8C%E3%81%B0%E7%A2%BA%E8%AA%8D%E3%81%99%E3%81%B9%E3%81%8D%E5%9F%BA%E7%A4%8E">📍 ここがわからなければ確認すべき基礎</h3>
+<ul>
+<li>Pythonのインデックス（<code>配列[0]</code>で最初の要素にアクセス）</li>
+<li>スライス（<code>配列[0:3]</code>で範囲を指定）</li>
+<li>2次元配列へのアクセス（<code>配列[行][列]</code>または<code>配列[行, 列]</code>）</li>
+</ul>
+<hr>
+<h2 id="4-%E7%B5%B1%E8%A8%88%E9%96%A2%E6%95%B0mean-std-var">4. 統計関数（mean, std, var）</h2>
+<p>ここからがプロジェクトの核心部分です。<br>
+<strong>3つの統計関数で画像の品質指標を計算</strong>します。</p>
+<h3 id="41-npmean%E5%B9%B3%E5%9D%87%E6%98%8E%E3%82%8B%E3%81%95%E8%A8%88%E7%AE%97">4.1 np.mean()：平均（明るさ計算）</h3>
+<h4 id="%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E8%AA%AC%E6%98%8E">ざっくり説明</h4>
+<p>「全部足して、個数で割る」＝ 平均</p>
+<h4 id="%E6%95%B0%E5%BC%8F">数式</h4>
+<p>$$
+\text{平均} = \frac{\text{全要素の合計}}{\text{要素数}}
+$$</p>
+<h4 id="%E3%82%B3%E3%83%BC%E3%83%89%E4%BE%8B">コード例</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 簡単な例</span>
+arr = np.array([<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>, <span class="hljs-number">50</span>])
+mean_value = np.mean(arr)
+print(mean_value)  <span class="hljs-comment"># 30.0  ← (10+20+30+40+50)/5 = 150/5 = 30</span>
+
+<span class="hljs-comment"># 2次元配列（画像）の場合</span>
+image = np.array([
+    [<span class="hljs-number">100</span>, <span class="hljs-number">150</span>],
+    [<span class="hljs-number">200</span>, <span class="hljs-number">250</span>]
+])
+mean_brightness = np.mean(image)
+print(mean_brightness)  <span class="hljs-comment"># 175.0  ← (100+150+200+250)/4 = 700/4 = 175</span>
+</div></code></pre>
+<h4 id="%E7%94%BB%E5%83%8F%E3%81%A7%E3%81%AE%E6%84%8F%E5%91%B3">画像での意味</h4>
+<pre class="hljs"><code><div>平均輝度 = 画像全体の「明るさ」
+
+低い値（0に近い） → 暗い画像
+高い値（255に近い） → 明るい画像
+</div></code></pre>
+<h4 id="%E6%98%8E%E3%82%8B%E3%81%95%E8%A8%88%E7%AE%97%E9%96%A2%E6%95%B0%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E5%AE%9F%E8%A3%85%E3%81%99%E3%82%8B%E3%82%82%E3%81%AE">明るさ計算関数（プロジェクトで実装するもの）</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_brightness</span><span class="hljs-params">(image: np.ndarray)</span> -&gt; float:</span>
+    <span class="hljs-string">"""
+    画像の平均輝度（明るさ）を計算する
+    
+    Parameters
+    ----------
+    image : np.ndarray
+        入力画像（グレースケールを想定）
+    
+    Returns
+    -------
+    float
+        平均輝度値（0.0〜255.0）
+    
+    Examples
+    --------
+    &gt;&gt;&gt; img = np.array([[100, 150], [200, 250]], dtype=np.uint8)
+    &gt;&gt;&gt; calc_brightness(img)
+    175.0
+    """</span>
+    <span class="hljs-keyword">return</span> float(np.mean(image))
+
+
+<span class="hljs-comment"># 使用例</span>
+test_image = np.array([
+    [<span class="hljs-number">50</span>, <span class="hljs-number">100</span>, <span class="hljs-number">150</span>],
+    [<span class="hljs-number">100</span>, <span class="hljs-number">150</span>, <span class="hljs-number">200</span>],
+    [<span class="hljs-number">150</span>, <span class="hljs-number">200</span>, <span class="hljs-number">250</span>]
+], dtype=np.uint8)
+
+brightness = calc_brightness(test_image)
+print(<span class="hljs-string">f"明るさ: <span class="hljs-subst">{brightness:<span class="hljs-number">.1</span>f}</span>"</span>)  <span class="hljs-comment"># 明るさ: 150.0</span>
+</div></code></pre>
+<h3 id="42-npstd%E6%A8%99%E6%BA%96%E5%81%8F%E5%B7%AE%E3%82%B3%E3%83%B3%E3%83%88%E3%83%A9%E3%82%B9%E3%83%88%E8%A8%88%E7%AE%97">4.2 np.std()：標準偏差（コントラスト計算）</h3>
+<h4 id="%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E8%AA%AC%E6%98%8E">ざっくり説明</h4>
+<p>「値がどれくらいバラついているか」を表す数値</p>
+<ul>
+<li>バラつきが小さい → 標準偏差が小さい</li>
+<li>バラつきが大きい → 標準偏差が大きい</li>
+</ul>
+<h4 id="%E7%9B%B4%E6%84%9F%E7%9A%84%E3%81%AA%E7%90%86%E8%A7%A3">直感的な理解</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># バラつきなし（全部同じ値）</span>
+arr_same = np.array([<span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>])
+print(np.std(arr_same))  <span class="hljs-comment"># 0.0 ← 全く散らばっていない</span>
+
+<span class="hljs-comment"># バラつきあり</span>
+arr_spread = np.array([<span class="hljs-number">0</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">100</span>])
+print(np.std(arr_spread))  <span class="hljs-comment"># 35.36... ← 散らばっている</span>
+
+<span class="hljs-comment"># もっとバラつきあり</span>
+arr_wide = np.array([<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">100</span>, <span class="hljs-number">100</span>])
+print(np.std(arr_wide))  <span class="hljs-comment"># 50.0 ← さらに散らばっている</span>
+</div></code></pre>
+<h4 id="%E6%95%B0%E5%BC%8F%E5%8F%82%E8%80%83">数式（参考）</h4>
+<p>$$
+\text{標準偏差} = \sqrt{\frac{1}{N}\sum_{i=1}^{N}(x_i - \bar{x})^2}
+$$</p>
+<p><strong>日本語で言うと</strong>：「各値と平均の差を2乗して、平均して、ルートを取る」</p>
+<h4 id="%E7%94%BB%E5%83%8F%E3%81%A7%E3%81%AE%E6%84%8F%E5%91%B3">画像での意味</h4>
+<pre class="hljs"><code><div>標準偏差 = 画像の「コントラスト」
+
+低い値 → コントラストが低い（のっぺりした画像）
+高い値 → コントラストが高い（メリハリのある画像）
+</div></code></pre>
+<h4 id="%E3%82%B3%E3%83%B3%E3%83%88%E3%83%A9%E3%82%B9%E3%83%88%E8%A8%88%E7%AE%97%E9%96%A2%E6%95%B0">コントラスト計算関数</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_contrast</span><span class="hljs-params">(image: np.ndarray)</span> -&gt; float:</span>
+    <span class="hljs-string">"""
+    画像のコントラスト（標準偏差）を計算する
+    
+    Parameters
+    ----------
+    image : np.ndarray
+        入力画像（グレースケールを想定）
+    
+    Returns
+    -------
+    float
+        コントラスト値（0.0〜127.5程度が一般的）
+    
+    Notes
+    -----
+    - 値が0に近い：コントラストが低い（のっぺり）
+    - 値が大きい：コントラストが高い（メリハリがある）
+    """</span>
+    <span class="hljs-keyword">return</span> float(np.std(image))
+
+
+<span class="hljs-comment"># 使用例</span>
+<span class="hljs-comment"># 低コントラスト画像（似たような値ばかり）</span>
+low_contrast = np.array([
+    [<span class="hljs-number">120</span>, <span class="hljs-number">125</span>, <span class="hljs-number">130</span>],
+    [<span class="hljs-number">125</span>, <span class="hljs-number">130</span>, <span class="hljs-number">135</span>],
+    [<span class="hljs-number">130</span>, <span class="hljs-number">135</span>, <span class="hljs-number">140</span>]
+], dtype=np.uint8)
+
+<span class="hljs-comment"># 高コントラスト画像（極端に違う値が混在）</span>
+high_contrast = np.array([
+    [<span class="hljs-number">0</span>,   <span class="hljs-number">255</span>, <span class="hljs-number">0</span>],
+    [<span class="hljs-number">255</span>, <span class="hljs-number">0</span>,   <span class="hljs-number">255</span>],
+    [<span class="hljs-number">0</span>,   <span class="hljs-number">255</span>, <span class="hljs-number">0</span>]
+], dtype=np.uint8)
+
+print(<span class="hljs-string">f"低コントラスト: <span class="hljs-subst">{calc_contrast(low_contrast):<span class="hljs-number">.1</span>f}</span>"</span>)   <span class="hljs-comment"># 約6.2</span>
+print(<span class="hljs-string">f"高コントラスト: <span class="hljs-subst">{calc_contrast(high_contrast):<span class="hljs-number">.1</span>f}</span>"</span>) <span class="hljs-comment"># 約127.5</span>
+</div></code></pre>
+<h3 id="43-npvar%E5%88%86%E6%95%A3%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%97%E3%83%8D%E3%82%B9%E8%A8%88%E7%AE%97%E3%81%AE%E6%BA%96%E5%82%99">4.3 np.var()：分散（シャープネス計算の準備）</h3>
+<h4 id="%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E8%AA%AC%E6%98%8E">ざっくり説明</h4>
+<p>「標準偏差を2乗したもの」＝ 分散</p>
+<h4 id="%E9%96%A2%E4%BF%82%E6%80%A7">関係性</h4>
+<p>$$
+\text{分散} = (\text{標準偏差})^2
+$$</p>
+<p>または</p>
+<p>$$
+\text{標準偏差} = \sqrt{\text{分散}}
+$$</p>
+<h4 id="%E3%82%B3%E3%83%BC%E3%83%89%E4%BE%8B">コード例</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+arr = np.array([<span class="hljs-number">0</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">100</span>])
+
+variance = np.var(arr)
+std_dev = np.std(arr)
+
+print(<span class="hljs-string">f"分散: <span class="hljs-subst">{variance}</span>"</span>)           <span class="hljs-comment"># 1250.0</span>
+print(<span class="hljs-string">f"標準偏差: <span class="hljs-subst">{std_dev}</span>"</span>)        <span class="hljs-comment"># 35.36...</span>
+print(<span class="hljs-string">f"標準偏差の2乗: <span class="hljs-subst">{std_dev**<span class="hljs-number">2</span>}</span>"</span>) <span class="hljs-comment"># 1250.0（分散と同じ）</span>
+</div></code></pre>
+<h4 id="%E3%81%AA%E3%81%9C%E5%88%86%E6%95%A3%E3%82%92%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%8B">なぜ分散を使うのか？</h4>
+<p><strong>シャープネス計算では分散を使います</strong>。理由：</p>
+<ol>
+<li>Laplacianフィルタ（Day 2で学習）の出力にはマイナス値が含まれる</li>
+<li>標準偏差より分散の方が計算が簡単</li>
+<li>慣例的にシャープネス指標は分散で計算される</li>
+</ol>
+<h4 id="%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%97%E3%83%8D%E3%82%B9%E8%A8%88%E7%AE%97%E3%81%AE%E4%BA%88%E5%91%8Aday-2%E3%81%A7%E5%AE%9F%E8%A3%85">シャープネス計算の予告（Day 2で実装）</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> cv2  <span class="hljs-comment"># Day 2で学習</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_sharpness</span><span class="hljs-params">(image: np.ndarray)</span> -&gt; float:</span>
+    <span class="hljs-string">"""
+    画像のシャープネス（Laplacian分散）を計算する
+    
+    ※ cv2.Laplacian()はDay 2で学習します
+    """</span>
+    <span class="hljs-comment"># グレースケールに変換（必要な場合）</span>
+    <span class="hljs-keyword">if</span> image.ndim == <span class="hljs-number">3</span>:
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    <span class="hljs-keyword">else</span>:
+        gray = image
+    
+    <span class="hljs-comment"># Laplacianフィルタを適用</span>
+    laplacian = cv2.Laplacian(gray, cv2.CV_64F)
+    
+    <span class="hljs-comment"># 分散を計算</span>
+    <span class="hljs-keyword">return</span> float(np.var(laplacian))
+</div></code></pre>
+<h3 id="44-3%E3%81%A4%E3%81%AE%E9%96%A2%E6%95%B0%E3%81%AE%E6%AF%94%E8%BC%83">4.4 3つの関数の比較</h3>
+<table>
+<thead>
+<tr>
+<th>関数</th>
+<th>計算内容</th>
+<th>プロジェクトでの用途</th>
+<th>実装日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>np.mean()</code></td>
+<td>平均</td>
+<td>明るさ（Brightness）</td>
+<td>Day 3</td>
+</tr>
+<tr>
+<td><code>np.std()</code></td>
+<td>標準偏差</td>
+<td>コントラスト（Contrast）</td>
+<td>Day 4</td>
+</tr>
+<tr>
+<td><code>np.var()</code></td>
+<td>分散</td>
+<td>シャープネス（Sharpness）</td>
+<td>Day 5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%F0%9F%93%8D-%E3%81%93%E3%81%93%E3%81%8C%E3%82%8F%E3%81%8B%E3%82%89%E3%81%AA%E3%81%91%E3%82%8C%E3%81%B0%E7%A2%BA%E8%AA%8D%E3%81%99%E3%81%B9%E3%81%8D%E5%9F%BA%E7%A4%8E">📍 ここがわからなければ確認すべき基礎</h3>
+<ul>
+<li>平均の計算方法（足して割る）</li>
+<li>平方根（ルート）の概念</li>
+<li>関数の定義と戻り値（<code>def</code>、<code>return</code>）</li>
+</ul>
+<hr>
+<h2 id="5-%E5%AE%9F%E8%B7%B5%E6%BC%94%E7%BF%92">5. 実践演習</h2>
+<p>実際にコードを書いて確認しましょう。<br>
+VS CodeのNotebook（.ipynb）またはPythonファイルで実行してください。</p>
+<h3 id="%E6%BC%94%E7%BF%921-%E9%85%8D%E5%88%97%E3%81%AE%E5%B1%9E%E6%80%A7%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B">演習1: 配列の属性を確認する</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 演習: 以下の配列の shape, dtype, ndim を予想してから実行</span>
+
+<span class="hljs-comment"># 配列A</span>
+arr_a = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>])
+print(<span class="hljs-string">"配列A:"</span>)
+print(<span class="hljs-string">f"  shape: <span class="hljs-subst">{arr_a.shape}</span>"</span>)
+print(<span class="hljs-string">f"  dtype: <span class="hljs-subst">{arr_a.dtype}</span>"</span>)
+print(<span class="hljs-string">f"  ndim: <span class="hljs-subst">{arr_a.ndim}</span>"</span>)
+
+<span class="hljs-comment"># 配列B</span>
+arr_b = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]], dtype=np.uint8)
+print(<span class="hljs-string">"\n配列B:"</span>)
+print(<span class="hljs-string">f"  shape: <span class="hljs-subst">{arr_b.shape}</span>"</span>)
+print(<span class="hljs-string">f"  dtype: <span class="hljs-subst">{arr_b.dtype}</span>"</span>)
+print(<span class="hljs-string">f"  ndim: <span class="hljs-subst">{arr_b.ndim}</span>"</span>)
+
+<span class="hljs-comment"># 配列C（3次元＝カラー画像を想定）</span>
+arr_c = np.zeros((<span class="hljs-number">100</span>, <span class="hljs-number">200</span>, <span class="hljs-number">3</span>), dtype=np.uint8)
+print(<span class="hljs-string">"\n配列C:"</span>)
+print(<span class="hljs-string">f"  shape: <span class="hljs-subst">{arr_c.shape}</span>"</span>)
+print(<span class="hljs-string">f"  dtype: <span class="hljs-subst">{arr_c.dtype}</span>"</span>)
+print(<span class="hljs-string">f"  ndim: <span class="hljs-subst">{arr_c.ndim}</span>"</span>)
+</div></code></pre>
+<h3 id="%E6%BC%94%E7%BF%922-%E7%B5%B1%E8%A8%88%E5%80%A4%E3%82%92%E8%A8%88%E7%AE%97%E3%81%99%E3%82%8B">演習2: 統計値を計算する</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 暗い画像を想定</span>
+dark_image = np.array([
+    [<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>],
+    [<span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>],
+    [<span class="hljs-number">30</span>, <span class="hljs-number">40</span>, <span class="hljs-number">50</span>]
+], dtype=np.uint8)
+
+<span class="hljs-comment"># 明るい画像を想定</span>
+bright_image = np.array([
+    [<span class="hljs-number">200</span>, <span class="hljs-number">210</span>, <span class="hljs-number">220</span>],
+    [<span class="hljs-number">210</span>, <span class="hljs-number">220</span>, <span class="hljs-number">230</span>],
+    [<span class="hljs-number">220</span>, <span class="hljs-number">230</span>, <span class="hljs-number">240</span>]
+], dtype=np.uint8)
+
+print(<span class="hljs-string">"暗い画像:"</span>)
+print(<span class="hljs-string">f"  平均（明るさ）: <span class="hljs-subst">{np.mean(dark_image):<span class="hljs-number">.1</span>f}</span>"</span>)
+print(<span class="hljs-string">f"  標準偏差（コントラスト）: <span class="hljs-subst">{np.std(dark_image):<span class="hljs-number">.1</span>f}</span>"</span>)
+
+print(<span class="hljs-string">"\n明るい画像:"</span>)
+print(<span class="hljs-string">f"  平均（明るさ）: <span class="hljs-subst">{np.mean(bright_image):<span class="hljs-number">.1</span>f}</span>"</span>)
+print(<span class="hljs-string">f"  標準偏差（コントラスト）: <span class="hljs-subst">{np.std(bright_image):<span class="hljs-number">.1</span>f}</span>"</span>)
+
+<span class="hljs-comment"># 質問: どちらの画像の「明るさ」が高い？</span>
+<span class="hljs-comment"># 質問: コントラストはどうか？</span>
+</div></code></pre>
+<h3 id="%E6%BC%94%E7%BF%923-%E6%8C%87%E6%A8%99%E8%A8%88%E7%AE%97%E9%96%A2%E6%95%B0%E3%82%92%E4%BD%9C%E3%82%8B">演習3: 指標計算関数を作る</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_brightness</span><span class="hljs-params">(image: np.ndarray)</span> -&gt; float:</span>
+    <span class="hljs-string">"""画像の明るさを計算"""</span>
+    <span class="hljs-comment"># ここを埋める</span>
+    <span class="hljs-keyword">pass</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_contrast</span><span class="hljs-params">(image: np.ndarray)</span> -&gt; float:</span>
+    <span class="hljs-string">"""画像のコントラストを計算"""</span>
+    <span class="hljs-comment"># ここを埋める</span>
+    <span class="hljs-keyword">pass</span>
+
+<span class="hljs-comment"># テスト用画像</span>
+test_image = np.array([
+    [<span class="hljs-number">0</span>, <span class="hljs-number">50</span>, <span class="hljs-number">100</span>],
+    [<span class="hljs-number">50</span>, <span class="hljs-number">100</span>, <span class="hljs-number">150</span>],
+    [<span class="hljs-number">100</span>, <span class="hljs-number">150</span>, <span class="hljs-number">200</span>]
+], dtype=np.uint8)
+
+<span class="hljs-comment"># テスト実行</span>
+print(<span class="hljs-string">f"明るさ: <span class="hljs-subst">{calc_brightness(test_image)}</span>"</span>)      <span class="hljs-comment"># 期待値: 100.0</span>
+print(<span class="hljs-string">f"コントラスト: <span class="hljs-subst">{calc_contrast(test_image)}</span>"</span>)  <span class="hljs-comment"># 期待値: 約52.7</span>
+</div></code></pre>
+<details>
+<summary>演習3の解答を見る</summary>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_brightness</span><span class="hljs-params">(image: np.ndarray)</span> -&gt; float:</span>
+    <span class="hljs-string">"""画像の明るさを計算"""</span>
+    <span class="hljs-keyword">return</span> float(np.mean(image))
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_contrast</span><span class="hljs-params">(image: np.ndarray)</span> -&gt; float:</span>
+    <span class="hljs-string">"""画像のコントラストを計算"""</span>
+    <span class="hljs-keyword">return</span> float(np.std(image))
+
+<span class="hljs-comment"># テスト用画像</span>
+test_image = np.array([
+    [<span class="hljs-number">0</span>, <span class="hljs-number">50</span>, <span class="hljs-number">100</span>],
+    [<span class="hljs-number">50</span>, <span class="hljs-number">100</span>, <span class="hljs-number">150</span>],
+    [<span class="hljs-number">100</span>, <span class="hljs-number">150</span>, <span class="hljs-number">200</span>]
+], dtype=np.uint8)
+
+<span class="hljs-comment"># テスト実行</span>
+print(<span class="hljs-string">f"明るさ: <span class="hljs-subst">{calc_brightness(test_image)}</span>"</span>)      <span class="hljs-comment"># 100.0</span>
+print(<span class="hljs-string">f"コントラスト: <span class="hljs-subst">{calc_contrast(test_image)}</span>"</span>)  <span class="hljs-comment"># 52.70...</span>
+</div></code></pre>
+</details>
+<hr>
+<h2 id="6-%E7%A2%BA%E8%AA%8D%E5%95%8F%E9%A1%8C">6. 確認問題</h2>
+<h3 id="%E5%95%8F%E9%A1%8C1-shape%E3%81%AE%E8%AA%AD%E3%81%BF%E5%8F%96%E3%82%8A">問題1: shapeの読み取り</h3>
+<p>以下の配列の<code>shape</code>を答えてください（実行せずに）。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+a = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>]])
+<span class="hljs-comment"># a.shape = ?</span>
+
+b = np.zeros((<span class="hljs-number">480</span>, <span class="hljs-number">640</span>, <span class="hljs-number">3</span>))
+<span class="hljs-comment"># b.shape = ?</span>
+<span class="hljs-comment"># これはカラー画像？グレースケール画像？</span>
+</div></code></pre>
+<h3 id="%E5%95%8F%E9%A1%8C2-%E7%B5%B1%E8%A8%88%E9%96%A2%E6%95%B0%E3%81%AE%E9%81%B8%E6%8A%9E">問題2: 統計関数の選択</h3>
+<p>次の用途に適した関数を選んでください。</p>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>選択肢</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>画像全体の明るさを測りたい</td>
+<td>A: np.mean / B: np.std / C: np.var</td>
+</tr>
+<tr>
+<td>画像のコントラストを測りたい</td>
+<td>A: np.mean / B: np.std / C: np.var</td>
+</tr>
+<tr>
+<td>Laplacianフィルタ後のバラつきを測りたい</td>
+<td>A: np.mean / B: np.std / C: np.var</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%E5%95%8F%E9%A1%8C3-%E7%9B%B4%E6%84%9F%E5%95%8F%E9%A1%8C">問題3: 直感問題</h3>
+<p>以下の2つの画像、どちらが：</p>
+<ul>
+<li>明るい？</li>
+<li>コントラストが高い？</li>
+</ul>
+<pre class="hljs"><code><div>image_a = np.array([[<span class="hljs-number">50</span>, <span class="hljs-number">50</span>], [<span class="hljs-number">50</span>, <span class="hljs-number">50</span>]], dtype=np.uint8)   <span class="hljs-comment"># 全部50</span>
+image_b = np.array([[<span class="hljs-number">0</span>, <span class="hljs-number">100</span>], [<span class="hljs-number">100</span>, <span class="hljs-number">200</span>]], dtype=np.uint8) <span class="hljs-comment"># バラバラ</span>
+</div></code></pre>
+<h3 id="%E5%95%8F%E9%A1%8C4-%E3%82%B3%E3%83%BC%E3%83%89%E4%BF%AE%E6%AD%A3">問題4: コード修正</h3>
+<p>以下のコードにはエラーがあります。修正してください。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_brightness</span><span class="hljs-params">(image)</span>:</span>
+    <span class="hljs-keyword">return</span> np.mean  <span class="hljs-comment"># ← 何かがおかしい</span>
+
+test = np.array([[<span class="hljs-number">100</span>, <span class="hljs-number">200</span>], [<span class="hljs-number">150</span>, <span class="hljs-number">250</span>]])
+print(calc_brightness(test))
+</div></code></pre>
+<details>
+<summary>確認問題の解答</summary>
+<p><strong>問題1:</strong></p>
+<pre class="hljs"><code><div>a.shape = (3, 2)  ← 3行2列
+b.shape = (480, 640, 3)  ← カラー画像（3チャンネルあるから）
+</div></code></pre>
+<p><strong>問題2:</strong></p>
+<ul>
+<li>明るさ → A: np.mean</li>
+<li>コントラスト → B: np.std</li>
+<li>Laplacian後のバラつき → C: np.var</li>
+</ul>
+<p><strong>問題3:</strong></p>
+<ul>
+<li>明るい方: image_b（平均100 &gt; image_aの平均50）</li>
+<li>コントラストが高い方: image_b（値がバラバラ）
+<ul>
+<li>image_a: std=0（全部同じ値）</li>
+<li>image_b: std≒70.7（大きくバラついている）</li>
+</ul>
+</li>
+</ul>
+<p><strong>問題4:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_brightness</span><span class="hljs-params">(image)</span>:</span>
+    <span class="hljs-keyword">return</span> np.mean(image)  <span class="hljs-comment"># ← (image) を追加</span>
+</div></code></pre>
+<p><code>np.mean</code>は関数オブジェクト、<code>np.mean(image)</code>は関数の呼び出し結果</p>
+</details>
+<hr>
+<h2 id="7-%E3%81%BE%E3%81%A8%E3%82%81%E3%81%A8%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A">7. まとめと次回予告</h2>
+<h3 id="%E4%BB%8A%E6%97%A5%E5%AD%A6%E3%82%93%E3%81%A0%E3%81%93%E3%81%A8">今日学んだこと</h3>
+<table>
+<thead>
+<tr>
+<th>トピック</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NumPy配列</td>
+<td>画像は数値の配列として表現される</td>
+</tr>
+<tr>
+<td>shape</td>
+<td>配列の形状（高さ, 幅, チャンネル）</td>
+</tr>
+<tr>
+<td>dtype</td>
+<td>データ型（画像はuint8が多い）</td>
+</tr>
+<tr>
+<td>np.mean()</td>
+<td>平均 → 明るさの計算に使用</td>
+</tr>
+<tr>
+<td>np.std()</td>
+<td>標準偏差 → コントラストの計算に使用</td>
+</tr>
+<tr>
+<td>np.var()</td>
+<td>分散 → シャープネスの計算に使用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A8%E3%81%AE%E5%AF%BE%E5%BF%9C">プロジェクトとの対応</h3>
+<table>
+<thead>
+<tr>
+<th>今日の学習</th>
+<th>プロジェクトでの使用日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shape, dtype</td>
+<td>Day 1（画像読み込み確認）</td>
+</tr>
+<tr>
+<td>ndimでカラー/グレー判定</td>
+<td>Day 7（カラー/グレー両対応）</td>
+</tr>
+<tr>
+<td>np.mean()</td>
+<td>Day 3（calc_brightness関数）</td>
+</tr>
+<tr>
+<td>np.std()</td>
+<td>Day 4（calc_contrast関数）</td>
+</tr>
+<tr>
+<td>np.var()</td>
+<td>Day 5（calc_sharpness関数）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A-day-2-opencv%E5%9F%BA%E7%A4%8E">次回予告: Day 2 OpenCV基礎</h3>
+<p>明日は以下を学習します：</p>
+<ul>
+<li><code>cv2.imread()</code>: 画像ファイルの読み込み</li>
+<li><code>cv2.cvtColor()</code>: カラー変換（BGR → グレースケール）</li>
+<li><code>cv2.Laplacian()</code>: シャープネス計算用フィルタ</li>
+<li><code>cv2.GaussianBlur()</code>: 人工ピンぼけ生成</li>
+</ul>
+<hr>
+
+<h2 id="%F0%9F%8E%AF-%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88%E5%AD%A6%E7%BF%92%E5%AE%8C%E4%BA%86%E7%A2%BA%E8%AA%8D">🎯 チェックリスト（学習完了確認）</h2>
+<ul>
+<li><input type="checkbox" id="checkbox5"><label for="checkbox5">NumPy配列の</label><code>shape</code>から画像サイズを読み取れる</li>
+<li><input type="checkbox" id="checkbox6"><label for="checkbox6"></label><code>dtype</code>の意味を理解している（uint8 = 0〜255）</li>
+<li><input type="checkbox" id="checkbox7"><label for="checkbox7"></label><code>ndim</code>でカラー/グレースケールを判定できる</li>
+<li><input type="checkbox" id="checkbox8"><label for="checkbox8"></label><code>np.mean()</code>で平均（明るさ）を計算できる</li>
+<li><input type="checkbox" id="checkbox9"><label for="checkbox9"></label><code>np.std()</code>で標準偏差（コントラスト）を計算できる</li>
+<li><input type="checkbox" id="checkbox10"><label for="checkbox10"></label><code>np.var()</code>で分散を計算できる</li>
+<li><input type="checkbox" id="checkbox11"><label for="checkbox11">演習問題をすべて解けた</label></li>
+</ul>
+<p>すべてにチェックが入ったら、Day 2に進みましょう！</p>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</html>
