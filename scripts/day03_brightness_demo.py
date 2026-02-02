@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 import argparse
 import cv2 
-from metrics import calc_brightness
+from scripts.metrics_demo import calc_brightness
 
 def main():
     parser = argparse.ArgumentParser()

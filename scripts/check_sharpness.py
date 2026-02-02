@@ -1,7 +1,7 @@
 from __future__ import annotations
 import argparse
 import cv2
-from metrics import calc_sharpness
+from scripts.metrics_demo import calc_sharpness
 
 def main() ->int:
     parser = argparse.ArgumentParser()

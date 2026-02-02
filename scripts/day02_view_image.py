@@ -31,7 +31,7 @@ def main():
         raise ValueError("cv2.imread が失敗しました（対応していない形式 or パス不正の可能性）")
     print("=== Color(BGR) ===")
     print("shape:", img_bgr.shape)  # (H, W, 3) 
-    print("shape:", img_bgr.dtype) # uint8 が多い
+    print("dtype:", img_bgr.dtype) # uint8 が多い
     
     # 2) カラー表示（BGR→RGB）
     img_rgb = bgr_to_rgb(img_bgr)
