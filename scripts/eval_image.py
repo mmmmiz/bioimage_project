@@ -40,7 +40,7 @@ def evaluate_image(path:Path)->dict[str,float]:
     return {
         "brightness_mean": calc_brightness(gray),
         "contrast_std": calc_contrast(gray),
-        "sharpness_laplacian_var": calc_sharpness(gray),
+        "sharpness_lap_var": calc_sharpness(gray),
     }
     
 def parse_args(argv:list[str])-> argparse.Namespace:

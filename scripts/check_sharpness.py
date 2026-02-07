@@ -12,7 +12,7 @@ def main() ->int:
     if img_bgr is None:
         raise SystemExit(f"画像が読み込めません: {args.image_path}")
     score = calc_sharpness(img_bgr)
-    print(f"sharpness_laplacian_var={score:.2f}")
+    print(f"sharpness_lap_var={score:.2f}")
     return 0
 
 if __name__ == "__main__":
