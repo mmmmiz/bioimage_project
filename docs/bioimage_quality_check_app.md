@@ -130,6 +130,48 @@
 - σ = 0,1,2,3 などで画像生成  
 - フォルダ整理（sharp / blur）  
 
+**現在のディレクトリ構成（2026-02-07時点）**
+```text
+bioimage_project/
+  README.md
+  requirements.txt
+  data/
+    raw/
+    dataset/
+      sharp/
+      blur/
+        sigma_0/
+        sigma_1/
+        sigma_2/
+        sigma_3/
+  docs/
+    bioimage_quality_check_app.md
+    lecture/
+      html/
+      md/
+  notebooks/
+    day02.ipynb
+    day04.ipynb
+    day05.ipynb
+  scripts/
+    check_image.py
+    check_sharpness.py
+    day02_view_image.py
+    day03_brightness_demo.py
+    eval_image.py
+    make_dataset.py
+    metrics_demo.py
+    self_test.py
+    synth_blur.py
+  src/
+    bioimage_qc/
+      __init__.py
+      exceptions.py
+      io.py
+      metrics.py
+      pipeline.py
+```
+
 ---
 
 ### Day 10（平日・2h）
