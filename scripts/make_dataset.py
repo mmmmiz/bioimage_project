@@ -26,8 +26,8 @@ def _parse_sigmas(text:str) ->list[float]:
     sigmas: list[float] = []
     for part in text.split(","):
         s = float(part.strip())
-        if s <= 0:
-            raise ValueError(f"sigma は正の数のみ（>0）にしてください: {s}")
+        if s < 0:
+            raise ValueError(f"sigma は0以上にしてください: {s}")
         sigmas.append(s)
     return sigmas
 
@@ -105,14 +105,24 @@ def main() -> int:
         
         # blur（σごとに生成）
         for sigma in sigmas:
-            k = _auto_ksize(sigma)
-            blurred = cv2.GaussianBlur(img, (k,k), sigmaX=sigma, sigmaY=sigma)
-            sigma_dir = blur_root / _sigma_dirname(sigma)
-            blur_dst = sigma_dir / src_path.name
-            _write_image(blur_dst, blurred)
-            records.append(
-                Record(src=str(src_path), dst=str(blur_dst), label="blur", sigma=sigma, ksize=k)
-            )
+            if sigma == 0:
+                # sigma=0は元画像コピー
+                sigma_dir = blur_root / _sigma_dirname(sigma)
+                blur_dst = sigma_dir / src_path.name
+                _write_image(blur_dst, img)
+                records.append(
+                    Record(src=str(src_path), dst=str(blur_dst), label="blur", sigma=0.0, ksize=0)
+                )
+            else:
+                # sigma > 0 の場合はGaussianBlurを適用
+                k = _auto_ksize(sigma)
+                blurred = cv2.GaussianBlur(img, (k,k), sigmaX=sigma, sigmaY=sigma)
+                sigma_dir = blur_root / _sigma_dirname(sigma)
+                blur_dst = sigma_dir / src_path.name
+                _write_image(blur_dst, blurred)
+                records.append(
+                    Record(src=str(src_path), dst=str(blur_dst), label="blur", sigma=sigma, ksize=k)
+                )
     manifest = out_root / "manifest.csv"
     with manifest.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
