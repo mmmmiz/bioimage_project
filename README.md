@@ -10,3 +10,18 @@
 - 言語：Python
 - UI：Streamlit
 - 利用ライブラリ：NumPy / OpenCV / pandas / matplotlib（検証・可視化）
+
+## Metrics（指標）
+3つの指標で画像品質を数値化します:
+- **brightness_mean**: 平均輝度（明るさ）
+- **contrast_std**: コントラスト（メリハリ）
+- **sharpness_lap_var**: シャープネス（ピントの鮮明さ）
+
+詳細 → [docs/metrics.md](docs/metrics.md)
+
+## Judgement（判定）
+各指標にしきい値を設定し、範囲外ならNG + 理由を列挙します。
+
+詳細 → [docs/judgement.md](docs/judgement.md)
+
+このアプリは 明るさ・コントラスト・シャープネス の3指標で画像品質をチェックし、しきい値に基づいて OK/NG を判定します。
