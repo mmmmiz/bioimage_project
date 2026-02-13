@@ -1,10 +1,19 @@
-# Day15: Streamlit起動 + 画像アップロード + プレビュー（最小）
 from __future__ import annotations
 from pathlib import Path
 import cv2
 import numpy as np
 import streamlit as st
+import sys
+import tempfile
+import pandas as pd
 
+ROOT = Path(__file__).resolve().parents[1]
+SRC_DIR = ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.append(str(SRC_DIR))
+    
+from bioimage_qc.pipeline import evaluate_image
+    
 def _decode_image(uploaded_file)-> np.ndarray:
     """StreamlitのUploadedFile（バイト列）をOpenCV画像（BGR）へデコードする"""
     data = uploaded_file.getvalue()
@@ -14,10 +23,17 @@ def _decode_image(uploaded_file)-> np.ndarray:
         raise ValueError("画像のデコードに失敗しました（対応形式か確認してください）")
     return img_bgr
 
+def _save_to_temp(uploaded_file) -> Path:
+    """UploadedFileを一時ファイルに保存し、そのPathを返す"""
+    suffix = Path(uploaded_file.name).suffix.lower() or ".png"
+    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as f:
+        f.write(uploaded_file.getvalue())
+        return Path(f.name)
+
 def main()->None:
     st.set_page_config(page_title="Bioimage QC", layout="centered")
     st.title("Bioimage Quality Check")
-    st.caption("Day15: Streamlit導入（起動 + 画像アップロード）")
+    st.caption("Day16: 指標（metrics）を表で表示")
     # Day14で作った短文をここに貼る想定（今は仮）
     st.write("このアプリは 明るさ・コントラスト・シャープネス の3指標で画像品質をチェックし、しきい値に基づいて OK/NG を判定します。")
     uploaded = st.file_uploader(
@@ -41,8 +57,24 @@ def main()->None:
     img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
     st.subheader("Preview")
     st.image(img_rgb, caption=uploaded.name, use_container_width=True)
-    st.success("Day15完了：アップロードとプレビュー表示ができました。")
-
+    
+    # 指標を計算して表表示
+    st.subheader("Metrics")
+    tmp_path = _save_to_temp(uploaded)
+    try:
+        result = evaluate_image(tmp_path)
+        metrics = result.get("metrics", {})
+        
+        rows = [{"metric": k, "value": float(v)} for k, v in metrics.items()]
+        df = pd.DataFrame(rows)
+        df["value"] = df["value"].map(lambda x:round(x, 4))
+        st.dataframe(df,use_container_width=True)
+    finally:
+        try:
+            tmp_path.unlink()
+        except Exception:
+            pass
+    st.success("Day16完了：指標を表で表示できました。")
 
 if __name__ == "__main__":
     main()
