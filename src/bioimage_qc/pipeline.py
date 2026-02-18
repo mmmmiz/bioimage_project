@@ -8,8 +8,7 @@ import numpy as np
 
 from .io import read_image, to_gray
 from .metrics import cal_brightness, cal_contrast, cal_sharpness
-from .judge import JudgeConfig, judge_metrics
-
+from .judge import JudgeConfig, Range, judge_metrics
 
 def evaluate(img: np.ndarray) -> dict[str, float]:
     return {
@@ -18,7 +17,6 @@ def evaluate(img: np.ndarray) -> dict[str, float]:
         "sharpness": cal_sharpness(img),
     }
 
-# ---------- Day13 追加 ----------
 """
 metrics のキー名を 
 brightness_mean / contrast_std / sharpness_lap_var に揃える（judge.pyの _RULE_ORDER と一致させる）
@@ -33,28 +31,20 @@ def compute_metrics(img: np.ndarray) -> dict[str, float]:
         "sharpness_lap_var": cal_sharpness(img),
     }
 
+def _dict_to_config(thresholds: dict) -> JudgeConfig:
+    def to_range(d: dict) -> Range:
+        return Range(min=d.get("min"), max=d.get("max"))
+    return JudgeConfig(
+        brightness_mean=to_range(thresholds.get("brightness_mean", {})),
+        contrast_std=to_range(thresholds.get("contrast_std", {})),
+        sharpness_lap_var=to_range(thresholds.get("sharpness_lap_var", {})),
+    )
 
-def evaluate_image(
-    path: str | Path,
-    config: JudgeConfig | None = None,
-    imread: str = "color",
-) -> dict[str, Any]:
-    """
-    1枚の画像パスを受け取り、指標計算→判定→結果dictを返す。
-
-    Parameters
-    ----------
-    path : 画像ファイルパス
-    config : 判定しきい値
-    imread : "color" / "gray"
-
-    Returns
-    -------
-    dict : Day13で定めた標準スキーマの結果dict
-    """
+def evaluate_image(path, thresholds: dict | None = None, imread="color"):
     import cv2
 
     p = Path(path)
+    config = _dict_to_config(thresholds) if thresholds else JudgeConfig()
 
     # --- 読み込み ---
     flags = cv2.IMREAD_GRAYSCALE if imread == "gray" else cv2.IMREAD_COLOR

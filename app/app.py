@@ -1,3 +1,6 @@
+# app/app.py
+# OK/NG判定（judgement）を表示（修正）
+
 from __future__ import annotations
 from pathlib import Path
 import cv2
@@ -31,7 +34,7 @@ def _save_to_temp(uploaded_file) -> Path:
         return Path(f.name)
 
 def _build_thresholds_ui() -> dict:
-    """Day17: しきい値をスライダーで入力して dict にまとめる"""
+    """しきい値をスライダーで入力して dict にまとめる"""
     st.sidebar.header("Thresholds")
     b_min, b_max = st.sidebar.slider(
         "brightness_mean(min, max)",
@@ -65,16 +68,38 @@ def _build_thresholds_ui() -> dict:
     }
     return thresholds
 
+def _render_judgement(judgement: dict) -> None:
+    """Day18: judgementを見やすく表示する"""
+    ok = bool(judgement.get("ok", False))
+    label = judgement.get("label", "OK" if ok else "NG")
+    reasons = judgement.get("reasons", [])
+
+    st.subheader("Judgement")
+
+    if ok:
+        st.success(f"{label}")
+        if reasons:
+            st.caption("Notes")
+            for r in reasons:
+                st.write(f"- {r}")
+    else:
+        st.error(f"{label}")
+        if reasons:
+            st.caption("Reasons")
+            for r in reasons:
+                st.write(f"- {r}")
+        else:
+            st.write("理由が取得できませんでした（judgeの返り値を確認してください）。")
 def main()->None:
     st.set_page_config(page_title="Bioimage QC", layout="centered")
     st.title("Bioimage Quality Check")
-    st.caption("Day17: しきい値（thresholds）をUI化")
+    st.caption("Day18: OK/NG判定を表示（理由付き）")
     st.write("このアプリは 明るさ・コントラスト・シャープネス の3指標で画像品質をチェックし、しきい値に基づいて OK/NG を判定します。")
-    # サイドバーでしきい値を入力
+
     thresholds = _build_thresholds_ui()
-    # しきい値を確認できるようにしておく（デバッグ用）
     with st.expander("Current thresholds(debug)",expanded=False):
         st.json(thresholds)
+        
     uploaded = st.file_uploader(
         label="画像ファイル（jpg/png）を選択してください", type=["jpg", "jpeg", "png"],
         accept_multiple_files=False,
@@ -83,41 +108,40 @@ def main()->None:
     if uploaded is None:
         st.info("画像をアップロードすると、ここにプレビューが表示されます。")
         return
-    # アップロード情報（軽いメタ情報）
-    st.write(
-        {
-            "filename":uploaded.name,
-            "type":uploaded.type,
-            "size_bytes":uploaded.size,
-        }
-    )
-    # 画像デコード → RGBに変換してプレビュー
+
+    # Preview
     img_bgr = _decode_image(uploaded)
     img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
     st.subheader("Preview")
     st.image(img_rgb, caption=uploaded.name, use_container_width=True)
     
-    # 指標を計算して表表示
-    st.subheader("Metrics")
+    # Evaluate (metrics + judgement)
     tmp_path = _save_to_temp(uploaded)
     try:
-        result = evaluate_image(tmp_path)
+        # ★ Day18: thresholdsを渡す（pipelineが対応している前提）
+        result = evaluate_image(tmp_path, thresholds=thresholds)
         metrics = result.get("metrics", {})
+        judgement = result.get("judgement", {})
         
+        # Metrics 表
+        st.subheader("Metrics")
         rows = [{"metric": k, "value": float(v)} for k, v in metrics.items()]
         df = pd.DataFrame(rows)
         df["value"] = df["value"].map(lambda x:round(x, 4))
         st.dataframe(df,use_container_width=True)
-        # metrics と thresholds の比較プレビュー（Day18の準備）
-        with st.expander("Metrics vs thresholds(preview)",expanded=False):
-            st.write("Day18でこのthresholdsを使ってOK/NG判定を表示します。")
-            st.json({"metrics": metrics,"thresholds":thresholds})
+
+        # ★ Day18: Judgement 表示
+        _render_judgement(judgement)
+
+        # デバッグ用
+        with st.expander("Raw result (debug)", expanded=False):
+            st.json(result)
     finally:
         try:
             tmp_path.unlink()
         except Exception:
             pass
-    st.success("Day17完了：しきい値をスライダーで調整できました。")
+    st.success("Day18完了：OK/NGと理由を表示できました。")
 
 if __name__ == "__main__":
     main()
