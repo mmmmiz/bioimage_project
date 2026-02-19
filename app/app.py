@@ -117,6 +117,7 @@ def main()->None:
     
     # Evaluate (metrics + judgement)
     tmp_path = _save_to_temp(uploaded)
+    ok = False
     try:
         # ★ Day18: thresholdsを渡す（pipelineが対応している前提）
         result = evaluate_image(tmp_path, thresholds=thresholds)
@@ -132,16 +133,19 @@ def main()->None:
 
         # ★ Day18: Judgement 表示
         _render_judgement(judgement)
-
+        ok = True
         # デバッグ用
         with st.expander("Raw result (debug)", expanded=False):
             st.json(result)
     finally:
         try:
             tmp_path.unlink()
-        except Exception:
+        except FileNotFoundError:
             pass
-    st.success("Day18完了：OK/NGと理由を表示できました。")
+    if ok:
+        st.success("Day18完了：OK/NGと理由を表示できました。")
+    else:
+        st.error("Day18失敗")
 
 if __name__ == "__main__":
     main()
