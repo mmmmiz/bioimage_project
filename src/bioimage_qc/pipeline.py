@@ -34,11 +34,13 @@ def compute_metrics(img: np.ndarray) -> dict[str, float]:
 def _dict_to_config(thresholds: dict) -> JudgeConfig:
     def to_range(d: dict) -> Range:
         return Range(min=d.get("min"), max=d.get("max"))
-    return JudgeConfig(
-        brightness_mean=to_range(thresholds.get("brightness_mean", {})),
-        contrast_std=to_range(thresholds.get("contrast_std", {})),
-        sharpness_lap_var=to_range(thresholds.get("sharpness_lap_var", {})),
-    )
+    
+    if any(k in thresholds for k in ("brightness_mean", "contrast_std", "sharpness_lap_var")):
+        return JudgeConfig(
+            brightness_mean=to_range(thresholds.get("brightness_mean", {})),
+            contrast_std=to_range(thresholds.get("contrast_std", {})),
+            sharpness_lap_var=to_range(thresholds.get("sharpness_lap_var", {})),
+        )
 
 def evaluate_image(path, thresholds: dict | None = None, imread="color"):
     import cv2

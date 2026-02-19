@@ -117,7 +117,7 @@ def _balanced_accuracy(y_true: np.ndarray, y_pred: np.ndarray) -> float:
     return 0.5 * (tpr + tnr)
 
 
-def propose_thresholds(df: pd.DataFrame) -> dict[str, float]:
+def propose_thresholds(df: pd.DataFrame) -> dict[str, object]:
     """
     しきい値候補を提案する（最初はsharpness中心）
     - sharpness: balanced accuracy が最大になる閾値を探索
@@ -149,11 +149,12 @@ def propose_thresholds(df: pd.DataFrame) -> dict[str, float]:
     c_min = float(sharp["contrast_std"].quantile(0.01))
 
     return {
-        "sharpness_lap_var_min": best_t,
-        "brightness_mean_min": b_min,
-        "brightness_mean_max": b_max,
-        "contrast_std_min": c_min,
-        "sharpness_search_balanced_accuracy": float(best_score),
+        "sharpness_lap_var": {"min": best_t},
+        "brightness_mean": {"min": b_min,"max": b_max},
+        "contrast_std": {"min": c_min},
+        "meta":{
+            "sharpness_search_balanced_accuracy": float(best_score),
+        },
     }
 
 
