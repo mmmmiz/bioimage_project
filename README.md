@@ -31,32 +31,105 @@ UI は Streamlit、コア処理は Python + NumPy/OpenCV で実装していま�
 
 ## 品質評価の方法
 
-### 指標（Metrics）
+### 指標（Metrics）詳細
 
-- `brightness_mean`: グレースケール平均輝度
-- `contrast_std`: グレースケール標準偏差
-- `sharpness_lap_var`: Laplacian 応答の分散（シャープネス）
+#### 1. `brightness_mean`（平均輝度）
 
-詳細は `docs/metrics.md` を参照してください。
+何を測るか:
+画像全体がどれくらい明るいか（グレースケール 0〜255 の平均値）
 
-### 判定（Judgement）
+計算方法:
+`np.mean(gray)`
 
-各指標がしきい値範囲内なら OK、1つでも外れたら NG です。  
-NG の場合は理由を列挙します。
+解釈:
+- 高い: 全体が明るい（白っぽい）
+- 低い: 全体が暗い（黒っぽい）
 
-詳細は `docs/judgement.md` を参照してください。
+注意:
+白飛びして情報が潰れていても値は高くなる
 
-### しきい値
+#### 2. `contrast_std`（コントラスト）
 
-しきい値探索の出力は `data/analysis/thresholds.json` を利用します。  
-このファイルに含まれる現在値（2026-02-21時点）は以下です。
+何を測るか:
+明暗のメリハリの強さ
 
-- `sharpness_lap_var.min`: `17.707344241118314`
-- `brightness_mean.min`: `128.14072814941406`
-- `brightness_mean.max`: `150.60439208984374`
-- `contrast_std.min`: `42.15484436035156`
+計算方法:
+`np.std(gray)`
 
-探索方法の説明は `docs/thresholds.md` と `scripts/day11_design_thresholds.py` を参照してください。
+解釈:
+- 高い: 明暗差が大きい
+- 低い: のっぺりした画像
+
+注意:
+ノイズが強いと標準偏差が上がる場合がある
+
+#### 3. `sharpness_lap_var`（シャープネス）
+
+何を測るか:
+輪郭（エッジ）の明瞭さ
+
+計算方法:
+`cv2.Laplacian(gray, cv2.CV_64F).var()`
+
+解釈:
+- 高い: ピントが合っている傾向
+- 低い: ピンぼけ・ブレの傾向
+
+実測例:
+`sample.jpg` に Gaussian blur をかけると `sigma_2: 3.63`、`sigma_3: 2.16` と低下し、ぼかしが強いほど値が下がる
+
+注意:
+- 平坦な被写体は値が低くなりやすい
+- ノイズでエッジが増えると値が高く見えることがある
+
+### 判定（Judgement）仕様
+
+#### 判定ロジック
+
+- 各指標にしきい値範囲を設定
+- すべて範囲内: `OK`
+- 1つでも範囲外: `NG`（外れた指標を理由として列挙）
+
+#### 判定結果の形式
+
+- `verdict`: `"OK"` または `"NG"`
+- `reasons`: `NG` の場合の理由配列（例: `["brightness_mean=50 は許容範囲外"]`）
+
+#### 現在のしきい値（`data/analysis/thresholds.json`, 2026-02-21時点）
+
+| 指標 | 下限 | 上限 |
+|---|---|---|
+| `sharpness_lap_var` | `17.707344241118314` | なし |
+| `brightness_mean` | `128.14072814941406` | `150.60439208984374` |
+| `contrast_std` | `42.15484436035156` | なし |
+
+NG 条件:
+- `sharpness_lap_var < 17.707344241118314`
+- `brightness_mean` が `[128.14072814941406, 150.60439208984374]` の範囲外
+- `contrast_std < 42.15484436035156`
+
+### しきい値設計（Thresholds）と根拠
+
+#### 対象データと実行コマンド
+
+- dataset root: `data/dataset`（Day9 で生成した `sharp` / `blur(sigma_*)`）
+- 探索スクリプト: `scripts/day11_design_thresholds.py`
+
+```bash
+python scripts/day11_design_thresholds.py --dataset-root data/dataset
+```
+
+#### sharpness しきい値の決定方法
+
+- 候補しきい値 `t` を分位点 5%〜95% の範囲で探索
+- `Balanced Accuracy = (感度 + 特異度) / 2` を最大化する `t` を採用
+- 探索結果（`thresholds.json`）: `meta.sharpness_search_balanced_accuracy = 0.825`
+
+#### brightness / contrast の決め方
+
+- sharp 画像分布から外れ値を除外するガードとして設定
+- `brightness_mean`: sharp 分布の低すぎ/高すぎを弾く
+- `contrast_std`: sharp 分布の低コントラスト側を弾く
 
 ## 実装構成
 
@@ -77,9 +150,6 @@ bioimage_project/
     self_test.py              # 最低限の自己テスト
   docs/
     bioimage_quality_check_app.md
-    metrics.md
-    judgement.md
-    thresholds.md
 ```
 
 ## セットアップ
@@ -175,6 +245,3 @@ python scripts/self_test.py
 ## 関連ドキュメント
 
 - `docs/bioimage_quality_check_app.md`: 1か月計画と完了条件
-- `docs/metrics.md`: 指標説明
-- `docs/judgement.md`: 判定仕様
-- `docs/thresholds.md`: しきい値設計メモ
