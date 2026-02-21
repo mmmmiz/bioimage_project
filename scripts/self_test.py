@@ -10,7 +10,6 @@ BASE_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BASE_DIR / "src"))
 
 from bioimage_qc.pipeline import evaluate, evaluate_image, compute_metrics
-from bioimage_qc.judge import JudgeConfig, Range
 
 EXPECTED_METRIC_KEYS = {"brightness_mean", "contrast_std", "sharpness_lap_var"}
 EXPECTED_TOP_KEYS = {"input_path", "metrics", "judgement", "meta"}
@@ -67,10 +66,9 @@ def test_judge_ng_case():
         cv2.imwrite(f.name, img)
         tmp_path = Path(f.name)
 
-    config = JudgeConfig(
-        sharpness_lap_var=Range(min=99999.0, max=None),
-    )
-    result = evaluate_image(tmp_path, config=config)
+    thresholds = {"sharpness_lap_var": {"min": 99999.0}}
+    result = evaluate_image(tmp_path, thresholds=thresholds)
+
     assert result["judgement"]["ok"] is False
     assert result["judgement"]["label"] == "NG"
     assert len(result["judgement"]["reasons"]) > 0

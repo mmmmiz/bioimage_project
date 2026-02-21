@@ -9,6 +9,8 @@ import streamlit as st
 import sys
 import tempfile
 import pandas as pd
+import json
+from datetime import datetime
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC_DIR = ROOT / "src"
@@ -16,6 +18,19 @@ if str(SRC_DIR) not in sys.path:
     sys.path.append(str(SRC_DIR))
     
 from bioimage_qc.pipeline import evaluate_image
+from bioimage_qc.exceptions import ImageQualityError
+
+ALLOWED_EXTS = {".jpg", ".jpeg", ".png"}
+
+def _validate_uploaded_file(uploaded_file) -> None:
+    """アップロード直後の基本入力チェック。"""
+    suffix = Path(uploaded_file.name).suffix.lower()
+    if suffix not in ALLOWED_EXTS:
+        raise ImageQualityError(f"未対応の拡張子です: {suffix}")
+
+    data = uploaded_file.getvalue()
+    if not data:
+        raise ImageQualityError("アップロードファイルが空です。画像を再選択してください。")
     
 def _decode_image(uploaded_file)-> np.ndarray:
     """StreamlitのUploadedFile（バイト列）をOpenCV画像（BGR）へデコードする"""
@@ -23,7 +38,7 @@ def _decode_image(uploaded_file)-> np.ndarray:
     arr = np.frombuffer(data, dtype=np.uint8)
     img_bgr = cv2.imdecode(arr, cv2.IMREAD_COLOR)
     if img_bgr is None:
-        raise ValueError("画像のデコードに失敗しました（対応形式か確認してください）")
+        raise ImageQualityError("画像のデコードに失敗しました（破損/形式不正の可能性があります）")
     return img_bgr
 
 def _save_to_temp(uploaded_file) -> Path:
@@ -90,6 +105,26 @@ def _render_judgement(judgement: dict) -> None:
                 st.write(f"- {r}")
         else:
             st.write("理由が取得できませんでした（judgeの返り値を確認してください）。")
+
+def _build_csv_row(uploaded_name: str, result: dict, thresholds: dict) -> dict:
+    """CSV出力用に1件分の結果を整形する。"""
+    metrics = result.get("metrics", {})
+    judgement = result.get("judgement", {})
+    reasons = judgement.get("reasons", [])
+    reasons_str = "; ".join(map(str, reasons)) if isinstance(reasons, list) else str(reasons)
+    return {
+        "evaluated_at": datetime.now().isoformat(timespec="seconds"),
+        "file_name": uploaded_name,
+        "input_path": str(result.get("input_path", "")),
+        "ok": bool(judgement.get("ok", False)),
+        "label": str(judgement.get("label", "OK" if judgement.get("ok", False) else "NG")),
+        "reasons": reasons_str,
+        "brightness_mean": float(metrics.get("brightness_mean", float("nan"))),
+        "contrast_std": float(metrics.get("contrast_std", float("nan"))),
+        "sharpness_lap_var": float(metrics.get("sharpness_lap_var", float("nan"))),
+        "thresholds_json": json.dumps(thresholds, ensure_ascii=False),
+    }
+
 def main()->None:
     st.set_page_config(page_title="Bioimage QC", layout="centered")
     st.title("Bioimage Quality Check")
@@ -109,16 +144,27 @@ def main()->None:
         st.info("画像をアップロードすると、ここにプレビューが表示されます。")
         return
 
-    # Preview
-    img_bgr = _decode_image(uploaded)
-    img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
-    st.subheader("Preview")
-    st.image(img_rgb, caption=uploaded.name, use_container_width=True)
-    
-    # Evaluate (metrics + judgement)
-    tmp_path = _save_to_temp(uploaded)
+    # Evaluate (preview + metrics + judgement)
+    tmp_path: Path | None = None
     ok = False
     try:
+        _validate_uploaded_file(uploaded)
+
+        # Preview
+        img_bgr = _decode_image(uploaded)
+        if img_bgr.size == 0:
+            raise ImageQualityError("画像データが空です。")
+        if img_bgr.ndim != 3 or img_bgr.shape[2] != 3:
+            raise ImageQualityError(f"想定外の画像形状です: shape={img_bgr.shape}")
+        h, w = img_bgr.shape[:2]
+        if h <= 0 or w <= 0:
+            raise ImageQualityError(f"画像サイズが不正です: width={w}, height={h}")
+
+        img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+        st.subheader("Preview")
+        st.image(img_rgb, caption=uploaded.name, use_container_width=True)
+
+        tmp_path = _save_to_temp(uploaded)
         # ★ Day18: thresholdsを渡す（pipelineが対応している前提）
         result = evaluate_image(tmp_path, thresholds=thresholds)
         metrics = result.get("metrics", {})
@@ -133,19 +179,41 @@ def main()->None:
 
         # ★ Day18: Judgement 表示
         _render_judgement(judgement)
+
+        # Day19: CSVダウンロード（1件結果）
+        st.subheader("Export CSV")
+        csv_row = _build_csv_row(uploaded.name, result, thresholds)
+        export_df = pd.DataFrame([csv_row])
+        csv_bytes = export_df.to_csv(index=False).encode("utf-8-sig")
+        out_name = f"qc_result_{Path(uploaded.name).stem}.csv"
+        st.download_button(
+            label="結果をCSVでダウンロード",
+            data=csv_bytes,
+            file_name=out_name,
+            mime="text/csv",
+        )
+
         ok = True
         # デバッグ用
         with st.expander("Raw result (debug)", expanded=False):
             st.json(result)
+    except ImageQualityError as e:
+        st.error(f"入力エラー: {e}")
+    except ValueError as e:
+        st.error(f"入力値エラー: {e}")
+    except Exception as e:
+        st.error("予期しないエラーが発生しました。入力画像や設定値を確認してください。")
+        with st.expander("Error detail (debug)", expanded=False):
+            st.exception(e)
     finally:
-        try:
-            tmp_path.unlink()
-        except FileNotFoundError:
-            pass
+        if tmp_path is not None:
+            try:
+                tmp_path.unlink()
+            except FileNotFoundError:
+                pass
+
     if ok:
         st.success("Day18完了：OK/NGと理由を表示できました。")
-    else:
-        st.error("Day18失敗")
 
 if __name__ == "__main__":
     main()

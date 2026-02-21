@@ -8,8 +8,6 @@ BASE_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BASE_DIR / "src"))
 
 from bioimage_qc.pipeline import evaluate_image
-from bioimage_qc.judge import JudgeConfig, Range
-
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="1枚画像を評価・判定する")
@@ -20,13 +18,11 @@ def main() -> int:
     args = parser.parse_args()
 
     # しきい値のカスタマイズ（指定があれば）
-    config = None
+    thresholds = None
     if args.sharpness_min is not None:
-        config = JudgeConfig(
-            sharpness_lap_var=Range(min=args.sharpness_min, max=None),
-        )
+        thresholds = {"sharpness_lap_var": {"min": args.sharpness_min}}
 
-    result = evaluate_image(args.image, config=config, imread=args.imread)
+    result = evaluate_image(args.image, thresholds=thresholds, imread=args.imread)
 
     # 結果表示
     print(f"File : {result['input_path']}")

@@ -31,7 +31,9 @@ def compute_metrics(img: np.ndarray) -> dict[str, float]:
         "sharpness_lap_var": cal_sharpness(img),
     }
 
-def _dict_to_config(thresholds: dict) -> JudgeConfig:
+def _dict_to_config(thresholds: dict | None) -> JudgeConfig:
+    if thresholds is None:
+        return JudgeConfig()
     def to_range(d: dict) -> Range:
         return Range(min=d.get("min"), max=d.get("max"))
     
@@ -42,7 +44,7 @@ def _dict_to_config(thresholds: dict) -> JudgeConfig:
             sharpness_lap_var=to_range(thresholds.get("sharpness_lap_var", {})),
         )
 
-def evaluate_image(path, thresholds: dict | None = None, imread="color"):
+def evaluate_image(path: str | Path, *, thresholds: dict | None = None, imread:str ="color") -> dict:
     import cv2
 
     p = Path(path)
