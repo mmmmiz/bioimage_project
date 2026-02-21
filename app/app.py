@@ -48,43 +48,68 @@ def _save_to_temp(uploaded_file) -> Path:
         f.write(uploaded_file.getvalue())
         return Path(f.name)
 
+DEFAULT_THRESHOLDS_PATH = ROOT / "data" / "analysis" / "thresholds.json"
+
+def _load_default_thresholds() -> dict:
+    fallback = {
+        "brightness_mean": {"min": 50.0, "max": 220.0},
+        "contrast_std": {"min": 10.0},
+        "sharpness_lap_var": {"min": 300.0},
+    }
+    try:
+        with DEFAULT_THRESHOLDS_PATH.open("r", encoding="utf-8") as f:
+            d = json.load(f)
+        return {
+            "brightness_mean": {
+                "min": float(d.get("brightness_mean", {}).get("min", fallback["brightness_mean"]["min"])),
+                "max": float(d.get("brightness_mean", {}).get("max", fallback["brightness_mean"]["max"])),
+            },
+            "contrast_std": {
+                "min": float(d.get("contrast_std", {}).get("min", fallback["contrast_std"]["min"])),
+            },
+            "sharpness_lap_var": {
+                "min": float(d.get("sharpness_lap_var", {}).get("min", fallback["sharpness_lap_var"]["min"]))
+            },
+        }
+    except Exception:
+        return fallback
+
 def _build_thresholds_ui() -> dict:
-    """しきい値をスライダーで入力して dict にまとめる"""
     st.sidebar.header("Thresholds")
+    defaults = _load_default_thresholds()
+    
     b_min, b_max = st.sidebar.slider(
         "brightness_mean(min, max)",
         min_value=0,
         max_value=255,
-        value=(50, 220),
+        value=(int(round(defaults["brightness_mean"]["min"])),int(round(defaults["brightness_mean"]["max"]))),
         step=1,
         key="th_brightness_range",
     )
-    c_min, c_max = st.sidebar.slider(
-        "contrast_std(min, max)",
+    c_min = st.sidebar.slider(
+        "contrast_std(min)",
         min_value=0,
         max_value=128,
-        value=(10, 80),
+        value=int(round(defaults["contrast_std"]["min"])),
         step=1,
-        key="th_contrast_range",
+        key="th_contrast_min",
     )
     s_min = st.sidebar.slider(
         "sharpness_lap_var(min)",
         min_value=0,
         max_value=50000,
-        value=300,
-        step=10,
+        value=int(round(defaults["sharpness_lap_var"]["min"])),
+        step=1,
         key="th_sharpness_mean",
     )
-    
-    thresholds = {
+    return {
         "brightness_mean": {"min": float(b_min),"max": float(b_max)},
-        "contrast_std":{"min": float(c_min),"max":float(c_max)},
+        "contrast_std":{"min": float(c_min)},
         "sharpness_lap_var":{"min": float(s_min)},
     }
-    return thresholds
 
 def _render_judgement(judgement: dict) -> None:
-    """Day18: judgementを見やすく表示する"""
+    """judgementを見やすく表示する"""
     ok = bool(judgement.get("ok", False))
     label = judgement.get("label", "OK" if ok else "NG")
     reasons = judgement.get("reasons", [])
