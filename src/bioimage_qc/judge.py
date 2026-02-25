@@ -1,5 +1,4 @@
 # src/bioimage_qc/judge.py
-# Day12 判定ロジック（OK/NG + 理由付与）
 
 from __future__ import annotations
 
