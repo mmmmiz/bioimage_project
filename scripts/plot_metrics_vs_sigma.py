@@ -120,7 +120,7 @@ def save_plots(df_mean:pd.DataFrame,out_dir:Path)->None:
 def parse_args() -> argparse.Namespace:
     ap = argparse.ArgumentParser()
     ap.add_argument("root", type=str, help="sigma_* ディレクトリ群が入っているルートフォルダ")
-    ap.add_argument("--out", type=str, default="outputs/day10", help="出力先ディレクトリ")
+    ap.add_argument("--out", type=str, default="outputs/metrics_vs_sigma", help="出力先ディレクトリ")
     return ap.parse_args()
 
 def main()-> int:

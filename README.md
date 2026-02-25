@@ -113,10 +113,10 @@ NG 条件:
 #### 対象データと実行コマンド
 
 - dataset root: `data/dataset`（Day9 で生成した `sharp` / `blur(sigma_*)`）
-- 探索スクリプト: `scripts/day11_design_thresholds.py`
+- 探索スクリプト: `scripts/design_thresholds.py`
 
 ```bash
-python scripts/day11_design_thresholds.py --dataset-root data/dataset
+python scripts/design_thresholds.py --dataset-root data/dataset
 ```
 
 #### sharpness しきい値の決定方法
@@ -146,7 +146,7 @@ bioimage_project/
   scripts/
     eval_and_judge.py         # 1枚評価CLI
     batch_eval.py             # 一括評価CLI + CSV出力
-    day11_design_thresholds.py# しきい値設計
+    design_thresholds.py# しきい値設計
     self_test.py              # 最低限の自己テスト
   docs/
     bioimage_quality_check_app.md
